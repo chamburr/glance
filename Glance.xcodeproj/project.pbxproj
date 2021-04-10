@@ -1220,11 +1220,20 @@
 
 /* Begin XCRemoteSwiftPackageReference section */
 		7E5E49492455E3EB00C8C148 /* XCRemoteSwiftPackageReference "swift-exec" */ = {
+		10779BC22621502C008A903C /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/samuelmeuli/swift-exec";
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.1.1;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.12;
+			};
+		};
+		10779BE926217F25008A903C /* XCRemoteSwiftPackageReference "SWCompression" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tsolomko/SWCompression";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.8;
 			};
 		};
 		7E616BAE244997420043F7AB /* XCRemoteSwiftPackageReference "SwiftCSV" */ = {
@@ -1238,10 +1247,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7E5E494A2455E3EB00C8C148 /* SwiftExec */ = {
+		10779BC32621502C008A903C /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7E5E49492455E3EB00C8C148 /* XCRemoteSwiftPackageReference "swift-exec" */;
-			productName = SwiftExec;
+			package = 10779BC22621502C008A903C /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+		10779BEA26217F25008A903C /* SWCompression */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10779BE926217F25008A903C /* XCRemoteSwiftPackageReference "SWCompression" */;
+			productName = SWCompression;
 		};
 		7E616BAF244997420043F7AB /* SwiftCSV */ = {
 			isa = XCSwiftPackageProductDependency;

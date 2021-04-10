@@ -1,6 +1,7 @@
 import Foundation
 import os.log
-import SwiftExec
+// import Gzip
+import SWCompression
 
 /// View controller for previewing tarballs (may be gzipped).
 class TARPreview: Preview {
@@ -30,22 +31,63 @@ class TARPreview: Preview {
 	}
 
 	private func runTARFilesCommand(filePath: String) throws -> String {
-		let result = try exec(
-			program: "/usr/bin/tar",
-			arguments: [
-				"--gzip", // Allows listing contents of `.tar.gz` files
-				"--list",
-				"--verbose",
-				"--file",
-				filePath,
-			]
-		)
-		return result.stdout ?? ""
+		let archiveURL = URL(fileURLWithPath: filePath)
+		let fileData = try Data(contentsOf: archiveURL, options: .mappedIfSafe)
+		let decompressedData = try? GzipArchive.unarchive(archive: fileData)
+		let archive = try TarContainer.info(container: decompressedData ?? fileData)
+
+		var entries = [String]()
+
+		for entry in archive {
+			var formatted = ""
+
+			if entry.type == .directory {
+				formatted += "drwxr-xr-x "
+			} else {
+				formatted += "-rw-r--r-- "
+			}
+
+			formatted += "0 user staff "
+			formatted += String(entry.size ?? 0) + " "
+
+			let modifiedYear = Calendar.current
+				.component(.year, from: entry.modificationTime ?? Date())
+			let currentYear = Calendar.current.component(.year, from: Date())
+
+			if modifiedYear == currentYear {
+				formatted += dateFormatter1.string(from: entry.modificationTime ?? Date()) + " "
+			} else {
+				formatted += dateFormatter2.string(from: entry.modificationTime ?? Date()) + " "
+			}
+
+			formatted += entry.name
+
+			entries.append(formatted)
+		}
+
+		return entries.joined(separator: "\n")
 	}
 
 	private func runGZIPSizeCommand(filePath: String) throws -> String {
-		let result = try exec(program: "/usr/bin/gzip", arguments: ["--list", filePath])
-		return result.stdout ?? ""
+		let archiveURL = URL(fileURLWithPath: filePath)
+		let fileData = try Data(contentsOf: archiveURL, options: .mappedIfSafe)
+		let decompressedData = try? GzipArchive.unarchive(archive: fileData)
+
+		let compressed = fileData.count
+		let uncompressed = decompressedData?.count ?? 0
+
+		var result =
+			" compressed uncompressed ratio uncompressed_name\n \(compressed) \(uncompressed) "
+
+		if uncompressed == 0 {
+			result += "0.0% "
+		} else {
+			result +=
+				String(format: "%.1f%% ", 100.0 - Double(compressed) / Double(uncompressed) * 100.0)
+		}
+
+		result += "archive.tar "
+		return result
 	}
 
 	/// Parses a date string from `tar` output to a `Date` object.
