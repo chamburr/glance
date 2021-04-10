@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1140"
+   LastUpgradeVersion = "1240"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7EE8D45F245969B000616E5B"
+               BlueprintIdentifier = "10779C0C26218B2B008A903C"
                BuildableName = "GlanceTests.xctest"
                BlueprintName = "GlanceTests"
                ReferencedContainer = "container:Glance.xcodeproj">

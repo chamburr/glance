@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.samuelmeuli.glance</string>
+		<string>group.com.chamburr.glance</string>
 	</array>
 	<key>com.apple.security.files.user-selected.read-only</key>
 	<true/>

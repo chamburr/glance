@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -392,10 +392,10 @@
                                 <rect key="frame" x="0.0" y="40" width="1100" height="540"/>
                                 <subviews>
                                     <stackView distribution="equalCentering" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ptx-j9-3J7" userLabel="TitleOuterStackView">
-                                        <rect key="frame" x="470" y="490" width="160" height="50"/>
+                                        <rect key="frame" x="470" y="490" width="161" height="50"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tdk-Iw-lqp" userLabel="TitleInnerStackView">
-                                                <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="161" height="50"/>
                                                 <subviews>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vAk-NQ-xW6" userLabel="AppIconImageView" customClass="AppIcon" customModule="Glance" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -406,7 +406,7 @@
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSMultipleDocuments" id="Xj9-Zy-3Ec" userLabel="AppIconImage"/>
                                                     </imageView>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gMP-oA-EKJ" userLabel="AppNameLabel">
-                                                        <rect key="frame" x="56" y="8" width="106" height="35"/>
+                                                        <rect key="frame" x="56" y="8" width="107" height="35"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="center" title="Glance" id="NSJ-Vq-LPH">
                                                             <font key="font" metaFont="systemBold" size="30"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -436,7 +436,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzf-ut-B0I">
-                                        <rect key="frame" x="399" y="442" width="303" height="21"/>
+                                        <rect key="frame" x="403" y="442" width="295" height="20"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LNw-oW-7Vx">
                                                 <rect key="frame" x="-2" y="2" width="142" height="16"/>
@@ -447,13 +447,13 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s5J-hJ-Wx3">
-                                                <rect key="frame" x="140" y="-7" width="169" height="32"/>
+                                                <rect key="frame" x="139" y="-7" width="163" height="32"/>
                                                 <buttonCell key="cell" type="push" title="View Supported Files" bezelStyle="rounded" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="PkV-Gc-MUC">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="openSupportedFilesWindow:" target="XfG-lQ-9wD" id="TBz-dH-aq3"/>
+                                                    <action selector="openSupportedFilesWindow:" target="XfG-lQ-9wD" id="jeT-dS-wBV"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -467,7 +467,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <box boxType="custom" borderType="none" borderWidth="0.0" title="Usage" translatesAutoresizingMaskIntoConstraints="NO" id="Flc-80-Cc5">
-                                        <rect key="frame" x="0.0" y="99" width="1100" height="315"/>
+                                        <rect key="frame" x="0.0" y="100" width="1100" height="315"/>
                                         <view key="contentView" id="MNE-Sg-bpr">
                                             <rect key="frame" x="0.0" y="0.0" width="1100" height="315"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -476,10 +476,10 @@
                                                     <rect key="frame" x="20" y="20" width="1060" height="275"/>
                                                     <subviews>
                                                         <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KBr-oC-Xwv" userLabel="FinderUsageStackView">
-                                                            <rect key="frame" x="40" y="16" width="313" height="239"/>
+                                                            <rect key="frame" x="40" y="15" width="313" height="240"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="we8-J8-KCq" userLabel="FinderUsageImageView">
-                                                                    <rect key="frame" x="7" y="78" width="300" height="161"/>
+                                                                    <rect key="frame" x="7" y="78" width="300" height="162"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="300" id="fKK-or-zs1"/>
                                                                         <constraint firstAttribute="width" secondItem="we8-J8-KCq" secondAttribute="height" multiplier="1300:700" id="hbM-G2-qnm"/>
@@ -526,10 +526,10 @@
                                                             </customSpacing>
                                                         </stackView>
                                                         <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I55-cO-0ho" userLabel="SpotlightUsageStackView">
-                                                            <rect key="frame" x="373" y="16" width="314" height="239"/>
+                                                            <rect key="frame" x="373" y="15" width="314" height="240"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VTx-m2-UO1" userLabel="SpotlightUsageImageView">
-                                                                    <rect key="frame" x="7" y="78" width="300" height="161"/>
+                                                                    <rect key="frame" x="7" y="78" width="300" height="162"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="VTx-m2-UO1" secondAttribute="height" multiplier="1300:700" id="LWn-FO-1wh"/>
                                                                         <constraint firstAttribute="width" constant="300" id="QtS-7W-3be"/>
@@ -576,10 +576,10 @@
                                                             </customSpacing>
                                                         </stackView>
                                                         <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sj5-GY-onb" userLabel="QLUsageStackView">
-                                                            <rect key="frame" x="707" y="16" width="313" height="239"/>
+                                                            <rect key="frame" x="707" y="15" width="313" height="240"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nkp-iN-Z3v" userLabel="QLUsageImageView">
-                                                                    <rect key="frame" x="6" y="78" width="300" height="161"/>
+                                                                    <rect key="frame" x="6" y="78" width="300" height="162"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="300" id="T8l-IA-kzV"/>
                                                                         <constraint firstAttribute="width" secondItem="nkp-iN-Z3v" secondAttribute="height" multiplier="1300:700" id="nVx-uP-ati"/>
@@ -796,7 +796,6 @@
                     <connections>
                         <outlet property="dailyAverageStatsValueLabel" destination="hrf-Uk-dEk" id="y8F-vb-tT0"/>
                         <outlet property="fileTypeStatsValueLabel" destination="RLD-y9-mYb" id="Fja-aF-ZaQ"/>
-                        <outlet property="supportedFilesButton" destination="s5J-hJ-Wx3" id="T4Q-2V-WxD"/>
                         <outlet property="totalStatsValueLabel" destination="yGx-F0-e5D" id="qgj-sc-mdk"/>
                     </connections>
                 </viewController>

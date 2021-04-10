@@ -1,10 +1,10 @@
 import Cocoa
 import Foundation
 
-let feedbackURL = URL(string: "https://samuelmeuli.com")!
-let licenseURL = URL(string: "https://github.com/samuelmeuli/glance/blob/master/LICENSE.md")!
-let privacyPolicyURL = URL(string: "https://github.com/samuelmeuli/glance/blob/master/PRIVACY.md")!
-let websiteURL = URL(string: "https://github.com/samuelmeuli/glance")!
+let feedbackURL = URL(string: "https://chamburr.xyz")!
+let licenseURL = URL(string: "https://github.com/chamburr/glance/blob/master/LICENSE.md")!
+let privacyPolicyURL = URL(string: "https://github.com/chamburr/glance/blob/master/PRIVACY.md")!
+let websiteURL = URL(string: "https://github.com/chamburr/glance")!
 
 /// Used as a subclass for the menu item in Interface Builder
 final class SupportedFilesMenuItem: NSMenuItem {
