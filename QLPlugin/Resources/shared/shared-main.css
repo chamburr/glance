@@ -15,6 +15,7 @@ body {
 	--font-family-monospace: "Menlo", monospace;
 	--font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Helvetica", sans-serif;
 	--font-weight-bold: 600;
+	--spacing-small: 8px;
 	--spacing-normal: 16px;
 	--spacing-large: 24px;
 }
@@ -41,7 +42,7 @@ body {
 }
 
 body {
-	padding: var(--spacing-normal);
+	padding: var(--spacing-small);
 	overflow: auto;
 	color: var(--color-text);
 	font-size: 14px;
