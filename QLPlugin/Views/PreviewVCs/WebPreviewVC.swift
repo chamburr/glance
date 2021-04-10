@@ -14,8 +14,6 @@ class WebPreviewVC: NSViewController, PreviewVC {
 		withExtension: "css"
 	)
 
-	@IBOutlet private var webView: OfflineWebView!
-
 	required convenience init(
 		html: String,
 		stylesheets: [Stylesheet] = [],
@@ -44,16 +42,15 @@ class WebPreviewVC: NSViewController, PreviewVC {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		setUpView()
 		loadPreview()
 	}
 
-	private func setUpView() {
-		// Remove background to prevent white flicker on load in Dark Mode
-		webView.setValue(false, forKey: "drawsBackground")
-	}
-
 	private func loadPreview() {
+		let webView = WebView(frame: view.bounds)
+		webView.autoresizingMask = [.height, .width]
+
+		view.addSubview(webView)
+
 		let linkTags = stylesheets
 			.map { $0.getHTML() }
 			.joined(separator: "\n")
@@ -61,7 +58,7 @@ class WebPreviewVC: NSViewController, PreviewVC {
 			.map { $0.getHTML() }
 			.joined(separator: "\n")
 
-		webView.loadHTMLString("""
+		webView.mainFrame.loadHTMLString("""
 		<!DOCTYPE html>
 		<html>
 			<head>
@@ -77,6 +74,6 @@ class WebPreviewVC: NSViewController, PreviewVC {
 				\(scriptTags)
 			</body>
 		</html>
-		""", baseURL: Bundle.main.resourceURL)
+		""", baseURL: Bundle.main.bundleURL)
 	}
 }
