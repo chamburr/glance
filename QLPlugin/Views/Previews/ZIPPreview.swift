@@ -1,6 +1,6 @@
 import Foundation
 import os.log
-import SwiftExec
+import ZIPFoundation
 
 class ZIPPreview: Preview {
 	let filesRegex =
@@ -15,21 +15,60 @@ class ZIPPreview: Preview {
 	}
 
 	private func runZIPInfoCommand(filePath: String) throws -> String {
-		do {
-			let result = try exec(
-				program: "/usr/bin/zipinfo",
-				arguments: [filePath]
-			)
-			return result.stdout ?? ""
-		} catch {
-			// Empty ZIP files are allowed, but return exit code 1
-			let error = error as! ExecError
-			let stdout = error.execResult.stdout ?? ""
-			if error.execResult.exitCode == 1, stdout.hasSuffix("Empty zipfile.") {
-				return stdout
-			}
-			throw error
+		let archiveURL = URL(fileURLWithPath: filePath)
+		guard let archive = Archive(url: archiveURL, accessMode: .read) else {
+			return ""
 		}
+
+		var result = ""
+		var entries = [String]()
+
+		var fileCount = 0
+		var uncompressed = 0
+		var compressed = 0
+
+		for entry in archive {
+			var formatted = ""
+
+			if entry.type == .directory {
+				formatted += "drwxr-xr-x "
+			} else {
+				formatted += "-rw-r--r-- "
+			}
+
+			formatted += "2.0 unx "
+			formatted += String(entry.uncompressedSize) + " "
+			formatted += "bx stor "
+			formatted += dateFormatter
+				.string(from: entry.fileAttributes[.modificationDate] as! Date) + " "
+			formatted += entry.path
+
+			entries.append(formatted)
+
+			fileCount += 1
+			uncompressed += entry.uncompressedSize
+			compressed += entry.compressedSize
+		}
+
+		result += "Archive: archive.zip\n"
+		result += "Zip file size: 0 bytes, number of entries: 0\n"
+		if entries.isEmpty {
+			result += "Empty zipfile."
+			return result
+		}
+
+		result += entries.joined(separator: "\n") + "\n"
+		result += String(fileCount) + " files, "
+		result += String(uncompressed) + " bytes uncompressed, "
+		result += String(compressed) + " bytes compressed: "
+		if uncompressed == 0 {
+			result += "0.0%"
+		} else {
+			result +=
+				String(format: "%.1f%%", 100.0 - Double(compressed) / Double(uncompressed) * 100.0)
+		}
+
+		return result
 	}
 
 	/// Parses the output of the `zipinfo` command.
@@ -83,9 +122,11 @@ class ZIPPreview: Preview {
 	}
 
 	func createPreviewVC(file: File) throws -> PreviewVC {
+		dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
 		let zipInfoOutput = try runZIPInfoCommand(filePath: file.path)
 
 		// Parse command output
+		dateFormatter.timeZone = TimeZone.current
 		let (fileTree, sizeUncompressed, compressionRatio) = parseZIPInfo(lines: zipInfoOutput)
 
 		// Build label
