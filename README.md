@@ -38,10 +38,6 @@
 - Some plugins still use the deprecated Quick Look Generator API and might stop working in the future.
 - Glance can easily be extended to support other file types.
 
-**Why does Glance require network permissions?**
-
-Glance renders some previews in a `WKWebView`. All assets are stored locally and network access is disabled, but web views unfortunately still need the `com.apple.security.network.client` entitlement to function.
-
 **Why isn't the app available on macOS 10.14 or older?**
 
 The app uses the [new Quick Look API](https://developer.apple.com/documentation/quartz/qlpreviewingcontroller/2867936-preparepreviewoffile) that was introduced in 10.15, so it unfortunately won't work with older versions of macOS.
