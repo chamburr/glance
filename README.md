@@ -18,7 +18,13 @@ The installation for this plugin is slightly complex, as I am currently unable t
 1. Download the `.dmg` file from GitHub [releases](https://github.com/chamburr/glance/releases) page.
 2. Open the file and move Glance.app to the Applications folder (do NOT open it yet).
 3. Install Xcode Command Line Tools with `xcode-select --install` if you have not previously installed it.
-4. Open a terminal and run `xattr -cr /Applications/Glance.app && codesign -s - -f --deep /Applications/Glance.app`.
+4. Open a terminal and run the following commands.
+	```sh
+	xattr -cr /Applications/Glance.app
+	echo '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>com.apple.security.app-sandbox</key><true/><key>com.apple.security.application-groups</key><array><string>group.com.chamburr.glance</string></array><key>com.apple.security.files.user-selected.read-only</key><true/></dict></plist>' > /tmp/Glance.entitlements
+	codesign -s - -f --deep --entitlements /tmp/Glance.entitlements /Applications/Glance.app
+	rm /tmp/Glance.entitlements
+	```
 5. Launch Glance. Done!
 
 Note: If anyone knows of a better workaround or can supply me with a Developer ID, please [let me know](https://chamburr.xyz). Thanks!
