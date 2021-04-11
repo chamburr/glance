@@ -3,9 +3,25 @@
 	<h1>Glance</h1>
 	<p><strong>All-in-one Quick Look plugin</strong></p>
 	<p>Glance provides Quick Look previews for files that macOS doesn't support out of the box.</p>
-	<p><a href="https://apps.apple.com/app/id1513574319"><img src="./AppStore/Assets/DownloadBadge.svg" alt="Download on the Mac App Store"></a></p>
+	<p><a href="#installation">Installation Steps</a></p>
 	<p><img src="./AppStore/Listing/Screenshots/Screenshot1.jpg" alt=""></p>
 </div>
+
+## About
+
+This is a fork of the [original Glance plugin](https://github.com/samuelmeuli/glance). Unfortunately, the owner seems to have discarded the project a while ago, and the app is largely broken on newer macOS systems. The aim of this fork is to revive the project and maintain it for future updates. For now, we have added support for macOS Big Sur and fixed several internal bugs.
+
+## Installation
+
+The installation for this plugin is slightly complex, as I am currently unable to register for an Apple Developer account for age reasons. Until then, you will need to code sign the application yourself. The steps are as follows:
+
+1. Download the `.dmg` file from GitHub [releases](https://github.com/chamburr/glance/releases) page.
+2. Open the file and move Glance.app to the Applications folder (do NOT open it yet).
+3. Install Xcode Command Line Tools with `xcode-select --install` if you have not previously installed it.
+4. Open a terminal and run `xattr -cr /Applications/Glance.app && codesign -s - -f --deep /Applications/Glance.app`.
+5. Launch Glance. Done!
+
+Note: If anyone knows of a better workaround or can supply me with a Developer ID, please [let me know](https://chamburr.xyz). Thanks!
 
 ## Supported file types
 
@@ -48,7 +64,7 @@ Glance blocks remote assets. Furthermore, the app only has access to the file th
 
 **Why isn't [file type] supported?**
 
-Feel free to [open an issue](https://github.com/samuelmeuli/glance/issues/new) or [contribute](#contributing)! When opening an issue, please describe what kind of preview you'd expect for your file.
+Feel free to [open an issue](https://github.com/chamburr/glance/issues/new) or [contribute](#contributing)! When opening an issue, please describe what kind of preview you'd expect for your file.
 
 Please note that macOS doesn't allow the handling of some file types (e.g. `.plist`, `.ts` and `.xml`).
 
@@ -74,3 +90,7 @@ To add previews for a new file extension, please follow these steps:
 2. Match the file extension to your class in [`PreviewVCFactory.swift`](./QLPlugin/Views/PreviewVCFactory.swift).
 3. Find your file's UTI by running `mdls -name kMDItemContentType /path/to/your/file`. Add it to `QLSupportedContentTypes` in [`Info.plist`](./QLPlugin/Info.plist).
 4. Update [`README.md`](README.md), [`SupportedFilesWC.xib`](Glance/SupportedFilesWC.xib), the [App Store description](AppStore/Listing/Description.txt) and [`Credits.rtf`](Glance/Credits.rtf) (if you introduced a new library).
+
+## License
+
+This project is licensed under [MIT License](LICENSE.md).
