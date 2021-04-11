@@ -5,16 +5,16 @@ on:
   - pull_request
 
 jobs:
-  test-swift:
-    name: Test (Swift)
-    runs-on: macos-latest
+  # test-swift:
+  #   name: Test (Swift)
+  #   runs-on: macos-latest
 
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Check out Git repository
+  #       uses: actions/checkout@v2
 
-      - name: Run tests
-        run: xcodebuild clean test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -project ./Glance.xcodeproj -scheme Glance
+  #     - name: Run tests
+  #       run: xcodebuild clean test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -project ./Glance.xcodeproj -scheme Glance
 
   test-go:
     name: Test (Go)
