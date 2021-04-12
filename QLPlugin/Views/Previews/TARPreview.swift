@@ -1,6 +1,5 @@
 import Foundation
 import os.log
-// import Gzip
 import SWCompression
 
 /// View controller for previewing tarballs (may be gzipped).
