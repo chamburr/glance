@@ -23,6 +23,9 @@ class TARPreview: Preview {
 	private func initDateFormatters() {
 		// Set default date to today to parse dates in current year
 		dateFormatter1.defaultDate = Date()
+		
+		dateFormatter1.locale = Locale(identifier: "en_US_POSIX")
+		dateFormatter2.locale = Locale(identifier: "en_US_POSIX")
 
 		// Specify date formats
 		dateFormatter1.dateFormat = "MMM dd HH:mm"

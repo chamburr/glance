@@ -11,6 +11,7 @@ class ZIPPreview: Preview {
 	let dateFormatter = DateFormatter()
 
 	required init() {
+		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 		dateFormatter.dateFormat = "yy-MMM-dd HH:mm" // Date format used in `zipinfo` output
 	}
 
