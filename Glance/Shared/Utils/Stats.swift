@@ -11,7 +11,7 @@ class Stats {
 	private let defaults: UserDefaults?
 
 	init() {
-		defaults = UserDefaults(suiteName: "com.chamburr.glance")
+		defaults = UserDefaults(suiteName: "group.com.chamburr.glance")
 		if defaults == nil {
 			os_log(
 				"Unable to initialize user defaults: Object is null",
