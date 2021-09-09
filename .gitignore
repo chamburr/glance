@@ -5,3 +5,9 @@ xcuserdata/
 # `go build` output
 HTMLConverter/htmlconverter.a
 HTMLConverter/htmlconverter.h
+
+# Release
+release
+
+# macOS Artifacts
+.DS_Store
