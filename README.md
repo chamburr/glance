@@ -1,10 +1,10 @@
 <div align="center">
-	<p><img src="./Glance/Assets.xcassets/AppIcon.appiconset/app-icon-256pt@1x.png" alt="" height="140"></p>
-	<h1>Glance</h1>
-	<p><strong>All-in-one Quick Look plugin</strong></p>
-	<p>Glance provides Quick Look previews for files that macOS doesn't support out of the box.</p>
-	<p><a href="#installation">Installation Steps</a></p>
-	<p><img src="./AppStore/Listing/Screenshots/Screenshot1.jpg" alt=""></p>
+ <p><img src="./Glance/Assets.xcassets/AppIcon.appiconset/app-icon-256pt@1x.png" alt="" height="140"></p>
+ <h1>Glance</h1>
+ <p><strong>All-in-one Quick Look plugin</strong></p>
+ <p>Glance provides Quick Look previews for files that macOS doesn't support out of the box.</p>
+ <p><a href="#installation">Installation Steps</a></p>
+ <p><img src="./AppStore/Listing/Screenshots/Screenshot1.jpg" alt=""></p>
 </div>
 
 ## About
@@ -19,12 +19,14 @@ The installation for this plugin is slightly complex, as I am currently unable t
 2. Open the file and move Glance.app to the Applications folder (do NOT open it yet).
 3. Install Xcode Command Line Tools with `xcode-select --install` if you have not previously installed it.
 4. Open a terminal and run the following commands.
+
    ```sh
    xattr -cr /Applications/Glance.app
    echo '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>com.apple.security.app-sandbox</key><true/><key>com.apple.security.application-groups</key><array><string>group.com.chamburr.glance</string></array><key>com.apple.security.files.user-selected.read-only</key><true/></dict></plist>' > /tmp/Glance.entitlements
    codesign -s - -f --deep --entitlements /tmp/Glance.entitlements /Applications/Glance.app
    rm /tmp/Glance.entitlements
    ```
+
 5. Launch Glance. Done!
 
 Note: If anyone knows of a better workaround or can supply me with a Developer ID, please [let me know](https://chamburr.xyz). Thanks!
@@ -35,9 +37,7 @@ Only this method allows you use **Apple Silicon** build support
 
 1. Install XCode
 2. Run `sudo xcode-select -s /Applications/Xcode.app/Contents/Developer` command on terminal
-3. Then run `./build.sh` on terminal and wait to finish
-4. See `release` folder and you should see `Glance.app`
-5. Move `Glance.app` to `/Applications` folder by dragging
+3. Then run `./install.sh` on terminal and wait to finish
 
 ## Supported file types
 
