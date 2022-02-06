@@ -113,7 +113,7 @@ class MainVC: NSViewController, QLPreviewingController {
 			// Add `PreviewVC` as a child view controller
 			addChild(previewVC)
 			previewVC.view.autoresizingMask = [.height, .width]
-			previewVC.view.frame = view.frame
+			previewVC.view.frame = view.bounds
 			view.addSubview(previewVC.view)
 
 			// Update stats
