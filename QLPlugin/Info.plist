@@ -58,6 +58,7 @@
 				<string>dyn.ah62d4rv4ge81e5pe</string> <!-- .Rmd -->
 				<string>net.daringfireball.markdown</string> <!-- .markdown, .md, .mdown, .mkd, .mkdn -->
 				<string>net.ia.markdown</string> <!-- .md (used by iA Writer) -->
+				<string>com.nutstore.down</string> <!-- .md (used by Nutstore) -->
 
 				<!-- TSV -->
 				<string>dyn.ah62d4rv4ge81k2pc</string> <!-- .tab -->
