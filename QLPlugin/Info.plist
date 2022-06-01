@@ -41,6 +41,7 @@
 				<string>com.sun.web-application-archive</string> <!-- .war (Java) -->
 				<string>dyn.ah62d4rv4ge80n2pw</string> <!-- .ear (Java) -->
 				<string>org.gnu.gnu-zip-archive</string> <!-- .gz -->
+				<string>org.gnu.gnu-zip-tar-archive</string> <!-- .tgz -->
 				<string>public.tar-archive</string> <!-- .tar -->
 				<string>public.zip-archive</string> <!-- .zip -->
 

@@ -12,7 +12,7 @@ class PreviewVCFactory {
 				return MarkdownPreview.self
 			case "ipynb":
 				return JupyterPreview.self
-			case "tar":
+			case "tar", "tgz":
 				return TARPreview.self
 			case "tab", "tsv":
 				return TSVPreview.self

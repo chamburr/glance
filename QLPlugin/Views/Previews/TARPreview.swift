@@ -140,7 +140,7 @@ class TARPreview: Preview {
 	}
 
 	func createPreviewVC(file: File) throws -> PreviewVC {
-		let isGzipped = file.path.hasSuffix(".tar.gz")
+		let isGzipped = file.path.hasSuffix(".tar.gz") || file.path.hasSuffix(".tgz")
 
 		// Parse TAR contents
 		let filesOutput = try runTARFilesCommand(filePath: file.path)
