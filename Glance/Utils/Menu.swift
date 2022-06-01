@@ -1,7 +1,7 @@
 import Cocoa
 import Foundation
 
-let feedbackURL = URL(string: "https://chamburr.xyz")!
+let feedbackURL = URL(string: "https://github.com/chamburr/glance/issues")!
 let licenseURL = URL(string: "https://github.com/chamburr/glance/blob/master/LICENSE.md")!
 let privacyPolicyURL = URL(string: "https://github.com/chamburr/glance/blob/master/PRIVACY.md")!
 let websiteURL = URL(string: "https://github.com/chamburr/glance")!
