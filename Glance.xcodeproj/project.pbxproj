@@ -1214,7 +1214,7 @@
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.12;
+				minimumVersion = 0.9.14;
 			};
 		};
 		10779BE926217F25008A903C /* XCRemoteSwiftPackageReference "SWCompression" */ = {
@@ -1222,7 +1222,7 @@
 			repositoryURL = "https://github.com/tsolomko/SWCompression";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.5.8;
+				minimumVersion = 4.8.1;
 			};
 		};
 		7E616BAE244997420043F7AB /* XCRemoteSwiftPackageReference "SwiftCSV" */ = {
@@ -1230,7 +1230,7 @@
 			repositoryURL = "https://github.com/swiftcsv/SwiftCSV";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.5.6;
+				minimumVersion = 0.6.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

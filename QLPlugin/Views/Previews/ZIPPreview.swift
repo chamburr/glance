@@ -47,8 +47,8 @@ class ZIPPreview: Preview {
 			entries.append(formatted)
 
 			fileCount += 1
-			uncompressed += entry.uncompressedSize
-			compressed += entry.compressedSize
+			uncompressed += Int(entry.uncompressedSize)
+			compressed += Int(entry.compressedSize)
 		}
 
 		result += "Archive: archive.zip\n"
