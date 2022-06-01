@@ -41,9 +41,9 @@ final class ObjectAssociation<T: Any> {
 }
 
 extension NSMenuItem {
-	typealias ActionClosure = ((NSMenuItem) -> Void)
+	typealias ActionClosure = (NSMenuItem) -> Void
 
-	private struct AssociatedKeys {
+	private enum AssociatedKeys {
 		static let onActionClosure = ObjectAssociation<ActionClosure>()
 	}
 

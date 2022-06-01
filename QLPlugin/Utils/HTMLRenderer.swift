@@ -24,7 +24,7 @@ extension HTMLRendererError: LocalizedError {
 	}
 }
 
-class HTMLRenderer {
+enum HTMLRenderer {
 	/// Throws an error if the return value indicates one. Because all `HTMLConverter` return values
 	/// are C strings, errors are implemented as return values starting with "error: ".
 	static func throwIfErrored(fileType: String, returnValue: String) throws {

@@ -1,7 +1,7 @@
 # Source: https://github.com/sindresorhus/swiftlint-sindre (with modifications)
 
 # Rules covered by SwiftFormat are commented out
-whitelist_rules:
+only_rules:
   - anyobject_protocol
   - array_init
   - attributes
@@ -165,3 +165,5 @@ identifier_name:
     - "x2"
     - "y1"
     - "y2"
+opening_brace:
+  allow_multiline_func: true

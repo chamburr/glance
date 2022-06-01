@@ -132,7 +132,8 @@ class TARPreview: Preview {
 	}
 
 	private func parseGZIPSize(lines: String)
-		-> (sizeUncompressed: Int?, compressionRatio: Double?) {
+		-> (sizeUncompressed: Int?, compressionRatio: Double?)
+	{
 		let sizeMatches = lines.matchRegex(regex: sizeRegex)
 		let sizeUncompressed = Int(sizeMatches[0][1])
 		let compressionRatio = Double(sizeMatches[0][2])

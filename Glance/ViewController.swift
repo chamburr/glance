@@ -9,7 +9,7 @@ class ViewController: NSViewController {
 		let supportedFilesWC = SupportedFilesWC(windowNibName: NSNib.Name("SupportedFilesWC"))
 		supportedFilesWC.showWindow(nil)
 	}
-	
+
 	@IBAction private func openGitHubRepository(_: NSButton) {
 		websiteURL.open()
 	}
