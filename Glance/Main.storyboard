@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -436,7 +437,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzf-ut-B0I">
-                                        <rect key="frame" x="403" y="442" width="295" height="20"/>
+                                        <rect key="frame" x="403" y="425" width="294" height="20"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LNw-oW-7Vx">
                                                 <rect key="frame" x="-2" y="2" width="142" height="16"/>
@@ -447,7 +448,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s5J-hJ-Wx3">
-                                                <rect key="frame" x="139" y="-7" width="163" height="32"/>
+                                                <rect key="frame" x="139" y="-7" width="162" height="32"/>
                                                 <buttonCell key="cell" type="push" title="View Supported Files" bezelStyle="rounded" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="PkV-Gc-MUC">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -467,7 +468,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <box boxType="custom" borderType="none" borderWidth="0.0" title="Usage" translatesAutoresizingMaskIntoConstraints="NO" id="Flc-80-Cc5">
-                                        <rect key="frame" x="0.0" y="100" width="1100" height="315"/>
+                                        <rect key="frame" x="0.0" y="65" width="1100" height="315"/>
                                         <view key="contentView" id="MNE-Sg-bpr">
                                             <rect key="frame" x="0.0" y="0.0" width="1100" height="315"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -648,129 +649,16 @@
                                         </view>
                                         <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </box>
-                                    <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dz1-sz-nAq" userLabel="StatsStackView">
-                                        <rect key="frame" x="442" y="0.0" width="217" height="72"/>
-                                        <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Yh-l8-rvY">
-                                                <rect key="frame" x="75" y="56" width="66" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Statistics" id="qiP-Pn-cMc">
-                                                    <font key="font" metaFont="systemBold"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
-                                            <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="afk-fh-XgE">
-                                                <rect key="frame" x="0.0" y="0.0" width="217" height="48"/>
-                                                <subviews>
-                                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="da6-33-OGP" userLabel="TotalStatsStackView">
-                                                        <rect key="frame" x="27" y="32" width="162" height="16"/>
-                                                        <subviews>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LUe-rf-Owc" userLabel="TotalStatsTitleLabel">
-                                                                <rect key="frame" x="-2" y="0.0" width="102" height="16"/>
-                                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Files previewed:" id="AZ1-mf-f91">
-                                                                    <font key="font" metaFont="system"/>
-                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                </textFieldCell>
-                                                            </textField>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yGx-F0-e5D" userLabel="TotalStatsValueLabel">
-                                                                <rect key="frame" x="101" y="0.0" width="63" height="16"/>
-                                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Loading…" id="JL3-3P-Yxr">
-                                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                </textFieldCell>
-                                                            </textField>
-                                                        </subviews>
-                                                        <visibilityPriorities>
-                                                            <integer value="1000"/>
-                                                            <integer value="1000"/>
-                                                        </visibilityPriorities>
-                                                        <customSpacing>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                        </customSpacing>
-                                                    </stackView>
-                                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0wy-RW-Kg6" userLabel="DailyAverageStatsStackView">
-                                                        <rect key="frame" x="3" y="16" width="211" height="16"/>
-                                                        <subviews>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="omt-dE-KUE" userLabel="DailyAverageStatsTitleLabel">
-                                                                <rect key="frame" x="-2" y="0.0" width="151" height="16"/>
-                                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Files previewed per day:" id="6f5-Pl-oeT">
-                                                                    <font key="font" metaFont="system"/>
-                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                </textFieldCell>
-                                                            </textField>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hrf-Uk-dEk" userLabel="DailyAverageStatsValueLabel">
-                                                                <rect key="frame" x="150" y="0.0" width="63" height="16"/>
-                                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Loading…" id="ypw-HQ-kBj">
-                                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                </textFieldCell>
-                                                            </textField>
-                                                        </subviews>
-                                                        <visibilityPriorities>
-                                                            <integer value="1000"/>
-                                                            <integer value="1000"/>
-                                                        </visibilityPriorities>
-                                                        <customSpacing>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                        </customSpacing>
-                                                    </stackView>
-                                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LNx-8x-m0H" userLabel="FileTypeStatsStackView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="217" height="16"/>
-                                                        <subviews>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WKO-s1-5yd" userLabel="FileTypeStatsTitleLabel">
-                                                                <rect key="frame" x="-2" y="0.0" width="157" height="16"/>
-                                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Most previewed file type:" id="NlY-wl-YmZ">
-                                                                    <font key="font" metaFont="system"/>
-                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                </textFieldCell>
-                                                            </textField>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-y9-mYb" userLabel="FileTypeStatsValueLabel">
-                                                                <rect key="frame" x="156" y="0.0" width="63" height="16"/>
-                                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Loading…" id="Cv2-gy-Dbn">
-                                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                </textFieldCell>
-                                                            </textField>
-                                                        </subviews>
-                                                        <visibilityPriorities>
-                                                            <integer value="1000"/>
-                                                            <integer value="1000"/>
-                                                        </visibilityPriorities>
-                                                        <customSpacing>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                        </customSpacing>
-                                                    </stackView>
-                                                </subviews>
-                                                <visibilityPriorities>
-                                                    <integer value="1000"/>
-                                                    <integer value="1000"/>
-                                                    <integer value="1000"/>
-                                                </visibilityPriorities>
-                                                <customSpacing>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                </customSpacing>
-                                            </stackView>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NwG-sY-j2S">
+                                        <rect key="frame" x="459" y="-7" width="182" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Open GitHub Repository" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FOd-4L-sO2">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="openGitHubRepository:" target="XfG-lQ-9wD" id="aOu-5D-q2b"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
@@ -793,11 +681,6 @@
                             <constraint firstAttribute="bottom" secondItem="lK5-aM-ivS" secondAttribute="bottom" constant="40" id="xiv-ze-oty"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="dailyAverageStatsValueLabel" destination="hrf-Uk-dEk" id="y8F-vb-tT0"/>
-                        <outlet property="fileTypeStatsValueLabel" destination="RLD-y9-mYb" id="Fja-aF-ZaQ"/>
-                        <outlet property="totalStatsValueLabel" destination="yGx-F0-e5D" id="qgj-sc-mdk"/>
-                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
