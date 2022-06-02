@@ -13,21 +13,15 @@ This is a fork of the [original Glance plugin](https://github.com/samuelmeuli/gl
 
 ## Installation
 
-The installation for this plugin is slightly complex, as I am currently unable to register for an Apple Developer account for age reasons. Until then, you will need to code sign the application yourself. The steps are as follows:
+The installation is slightly complex as the package is not notarized. The steps are as follows:
 
 1. Download the `.dmg` file from GitHub [releases](https://github.com/chamburr/glance/releases) page.
-2. Open the file and move Glance.app to the Applications folder (do NOT open it yet).
-3. Install Xcode Command Line Tools with `xcode-select --install` if you have not previously installed it.
-4. Open a terminal and run the following commands.
+2. Open the file and move Glance.app to the Applications folder.
+4. Open a terminal and run the following command.
 	```sh
-	xattr -cr /Applications/Glance.app
-	echo '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>com.apple.security.app-sandbox</key><true/><key>com.apple.security.application-groups</key><array><string>group.com.chamburr.glance</string></array><key>com.apple.security.files.user-selected.read-only</key><true/></dict></plist>' > /tmp/Glance.entitlements
-	codesign -s - -f --deep --entitlements /tmp/Glance.entitlements /Applications/Glance.app
-	rm /tmp/Glance.entitlements
+	xattr -rd com.apple.quarantine /Applications/Glance.app
 	```
-5. Launch Glance. Done!
-
-Note: If anyone knows of a better workaround or can supply me with a Developer ID, please [let me know](https://chamburr.xyz). Thanks!
+5. Launch Glance. Enjoy!
 
 ## Supported file types
 
