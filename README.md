@@ -1,5 +1,5 @@
 <div align="center">
-	<p><img src="./Glance/Assets.xcassets/AppIcon.appiconset/app-icon-256pt@1x.png" alt="" height="140"></p>
+	<p><img src="./Glance/Assets.xcassets/AppIcon.appiconset/app-icon-256pt@1x.png" alt="" height="160"></p>
 	<h1>Glance</h1>
 	<p><strong>All-in-one Quick Look plugin</strong></p>
 	<p>Glance provides Quick Look previews for files that macOS doesn't support out of the box.</p>
