@@ -1,0 +1,27 @@
+---
+kind: pipeline
+name: lint
+
+steps:
+  - name: lint swift
+    image: swift
+    commands:
+      - git clone https://github.com/yonaskolb/Mint.git /tmp/Mint
+      - swift run --package-path /tmp/Mint mint install yonaskolb/mint
+      - mint bootstrap
+      - mint run swiftlint --quiet --strict
+      - mint run swiftformat --lint .
+    environment:
+      MINT_LINK_PATH: /usr/local/bin
+  - name: lint go
+    image: golangci/golangci-lint
+    commands:
+      - cd HTMLConverter
+      - golangci-lint run
+
+trigger:
+  event:
+    - push
+    - pull_request
+  branch:
+    - master

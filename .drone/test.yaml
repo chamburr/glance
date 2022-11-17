@@ -1,0 +1,17 @@
+---
+kind: pipeline
+name: test
+
+steps:
+  - name: test go
+    image: golangci/golangci-lint
+    commands:
+      - cd HTMLConverter
+      - golangci-lint run
+
+trigger:
+  event:
+    - push
+    - pull_request
+  branch:
+    - master
