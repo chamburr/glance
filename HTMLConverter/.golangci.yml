@@ -4,12 +4,25 @@ output:
 linters:
   enable-all: true
   disable:
+    - dupword
+    - exhaustruct
+    - exhaustivestruct
     - funlen
+    - gci
     - gochecknoglobals
     - gocognit
+    - goimports
+    - gofmt
+    - gofumpt
     - gomnd
     - maligned
+    - nlreturn
+    - nolintlint
+    - nosnakecase
+    - paralleltest
+    - revive
     - testpackage
+    - varnamelen
     - wsl
 
 linters-settings:

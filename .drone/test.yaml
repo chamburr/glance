@@ -4,10 +4,10 @@ name: test
 
 steps:
   - name: test go
-    image: golangci/golangci-lint
+    image: golang
     commands:
       - cd HTMLConverter
-      - golangci-lint run
+      - go test
 
 trigger:
   event:
