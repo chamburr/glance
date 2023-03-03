@@ -35,7 +35,7 @@
 		7E616BB0244997420043F7AB /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 7E616BAF244997420043F7AB /* SwiftCSV */; };
 		7E616BB2244998650043F7AB /* MainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E616BB1244998650043F7AB /* MainVC.xib */; };
 		7E6EF1FD240CC802009E4199 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6EF1FC240CC802009E4199 /* Quartz.framework */; };
-		7E6EF208240CC802009E4199 /* QLPlugin.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E6EF1FA240CC802009E4199 /* QLPlugin.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7E6EF208240CC802009E4199 /* QLPlugin.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7E6EF1FA240CC802009E4199 /* QLPlugin.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E7A9DAD244F24B900276E51 /* TARPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A9DAC244F24B900276E51 /* TARPreview.swift */; };
 		7E9F0D7D24168870007F1008 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F0D7A24168870007F1008 /* Stylesheet.swift */; };
 		7E9F0D7E24168870007F1008 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F0D7B24168870007F1008 /* Script.swift */; };
@@ -139,15 +139,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7E6EF209240CC802009E4199 /* Embed App Extensions */ = {
+		7E6EF209240CC802009E4199 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				7E6EF208240CC802009E4199 /* QLPlugin.appex in Embed App Extensions */,
+				7E6EF208240CC802009E4199 /* QLPlugin.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7E9F0D5E2416427B007F1008 /* Copy Files */ = {
@@ -654,7 +654,7 @@
 				7ECC8CEA240CB4CC000D6970 /* Sources */,
 				7ECC8CEB240CB4CC000D6970 /* Frameworks */,
 				7ECC8CEC240CB4CC000D6970 /* Resources */,
-				7E6EF209240CC802009E4199 /* Embed App Extensions */,
+				7E6EF209240CC802009E4199 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -675,7 +675,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = CHamburr;
 				TargetAttributes = {
 					10779C0C26218B2B008A903C = {
@@ -829,7 +829,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ./HTMLConverter/\nGOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-amd64.a\nGOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-arm64.a\nlipo -create -output htmlconverter.a htmlconverter-amd64.a htmlconverter-arm64.a\ncp htmlconverter-amd64.h htmlconverter.h\n";
+			shellScript = "cd ./HTMLConverter/\n[ ! -d /opt/homebrew ] || eval \"$(/opt/homebrew/bin/brew shellenv)\"\nGOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-amd64.a\nGOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-arm64.a\nlipo -create -output htmlconverter.a htmlconverter-amd64.a htmlconverter-arm64.a\ncp htmlconverter-amd64.h htmlconverter.h\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -910,6 +910,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = GlanceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -932,6 +933,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = GlanceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -954,6 +956,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -984,6 +987,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1041,6 +1045,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1103,6 +1108,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1135,6 +1141,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 9;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Glance/Info.plist;
@@ -1160,6 +1167,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 9;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Glance/Info.plist;
