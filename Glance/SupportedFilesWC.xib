@@ -60,7 +60,7 @@
                                         </fragment>
                                         <fragment>
                                             <string key="content">
-.md, .markdown, .mdown, .mkdn, .mkd, .Rmd
+.md, .markdown, .mdown, .mkdn, .mkd, .Rmd, .qmd
 
 </string>
                                             <attributes>
