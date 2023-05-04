@@ -4,3 +4,4 @@
 --indentcase true
 --maxwidth 100
 --tabwidth 4
+--disable hoistTry
