@@ -4,6 +4,7 @@ output:
 linters:
   enable-all: true
   disable:
+    - depguard
     - dupword
     - exhaustruct
     - exhaustivestruct
