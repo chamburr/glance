@@ -24,4 +24,4 @@ trigger:
     - push
     - pull_request
   branch:
-    - master
+    - main

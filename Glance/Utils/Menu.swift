@@ -2,8 +2,8 @@ import Cocoa
 import Foundation
 
 let feedbackURL = URL(string: "https://github.com/chamburr/glance/issues")!
-let licenseURL = URL(string: "https://github.com/chamburr/glance/blob/master/LICENSE.md")!
-let privacyPolicyURL = URL(string: "https://github.com/chamburr/glance/blob/master/PRIVACY.md")!
+let licenseURL = URL(string: "https://github.com/chamburr/glance/blob/main/LICENSE.md")!
+let privacyPolicyURL = URL(string: "https://github.com/chamburr/glance/blob/main/PRIVACY.md")!
 let websiteURL = URL(string: "https://github.com/chamburr/glance")!
 
 /// Used as a subclass for the menu item in Interface Builder
