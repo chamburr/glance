@@ -153,6 +153,10 @@
 				<string>dyn.ah62d4rv4ge81u65e</string> <!-- .xsd -->
 				<string>dyn.ah62d4rv4ge81u65q</string> <!-- .xsl -->
 				<string>dyn.ah62d4rv4ge81u65qsu</string> <!-- .xslt -->
+				<string>dyn.ah62d4rv4ge81g5ds</string> <!-- .sln -->
+				<string>dyn.ah62d4rv4ge81k2pwq7w1k62</string> <!-- .targets -->
+				<string>dyn.ah62d4rv4ge81a6xtsb3u</string> <!-- .props -->
+				<string>dyn.ah62d4rv4ge80g65usm10y</string> <!-- .csproj -->
 				<string>org.arduino.ino-source</string> <!-- .ino (Arduino) -->
 				<string>org.arduino.source</string>  <!-- .pde (Arduino) -->
 				<string>org.asm.source</string> <!-- .asm (TASM) -->

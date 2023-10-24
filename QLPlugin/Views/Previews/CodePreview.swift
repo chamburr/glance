@@ -43,6 +43,9 @@ let fileExtensionLexers = [
 	"webmanifest": "json",
 	"xcscheme": "xml",
 	"xib": "xml",
+	"csproj": "xml",
+	"props": "xml",
+	"targets": "xml",
 
 	// Files for which a different, similar syntax is used
 	"liquid": "twig",
@@ -50,6 +53,7 @@ let fileExtensionLexers = [
 	"njk": "twig",
 	"pbxproj": "txt",
 	"strings": "c",
+	"sln": "txt",
 ]
 
 class CodePreview: Preview {
