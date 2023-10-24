@@ -108,6 +108,7 @@
 				<string>dyn.ah62d4rv4ge80g55sq2</string> <!-- .conf -->
 				<string>dyn.ah62d4rv4ge80g5pbrrwu</string> <!-- .cmake -->
 				<string>dyn.ah62d4rv4ge80g62</string> <!-- .cs -->
+				<string>dyn.ah62d4rv4ge80g65usm10y</string> <!-- .csproj -->
 				<string>dyn.ah62d4rv4ge80g6pq</string> <!-- .cql (Cassandra) -->
 				<string>dyn.ah62d4rv4ge80k4pxsu</string> <!-- .dist -->
 				<string>dyn.ah62d4rv4ge80n5dr</string> <!-- .elm -->
@@ -127,6 +128,7 @@
 				<string>dyn.ah62d4rv4ge80y652</string> <!-- .jsx -->
 				<string>dyn.ah62d4rv4ge81a63v</string> <!-- .ps1 (PowerShell) -->
 				<string>dyn.ah62d4rv4ge81a65rge</string> <!-- .psm1 (PowerShell) -->
+				<string>dyn.ah62d4rv4ge81a6xtsb3u</string> <!-- .props -->
 				<string>dyn.ah62d4rv4ge81e2ppqy</string> <!-- .rake (Ruby) -->
 				<string>dyn.ah62d4rv4ge81e3pxr70hq3pe</string> <!-- .resolved (lockfile for Swift Package Manager) -->
 				<string>dyn.ah62d4rv4ge81e3pxsu</string> <!-- .rest (reStructuredText) -->
@@ -138,9 +140,11 @@
 				<string>dyn.ah62d4rv4ge81g25xsq</string> <!-- .scss -->
 				<string>dyn.ah62d4rv4ge81g2pxsq</string> <!-- .sass -->
 				<string>dyn.ah62d4rv4ge81g3pws3y0g3k</string> <!-- .service (systemd) -->
+				<string>dyn.ah62d4rv4ge81g5ds</string> <!-- .sln -->
 				<string>dyn.ah62d4rv4ge81g6dbsm202</string> <!-- .sparql (SPARQL) -->
 				<string>dyn.ah62d4rv4ge81g6pq</string> <!-- .sql -->
 				<string>dyn.ah62d4rv4ge81g7xfrv4gn</string> <!-- .svelte -->
+				<string>dyn.ah62d4rv4ge81k2pwq7w1k62</string> <!-- .targets -->
 				<string>dyn.ah62d4rv4ge81k55d</string> <!-- .toc (LaTeX) -->
 				<string>dyn.ah62d4rv4ge81k55rru</string> <!-- .toml -->
 				<string>dyn.ah62d4rv4ge81k652</string> <!-- .tsx -->

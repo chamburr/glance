@@ -28,10 +28,12 @@ let fileExtensionLexers = [
 	// Files with syntax supported by Chroma
 	"alfredappearance": "json",
 	"cls": "tex",
+	"csproj": "xml",
 	"entitlements": "xml",
 	"hbs": "handlebars",
 	"iml": "xml",
 	"plist": "xml",
+	"props": "xml",
 	"resolved": "json",
 	"scpt": "applescript",
 	"scptd": "applescript",
@@ -40,6 +42,7 @@ let fileExtensionLexers = [
 	"storyboard": "xml",
 	"stringsdict": "xml",
 	"sty": "tex",
+	"targets": "xml",
 	"webmanifest": "json",
 	"xcscheme": "xml",
 	"xib": "xml",
@@ -49,6 +52,7 @@ let fileExtensionLexers = [
 	"modulemap": "hcl",
 	"njk": "twig",
 	"pbxproj": "txt",
+	"sln": "txt",
 	"strings": "c",
 ]
 
