@@ -28,10 +28,12 @@ let fileExtensionLexers = [
 	// Files with syntax supported by Chroma
 	"alfredappearance": "json",
 	"cls": "tex",
+	"csproj": "xml",
 	"entitlements": "xml",
 	"hbs": "handlebars",
 	"iml": "xml",
 	"plist": "xml",
+	"props": "xml",
 	"resolved": "json",
 	"scpt": "applescript",
 	"scptd": "applescript",
@@ -40,20 +42,18 @@ let fileExtensionLexers = [
 	"storyboard": "xml",
 	"stringsdict": "xml",
 	"sty": "tex",
+	"targets": "xml",
 	"webmanifest": "json",
 	"xcscheme": "xml",
 	"xib": "xml",
-	"csproj": "xml",
-	"props": "xml",
-	"targets": "xml",
 
 	// Files for which a different, similar syntax is used
 	"liquid": "twig",
 	"modulemap": "hcl",
 	"njk": "twig",
 	"pbxproj": "txt",
-	"strings": "c",
 	"sln": "txt",
+	"strings": "c",
 ]
 
 class CodePreview: Preview {
