@@ -7,21 +7,19 @@ linters:
     - depguard
     - dupword
     - exhaustruct
-    - exhaustivestruct
     - funlen
     - gci
     - gochecknoglobals
     - gocognit
+    - godot
     - goimports
     - gofmt
     - gofumpt
-    - gomnd
-    - maligned
     - nlreturn
     - nolintlint
-    - nosnakecase
     - paralleltest
     - revive
+    - testifylint
     - testpackage
     - varnamelen
     - wsl
