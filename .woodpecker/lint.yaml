@@ -1,6 +1,7 @@
----
-kind: pipeline
-name: lint
+when:
+  - event: pull_request
+  - event: push
+    branch: main
 
 steps:
   - name: lint swift
@@ -18,10 +19,3 @@ steps:
     commands:
       - cd HTMLConverter
       - golangci-lint run
-
-trigger:
-  event:
-    - push
-    - pull_request
-  branch:
-    - main

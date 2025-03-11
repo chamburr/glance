@@ -1,0 +1,11 @@
+when:
+  - event: pull_request
+  - event: push
+    branch: main
+
+steps:
+  - name: test go
+    image: golang
+    commands:
+      - cd HTMLConverter
+      - go test
