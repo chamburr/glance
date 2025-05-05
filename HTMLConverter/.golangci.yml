@@ -1,20 +1,14 @@
-output:
-  print-issued-lines: false
-
+version: "2"
 linters:
-  enable-all: true
+  default: all
   disable:
     - depguard
     - dupword
     - exhaustruct
     - funlen
-    - gci
     - gochecknoglobals
     - gocognit
     - godot
-    - goimports
-    - gofmt
-    - gofumpt
     - nlreturn
     - nolintlint
     - paralleltest
@@ -23,15 +17,26 @@ linters:
     - testpackage
     - varnamelen
     - wsl
-
-linters-settings:
-  lll:
-    max-length: 100
-    tab-width: 2
-
+  settings:
+    lll:
+      line-length: 100
+      tab-width: 2
+  exclusions:
+    generated: lax
+    rules:
+      - path: (.+)\.go$
+        text: Line contains TODO/BUG/FIXME
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0
-  exclude-use-default: false
-  exclude:
-    - "Line contains TODO/BUG/FIXME"
+formatters:
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

@@ -59,7 +59,7 @@ Text`
 }
 
 func TestConvertMarkdownToHTMLWithSyntaxHighlighting(t *testing.T) {
-	source := "# Heading\n\nText\n\n```js\nconst print = (text) => console.log(text);\nprint(\"Hello world\");\n```"
+	source := "# Heading\n\nText\n\n```js\nconst print = (text) => console.log(text);\nprint(\"Hello world\");\n```" // nolint:lll
 	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
 	assert.True(t, strings.Contains(actual, `<pre class="chroma">`))
 }
