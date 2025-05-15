@@ -27,6 +27,7 @@ let dotfileLexers = [
 let fileExtensionLexers = [
 	// Files with syntax supported by Chroma
 	"alfredappearance": "json",
+	"mobileconfig": "xml",
 	"cls": "tex",
 	"csproj": "xml",
 	"entitlements": "xml",
