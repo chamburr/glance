@@ -13,15 +13,16 @@ This is a fork of the [original Glance plugin](https://github.com/samuelmeuli/gl
 
 ## Installation
 
-The installation is slightly complex as the package is not notarized. The steps are as follows:
+You can install Glance through Homebrew using `brew install --no-quarantine glance-chamburr`.
+
+Alternatively, you can install Glance directly. The installation is slightly complex as the package is not notarized. The steps are as follows:
 
 1. Download the `.dmg` file from [releases](https://github.com/chamburr/glance/releases), open the file and drag Glance.app to Applications.
-2. Alternatively, install Glance through Homebrew using `brew install glance-chamburr`.
-3. Open a terminal and run the following command.
+2. Open a terminal and run the following command.
 	```sh
 	xattr -rd com.apple.quarantine /Applications/Glance.app
 	```
-4. Launch Glance. Enjoy!
+3. Launch Glance. Enjoy!
 
 ## Supported file types
 
