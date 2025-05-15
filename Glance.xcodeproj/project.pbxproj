@@ -674,9 +674,10 @@
 		7ECC8CE6240CB4CC000D6970 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1420;
-				ORGANIZATIONNAME = CHamburr;
+				LastUpgradeCheck = 1630;
+				ORGANIZATIONNAME = "Han Cen";
 				TargetAttributes = {
 					10779C0C26218B2B008A903C = {
 						CreatedOnToolsVersion = 12.4;
@@ -1134,7 +1135,6 @@
 		7ECC8CFF240CB4CC000D6970 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Glance/Glance.entitlements;
 				CODE_SIGN_IDENTITY = "-";
@@ -1160,7 +1160,6 @@
 		7ECC8D00240CB4CC000D6970 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Glance/Glance.entitlements;
 				CODE_SIGN_IDENTITY = "-";
