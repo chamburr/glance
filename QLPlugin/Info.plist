@@ -89,7 +89,7 @@
 				<string>com.eiffel.source-code</string> <!-- .e (Eiffel) -->
 				<string>com.microsoft.csharp-source</string> <!-- .cs -->
 				<string>com.microsoft.f-sharp</string> <!-- .fsx (F Sharp) -->
-				<string>com.netscape.javascript-source</string> <!-- .js -->
+				<string>com.netscape.javascript-source</string> <!-- .js, .mjs -->
 				<string>com.runningwithcrayons.alfred.appearance</string> <!-- Alfred theme (.alfredappearance) -->
 				<string>com.sequelpro.sequelpro.spf</string> <!-- .spf (Sequel Pro query favorites file) -->
 				<string>com.sequelpro.sequelpro.sptheme</string> <!-- .spTheme (Sequel Pro theme file) -->
@@ -107,6 +107,7 @@
 				<string>dyn.ah62d4rv4ge8064prsm10k</string> <!-- .nimrod (Nim) -->
 				<string>dyn.ah62d4rv4ge8064xp</string> <!-- .njk (Nunjucks) -->
 				<string>dyn.ah62d4rv4ge80c7p2</string> <!-- .aux (LaTeX) -->
+				<string>dyn.ah62d4rv4ge80g4xx</string> <!-- .cjs -->
 				<string>dyn.ah62d4rv4ge80g55sq2</string> <!-- .conf -->
 				<string>dyn.ah62d4rv4ge80g5pbrrwu</string> <!-- .cmake -->
 				<string>dyn.ah62d4rv4ge80g62</string> <!-- .cs -->

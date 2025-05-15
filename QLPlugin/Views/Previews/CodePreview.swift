@@ -28,11 +28,13 @@ let fileExtensionLexers = [
 	// Files with syntax supported by Chroma
 	"alfredappearance": "json",
 	"mobileconfig": "xml",
+	"cjs": "js",
 	"cls": "tex",
 	"csproj": "xml",
 	"entitlements": "xml",
 	"hbs": "handlebars",
 	"iml": "xml",
+	"mjs": "js",
 	"plist": "xml",
 	"props": "xml",
 	"resolved": "json",
