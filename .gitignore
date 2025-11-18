@@ -5,3 +5,5 @@ xcuserdata/
 # `go build` output
 HTMLConverter/htmlconverter*.a
 HTMLConverter/htmlconverter*.h
+
+.DS_Store

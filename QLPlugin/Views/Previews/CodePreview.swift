@@ -49,14 +49,20 @@ let fileExtensionLexers = [
 	"webmanifest": "json",
 	"xcscheme": "xml",
 	"xib": "xml",
+	"xmp": "xml",
 
 	// Files for which a different, similar syntax is used
+	"ass": "txt",
 	"liquid": "twig",
+	"lrc": "txt",
 	"modulemap": "hcl",
+	"nfo": "txt",
 	"njk": "twig",
 	"pbxproj": "txt",
 	"sln": "txt",
+	"srt": "txt",
 	"strings": "c",
+	"vtt": "txt",
 ]
 
 class CodePreview: Preview {
