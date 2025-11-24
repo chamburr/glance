@@ -97,7 +97,8 @@ func convertMarkdownToHTML(source *C.char) *C.char {
 
 	// Convert Markdown to HTML
 	var htmlBuffer bytes.Buffer
-	if err := markdownParser.Convert([]byte(sourceString), &htmlBuffer); err != nil {
+	err := markdownParser.Convert([]byte(sourceString), &htmlBuffer)
+	if err != nil {
 		errMessage := fmt.Sprintf("error: Could not convert Markdown to HTML: %d", err)
 		return convertToCString(errMessage)
 	}

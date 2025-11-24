@@ -23,6 +23,7 @@ func minifyHTML(htmlString string) string {
 	if err != nil {
 		panic(fmt.Sprintf("Could not minify HTML: %d", err))
 	}
+
 	return minified
 }
 
