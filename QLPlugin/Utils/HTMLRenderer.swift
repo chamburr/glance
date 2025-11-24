@@ -13,7 +13,7 @@ enum HTMLRendererError {
 }
 
 extension HTMLRendererError: LocalizedError {
-	public var errorDescription: String? {
+	var errorDescription: String? {
 		switch self {
 			case let .rendererError(fileType, errorMessage):
 				return NSLocalizedString(

@@ -5,7 +5,7 @@ enum FileTreeError {
 }
 
 extension FileTreeError: LocalizedError {
-	public var errorDescription: String? {
+	var errorDescription: String? {
 		switch self {
 			case let .notADirectoryError(pathParts, pathPartIndex):
 				return NSLocalizedString(

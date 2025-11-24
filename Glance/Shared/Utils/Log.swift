@@ -1,7 +1,7 @@
 import Foundation
 import os.log
 
-struct Log {
+enum Log {
 	// Subsystems
 	static let subsystem = Bundle.main.bundleIdentifier!
 

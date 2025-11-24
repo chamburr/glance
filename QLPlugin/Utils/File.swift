@@ -7,7 +7,7 @@ enum FileError: Error {
 }
 
 extension FileError: LocalizedError {
-	public var errorDescription: String? {
+	var errorDescription: String? {
 		switch self {
 			case let .fileAttributeError(path, message):
 				return NSLocalizedString(
