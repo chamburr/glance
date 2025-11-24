@@ -86,12 +86,9 @@
 				<string>com.barebones.bbedit.ini-configuration</string> <!-- .cfg -->
 				<string>com.barebones.bbedit.scss-source</string> <!-- .scss -->
 				<string>com.barebones.bbedit.tex-source</string> <!-- .tex -->
-				<string>com.bps.lrc</string> <!-- .lrc (Lyrics file) -->
-				<string>com.bps.nfo</string> <!-- .nfo -->
-				<string>com.bps.srt</string> <!-- .srt (SubRip subtitle file) -->
 				<string>com.eiffel.source-code</string> <!-- .e (Eiffel) -->
-				<string>com.firecore.fileformat.ass</string> <!-- .ass (subtitle file) -->
-				<string>com.firecore.fileformat.srt</string> <!-- .srt (SubRip subtitle file) -->
+				<string>com.firecore.fileformat.ass</string> <!-- .ass (Infuse subtitle) -->
+				<string>com.firecore.fileformat.srt</string> <!-- .srt (Infuse SubRip subtitle) -->
 				<string>com.microsoft.csharp-source</string> <!-- .cs -->
 				<string>com.microsoft.f-sharp</string> <!-- .fsx (F Sharp) -->
 				<string>com.netscape.javascript-source</string> <!-- .js, .mjs -->
@@ -99,14 +96,14 @@
 				<string>com.sequelpro.sequelpro.spf</string> <!-- .spf (Sequel Pro query favorites file) -->
 				<string>com.sequelpro.sequelpro.sptheme</string> <!-- .spTheme (Sequel Pro theme file) -->
 				<string>com.sequelpro.sequelpro.sql</string> <!-- .sql (used by Sequel Pro) -->
-				<string>com.seriflabs.xmp</string> <!-- .xmp (Extensible Metadata Platform sidecar file) -->
+				<string>com.seriflabs.xmp</string> <!-- .xmp (used by Affinity) -->
 				<string>com.sun.java-source</string> <!-- .java -->
 				<string>com.vallettaventures.texpadm.bibtex</string> <!-- .bib (Texpad BibTeX) -->
 				<string>com.vallettaventures.texpadm.tex</string> <!-- .cls, .sty, .tex (Texpad LaTeX) -->
 				<string>dyn.ah62d4rv4ge8007a</string> <!-- .kt (Kotlin) -->
 				<string>dyn.ah62d4rv4ge8024pvszy0k</string> <!-- .liquid -->
 				<string>dyn.ah62d4rv4ge80255drq</string> <!-- .lock (lockfile for Cargo, Poetry, Yarn, ...) -->
-				<string>dyn.ah62d4rv4ge8026xd</string> <!-- .lrc (Lyrics file) -->
+				<string>dyn.ah62d4rv4ge8026xd</string> <!-- .lrc (lyrics) -->
 				<string>dyn.ah62d4rv4ge8043d2</string> <!-- .mdx (MDX, Markdown with JSX) -->
 				<string>dyn.ah62d4rv4ge8045a</string> <!-- .ml (OCaml) -->
 				<string>dyn.ah62d4rv4ge8063xt</string> <!-- .nfo -->
@@ -114,7 +111,7 @@
 				<string>dyn.ah62d4rv4ge8064pr</string> <!-- .nim (Nim) -->
 				<string>dyn.ah62d4rv4ge8064prsm10k</string> <!-- .nimrod (Nim) -->
 				<string>dyn.ah62d4rv4ge8064xp</string> <!-- .njk (Nunjucks) -->
-				<string>dyn.ah62d4rv4ge80c65x</string> <!-- .ass (subtitle file) -->
+				<string>dyn.ah62d4rv4ge80c65x</string> <!-- .ass (subtitle) -->
 				<string>dyn.ah62d4rv4ge80c7p2</string> <!-- .aux (LaTeX) -->
 				<string>dyn.ah62d4rv4ge80g4xx</string> <!-- .cjs -->
 				<string>dyn.ah62d4rv4ge80g55sq2</string> <!-- .conf -->
@@ -156,7 +153,7 @@
 				<string>dyn.ah62d4rv4ge81g5ds</string> <!-- .sln -->
 				<string>dyn.ah62d4rv4ge81g6dbsm202</string> <!-- .sparql (SPARQL) -->
 				<string>dyn.ah62d4rv4ge81g6pq</string> <!-- .sql -->
-				<string>dyn.ah62d4rv4ge81g6xy</string> <!-- .srt (SubRip subtitle file) -->
+				<string>dyn.ah62d4rv4ge81g6xy</string> <!-- .srt (SubRip subtitle) -->
 				<string>dyn.ah62d4rv4ge81g7xfrv4gn</string> <!-- .svelte -->
 				<string>dyn.ah62d4rv4ge81k2pwq7w1k62</string> <!-- .targets -->
 				<string>dyn.ah62d4rv4ge81k55d</string> <!-- .toc (LaTeX) -->
@@ -168,7 +165,7 @@
 				<string>dyn.ah62d4rv4ge81s3pcrzu064pgqz31k</string> <!-- .webmanifest (web app manifest) -->
 				<string>dyn.ah62d4rv4ge81s65eru</string> <!-- .wsdl -->
 				<string>dyn.ah62d4rv4ge81s65g</string> <!-- .wsf -->
-				<string>dyn.ah62d4rv4ge81u5pu</string> <!-- .xmp (Extensible Metadata Platform sidecar file) -->
+				<string>dyn.ah62d4rv4ge81u5pu</string> <!-- .xmp -->
 				<string>dyn.ah62d4rv4ge81u65e</string> <!-- .xsd -->
 				<string>dyn.ah62d4rv4ge81u65q</string> <!-- .xsl -->
 				<string>dyn.ah62d4rv4ge81u65qsu</string> <!-- .xslt -->
@@ -217,7 +214,7 @@
 				<string>org.tug.lua</string> <!-- .lua (used by TeXShop) -->
 				<string>org.tug.tex</string> <!-- .tex (used by TeXShop) -->
 				<string>org.vim.vim-script</string> <!-- .vim -->
-				<string>org.w3.webvtt</string> <!-- .vtt (WebVTT subtitle file) -->
+				<string>org.w3.webvtt</string> <!-- .vtt (WebVTT subtitle) -->
 				<string>org.xul.source</string> <!-- .xul -->
 				<string>public.ada-source</string> <!-- .ada, .adb, .ads (Ada) -->
 				<string>public.assembly-source</string> <!-- .s (Assembly) -->
