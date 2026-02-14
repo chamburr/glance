@@ -11,6 +11,7 @@ linters:
     - godot
     - nlreturn
     - nolintlint
+    - nonamedreturns
     - paralleltest
     - revive
     - testifylint
