@@ -52,6 +52,7 @@
 
 				<!-- Markdown -->
 				<string>com.unknown.md</string> <!-- .md (used by TeXShop) -->
+				<string>public.markdown</string> <!-- .md -->
 				<string>dyn.ah62d4rv4ge8042pwrrwg875s</string> <!-- .markdown -->
 				<string>dyn.ah62d4rv4ge8043a</string> <!-- .md -->
 				<string>dyn.ah62d4rv4ge8043dts71a</string> <!-- .mdown -->
@@ -60,6 +61,7 @@
 				<string>dyn.ah62d4rv4ge80445er7506</string> <!-- .mkdown -->
 				<string>dyn.ah62d4rv4ge81e5pe</string> <!-- .Rmd -->
 				<string>dyn.ah62d4rv4ge81c5pe</string> <!-- .qmd -->
+				<string>org.quarto.qmarkdown</string> <!-- .qmd -->
 				<string>net.daringfireball.markdown</string> <!-- .markdown, .md, .mdown, .mkd, .mkdn -->
 				<string>net.ia.markdown</string> <!-- .md (used by iA Writer) -->
 				<string>com.nutstore.down</string> <!-- .md (used by Nutstore) -->
@@ -135,6 +137,7 @@
 				<string>dyn.ah62d4rv4ge80u2xx</string> <!-- .hbs (Handlebars) -->
 				<string>dyn.ah62d4rv4ge80w5pq</string> <!-- .iml -->
 				<string>dyn.ah62d4rv4ge80y5a</string> <!-- .jl -->
+				<string>org.julialang.julia</string> <!-- .jl -->
 				<string>dyn.ah62d4rv4ge80y652</string> <!-- .jsx -->
 				<string>dyn.ah62d4rv4ge81a63v</string> <!-- .ps1 (PowerShell) -->
 				<string>dyn.ah62d4rv4ge81a65rge</string> <!-- .psm1 (PowerShell) -->
