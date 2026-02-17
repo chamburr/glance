@@ -49,6 +49,8 @@ class WebPreviewVC: NSViewController, PreviewVC {
 		let webView = WebView(frame: view.bounds)
 		webView.autoresizingMask = [.height, .width]
 
+		webView.drawsBackground = false
+
 		view.addSubview(webView)
 
 		let linkTags = stylesheets
