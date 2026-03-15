@@ -36,6 +36,9 @@
 					- public.xml (.xml)
 				-->
 
+				<!-- Directory -->
+				<string>public.folder</string>
+
 				<!-- Archive -->
 				<string>com.sun.java-archive</string> <!-- .jar (Java) -->
 				<string>com.sun.web-application-archive</string> <!-- .war (Java) -->

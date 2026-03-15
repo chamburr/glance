@@ -3,6 +3,7 @@ import Cocoa
 class OutlinePreviewVC: NSViewController, PreviewVC {
 	@objc dynamic var rootNodes: [FileTreeNode]
 	private let labelText: String?
+	private let expandAll: Bool
 
 	@objc dynamic var customSortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
 
@@ -10,18 +11,20 @@ class OutlinePreviewVC: NSViewController, PreviewVC {
 	@IBOutlet private var outlineView: NSOutlineView!
 	@IBOutlet private var label: NSTextField!
 
-	required convenience init(rootNodes: [FileTreeNode], labelText: String?) {
-		self.init(nibName: nil, bundle: nil, rootNodes: rootNodes, labelText: labelText)
+	required convenience init(rootNodes: [FileTreeNode], labelText: String?, expandAll: Bool = false) {
+		self.init(nibName: nil, bundle: nil, rootNodes: rootNodes, labelText: labelText, expandAll: expandAll)
 	}
 
 	init(
 		nibName nibNameOrNil: NSNib.Name?,
 		bundle nibBundleOrNil: Bundle?,
 		rootNodes: [FileTreeNode],
-		labelText: String?
+		labelText: String?,
+		expandAll: Bool = false
 	) {
 		self.rootNodes = rootNodes
 		self.labelText = labelText
+		self.expandAll = expandAll
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
 		// Register required value transformers
@@ -38,7 +41,11 @@ class OutlinePreviewVC: NSViewController, PreviewVC {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpView()
-		expandSingleRootItem()
+		if expandAll {
+			expandAllItems()
+		} else {
+			expandSingleRootItem()
+		}
 	}
 
 	private func setUpView() {
@@ -57,6 +64,11 @@ class OutlinePreviewVC: NSViewController, PreviewVC {
 		if root.children?.count == 1 {
 			outlineView.expandItem(root.children?.first!)
 		}
+	}
+
+	/// Expands all items in the outline view.
+	private func expandAllItems() {
+		outlineView.expandItem(nil, expandChildren: true)
 	}
 }
 
