@@ -78,7 +78,7 @@
                                         </fragment>
                                         <fragment>
                                             <string key="content">
-.tar, .tar.gz, .zip
+.7z, .tar, .tar.gz, .zip
 
 </string>
                                             <attributes>

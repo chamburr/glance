@@ -37,6 +37,7 @@
 				-->
 
 				<!-- Archive -->
+				<string>org.7-zip.7-zip-archive</string> <!-- .7z -->
 				<string>com.sun.java-archive</string> <!-- .jar (Java) -->
 				<string>com.sun.web-application-archive</string> <!-- .war (Java) -->
 				<string>dyn.ah62d4rv4ge80n2pw</string> <!-- .ear (Java) -->
