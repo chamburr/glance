@@ -32,14 +32,14 @@ class SevenZipPreview: Preview {
 		}
 
 		let compressed = file.size
-		let ratio = totalUncompressed == 0
+		let compressionRatio = totalUncompressed == 0
 			? 0.0
 			: 100.0 - Double(compressed) / Double(totalUncompressed) * 100.0
 
 		let labelText = """
 		Compressed: \(byteCountFormatter.string(for: compressed) ?? "--")
 		Uncompressed: \(byteCountFormatter.string(for: totalUncompressed) ?? "--")
-		Compression ratio: \(String(format: "%.1f", ratio)) %
+		Compression ratio: \(String(compressionRatio)) %
 		"""
 
 		return OutlinePreviewVC(rootNodes: fileTree.root.childrenList, labelText: labelText)
