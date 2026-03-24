@@ -360,7 +360,6 @@
 				7E1DC529240E6FDE00D0A061 /* CodePreview.swift */,
 				7EB7491824228549007265A4 /* JupyterPreview.swift */,
 				7E1DC520240E6D8000D0A061 /* MarkdownPreview.swift */,
-				AA0000012CA00000000000A0 /* SevenZipPreview.swift */,
 				7E7A9DAC244F24B900276E51 /* TARPreview.swift */,
 				7E413F7F2418DD6200CFBB1D /* TSVPreview.swift */,
 				7EB36489244B665700D7F96F /* ZIPPreview.swift */,
