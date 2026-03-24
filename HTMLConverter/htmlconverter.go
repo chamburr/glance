@@ -17,7 +17,7 @@ import (
 )
 
 // Regex for YAML front matter in a Markdown document
-var markdownFrontMatterRegex = regexp.MustCompile(`---\n[\s\S]*?\n---\n`)
+var markdownFrontMatterRegex = regexp.MustCompile(`^---\n[\s\S]*?\n---\n`)
 
 // Enable syntax highlighting in Markdown
 var markdownParser = goldmark.New(
