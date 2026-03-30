@@ -34,7 +34,7 @@ Alternatively, you can install Glance directly. The installation is slightly com
 
   <p><img src="./AppStore/Assets/Screenshots/ScreenshotMarkdown.png" alt="" width="600"></p>
 
-- **Archive**: `.tar`, `.tar.gz`, `.zip`
+- **Archive**: `.7z`, `.tar`, `.tar.gz`, `.zip`
 
   <p><img src="./AppStore/Assets/Screenshots/ScreenshotArchive.png" alt="" width="600"></p>
 

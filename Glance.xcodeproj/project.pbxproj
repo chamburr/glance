@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		102D56C526206A36000B5C0E /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D56C426206A36000B5C0E /* MainVC.swift */; };
+		103654F42F726241006F2538 /* SevenZipPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103654F32F72623D006F2538 /* SevenZipPreview.swift */; };
 		10779BC42621502C008A903C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 10779BC32621502C008A903C /* ZIPFoundation */; };
 		10779BEB26217F25008A903C /* SWCompression in Frameworks */ = {isa = PBXBuildFile; productRef = 10779BEA26217F25008A903C /* SWCompression */; };
 		10779C50262198EA008A903C /* htmlconverter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E42B61D245857D9008D7116 /* htmlconverter.a */; };
@@ -165,6 +166,7 @@
 
 /* Begin PBXFileReference section */
 		102D56C426206A36000B5C0E /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		103654F32F72623D006F2538 /* SevenZipPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenZipPreview.swift; sourceTree = "<group>"; };
 		10779C0D26218B2B008A903C /* GlanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10779C1126218B2B008A903C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E022BE32452181F000EFCD3 /* WebPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewVC.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 		7E1DC52C240E9A3700D0A061 /* Previews */ = {
 			isa = PBXGroup;
 			children = (
+				103654F32F72623D006F2538 /* SevenZipPreview.swift */,
 				7E1DC529240E6FDE00D0A061 /* CodePreview.swift */,
 				7EB7491824228549007265A4 /* JupyterPreview.swift */,
 				7E1DC520240E6D8000D0A061 /* MarkdownPreview.swift */,
@@ -870,6 +873,7 @@
 				7E022BED245253B3000EFCD3 /* OutlinePreviewVC.swift in Sources */,
 				7E9F0D7E24168870007F1008 /* Script.swift in Sources */,
 				7EB3648A244B665700D7F96F /* ZIPPreview.swift in Sources */,
+				103654F42F726241006F2538 /* SevenZipPreview.swift in Sources */,
 				A1B2C3D4E5F6789000112234 /* DirectoryPreview.swift in Sources */,
 				7E9F0D7D24168870007F1008 /* Stylesheet.swift in Sources */,
 			);

@@ -19,6 +19,8 @@ class PreviewVCFactory {
 				return TARPreview.self
 			case "tab", "tsv":
 				return TSVPreview.self
+			case "7z":
+				return SevenZipPreview.self
 			case "ear", "jar", "war", "zip":
 				return ZIPPreview.self
 			default:
