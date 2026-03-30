@@ -14,7 +14,7 @@ class DirectoryPreview: Preview {
 	/// Directories inside temporary extraction paths (e.g. from ZIP browsing in Finder)
 	/// should not be previewed by our plugin.
 	private func isTemporaryPath(_ path: String) -> Bool {
-		return path.hasPrefix("/private/var/folders/")
+		path.hasPrefix("/private/var/folders/")
 			|| path.hasPrefix("/var/folders/")
 			|| path.hasPrefix("/tmp/")
 			|| path.hasPrefix("/private/tmp/")
@@ -36,7 +36,9 @@ class DirectoryPreview: Preview {
 	}
 
 	private func scanDirectory(url: URL, fileTree: FileTree, basePath: String, depth: Int, itemCount: inout Int) {
-		guard depth < maxDepth, itemCount < maxItems else { return }
+		guard depth < maxDepth, itemCount < maxItems else {
+			return
+		}
 
 		let contents: [URL]
 		do {
@@ -57,7 +59,9 @@ class DirectoryPreview: Preview {
 		}
 
 		for itemURL in contents {
-			guard itemCount < maxItems else { return }
+			guard itemCount < maxItems else {
+				return
+			}
 
 			let resourceValues = try? itemURL.resourceValues(forKeys: [.isDirectoryKey, .fileSizeKey, .contentModificationDateKey])
 			let isDir = resourceValues?.isDirectory ?? false
