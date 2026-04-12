@@ -27,15 +27,31 @@ class DirectoryPreview: Preview {
 
 		let fileTree = FileTree()
 		var itemCount = 0
-		scanDirectory(url: file.url, fileTree: fileTree, basePath: file.url.path, depth: 0, itemCount: &itemCount)
+		scanDirectory(
+			url: file.url,
+			fileTree: fileTree,
+			basePath: file.url.path,
+			depth: 0,
+			itemCount: &itemCount
+		)
 
 		let childrenCount = countItems(nodes: fileTree.root.childrenList)
 		let labelText = "\(childrenCount) items"
 
-		return OutlinePreviewVC(rootNodes: fileTree.root.childrenList, labelText: labelText, expandAll: true)
+		return OutlinePreviewVC(
+			rootNodes: fileTree.root.childrenList,
+			labelText: labelText,
+			expandAll: true
+		)
 	}
 
-	private func scanDirectory(url: URL, fileTree: FileTree, basePath: String, depth: Int, itemCount: inout Int) {
+	private func scanDirectory(
+		url: URL,
+		fileTree: FileTree,
+		basePath: String,
+		depth: Int,
+		itemCount: inout Int
+	) {
 		guard depth < maxDepth, itemCount < maxItems else {
 			return
 		}
@@ -44,7 +60,11 @@ class DirectoryPreview: Preview {
 		do {
 			contents = try fileManager.contentsOfDirectory(
 				at: url,
-				includingPropertiesForKeys: [.isDirectoryKey, .fileSizeKey, .contentModificationDateKey],
+				includingPropertiesForKeys: [
+					.isDirectoryKey,
+					.fileSizeKey,
+					.contentModificationDateKey,
+				],
 				options: [.skipsHiddenFiles]
 			)
 		} catch {
@@ -63,7 +83,11 @@ class DirectoryPreview: Preview {
 				return
 			}
 
-			let resourceValues = try? itemURL.resourceValues(forKeys: [.isDirectoryKey, .fileSizeKey, .contentModificationDateKey])
+			let resourceValues = try? itemURL.resourceValues(forKeys: [
+				.isDirectoryKey,
+				.fileSizeKey,
+				.contentModificationDateKey,
+			])
 			let isDir = resourceValues?.isDirectory ?? false
 			let size = resourceValues?.fileSize ?? 0
 			let dateModified = resourceValues?.contentModificationDate
@@ -84,7 +108,13 @@ class DirectoryPreview: Preview {
 			}
 
 			if isDir {
-				scanDirectory(url: itemURL, fileTree: fileTree, basePath: basePath, depth: depth + 1, itemCount: &itemCount)
+				scanDirectory(
+					url: itemURL,
+					fileTree: fileTree,
+					basePath: basePath,
+					depth: depth + 1,
+					itemCount: &itemCount
+				)
 			}
 		}
 	}
