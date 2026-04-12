@@ -49,7 +49,9 @@ class DrawIOPreview: Preview {
 		let escaped = escapeForJSON(xml)
 
 		return """
-		<div class="mxgraph" data-mxgraph='{"highlight":"#0000ff","nav":false,"resize":true,"toolbar":"","edit":"_blank","xml":\(escaped)}'></div>
+		<div class="mxgraph" data-mxgraph='{"highlight":"#0000ff","nav":false,"resize":true,"toolbar":"","edit":"_blank","xml":\(
+			escaped
+		)}'></div>
 		"""
 	}
 
@@ -58,17 +60,20 @@ class DrawIOPreview: Preview {
 	private func resolveLightDarkColors(_ xml: String) -> String {
 		var result = xml
 		let pattern = "light-dark\\(\\s*(#[0-9A-Fa-f]{6})\\s*,\\s*(#[0-9A-Fa-f]{6})\\s*\\)"
-		guard let regex = try? NSRegularExpression(pattern: pattern) else { return xml }
+		guard let regex = try? NSRegularExpression(pattern: pattern) else {
+			return xml
+		}
 		let matches = regex.matches(in: result, range: NSRange(result.startIndex..., in: result))
 		// Replace in reverse order to preserve ranges
 		for match in matches.reversed() {
 			guard let fullRange = Range(match.range, in: result),
-				let lightRange = Range(match.range(at: 1), in: result),
-				let darkRange = Range(match.range(at: 2), in: result)
+			      let lightRange = Range(match.range(at: 1), in: result),
+			      let darkRange = Range(match.range(at: 2), in: result)
 			else { continue }
 			let light = String(result[lightRange]).lowercased()
 			let dark = String(result[darkRange])
-			let replacement = (light == "#000000" || light == "#ffffff") ? dark : String(result[lightRange])
+			let replacement = (light == "#000000" || light == "#ffffff") ? dark :
+				String(result[lightRange])
 			result.replaceSubrange(fullRange, with: replacement)
 		}
 		return result
