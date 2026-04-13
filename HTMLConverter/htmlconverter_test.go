@@ -59,6 +59,54 @@ Text`
 	assert.Equal(t, expected, minifyHTML(actual))
 }
 
+func TestConvertMarkdownToHTMLWithFrontMatterAndBlankLines(t *testing.T) {
+	// YAML front matter containing blank lines should still be stripped
+	source := `---
+title: My Document
+
+description: A document
+---
+
+# Heading
+
+Text`
+	expected := "<h1>Heading</h1><p>Text</p>"
+	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
+	assert.Equal(t, expected, minifyHTML(actual))
+}
+
+func TestConvertMarkdownToHTMLWithThematicBreakNotStripped(t *testing.T) {
+	// A --- thematic break at the top followed by a blank line should NOT be treated as front matter
+	source := `---
+
+## My Section
+
+Some content
+
+---
+
+## Another Section
+
+More content`
+	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
+	assert.True(t, strings.Contains(actual, "My Section"), "first section heading should be present")
+	assert.True(t, strings.Contains(actual, "Some content"), "first section content should be present")
+	assert.True(t, strings.Contains(actual, "Another Section"), "second section heading should be present")
+}
+
+func TestConvertMarkdownToHTMLWithHeadingAfterThematicBreakNotStripped(t *testing.T) {
+	// A --- thematic break immediately followed by a heading (no colon) should NOT be treated as front matter
+	source := `---
+## My Section
+
+Content
+
+---`
+	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
+	assert.True(t, strings.Contains(actual, "My Section"), "section heading should be present")
+	assert.True(t, strings.Contains(actual, "Content"), "section content should be present")
+}
+
 func TestConvertMarkdownToHTMLWithSyntaxHighlighting(t *testing.T) {
 	source := "# Heading\n\nText\n\n```js\nconst print = (text) => console.log(text);\nprint(\"Hello world\");\n```" // nolint:lll
 	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
