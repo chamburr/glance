@@ -54,9 +54,9 @@ key2: Another value
 # Heading
 
 Text`
-	expected := "<h1>Heading</h1><p>Text</p>"
 	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
-	assert.Equal(t, expected, minifyHTML(actual))
+	assert.True(t, strings.Contains(actual, `<pre tabindex="0" class="chroma">`))
+	assert.True(t, strings.Contains(minifyHTML(actual), `<h1>Heading</h1><p>Text</p>`))
 }
 
 func TestConvertMarkdownToHTMLWithSyntaxHighlighting(t *testing.T) {

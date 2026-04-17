@@ -17,7 +17,7 @@ import (
 )
 
 // Regex for YAML front matter in a Markdown document
-var markdownFrontMatterRegex = regexp.MustCompile(`^---\n[\s\S]*?\n---\n`)
+var markdownFrontMatterRegex = regexp.MustCompile(`^---\n([\s\S]*?)\n---\n`)
 
 // Enable syntax highlighting in Markdown
 var markdownParser = goldmark.New(
@@ -92,8 +92,8 @@ func convertCodeToHTML(source *C.char, lexer *C.char) *C.char {
 func convertMarkdownToHTML(source *C.char) *C.char {
 	sourceString := convertToGoString(source)
 
-	// Strip YAML front matter
-	sourceString = markdownFrontMatterRegex.ReplaceAllString(sourceString, "")
+	// Render YAML front matter as code block
+	sourceString = markdownFrontMatterRegex.ReplaceAllString(sourceString, "```yaml\n$1\n```\n")
 
 	// Convert Markdown to HTML
 	var htmlBuffer bytes.Buffer
