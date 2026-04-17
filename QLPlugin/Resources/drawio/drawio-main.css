@@ -1,0 +1,13 @@
+/* draw.io viewer preview */
+
+body {
+	background: #ffffff !important;
+}
+
+.mxgraph {
+	width: 100%;
+}
+
+.geDiagramContainer {
+	overflow: visible !important;
+}
