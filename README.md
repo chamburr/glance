@@ -46,6 +46,8 @@ Alternatively, you can install Glance directly. The installation is slightly com
 
   <p><img src="./AppStore/Assets/Screenshots/ScreenshotTSV.png" alt="" width="600"></p>
 
+- **Directory**: folders are previewed as a tree view showing their contents (files, subfolders, sizes and dates)
+
 ## FAQ
 
 **There are existing Quick Look apps for some of the supported file types. Why create another one?**

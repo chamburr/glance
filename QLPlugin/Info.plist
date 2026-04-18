@@ -36,6 +36,9 @@
 					- public.xml (.xml)
 				-->
 
+				<!-- Directory -->
+				<string>public.folder</string>
+
 				<!-- Archive -->
 				<string>org.7-zip.7-zip-archive</string> <!-- .7z -->
 				<string>com.sun.java-archive</string> <!-- .jar (Java) -->
