@@ -163,6 +163,7 @@
 				<string>dyn.ah62d4rv4ge81k2pwq7w1k62</string> <!-- .targets -->
 				<string>dyn.ah62d4rv4ge81k55d</string> <!-- .toc (LaTeX) -->
 				<string>dyn.ah62d4rv4ge81k55rru</string> <!-- .toml -->
+				<string>dyn.ah62d4rv4ge81k7drru</string> <!-- .ttml -->
 				<string>dyn.ah62d4rv4ge81k652</string> <!-- .tsx -->
 				<string>dyn.ah62d4rv4ge81k75mq6</string> <!-- .twig -->
 				<string>dyn.ah62d4rv4ge81k7dq</string> <!-- .ttl (Turtle) -->
@@ -252,6 +253,7 @@
 				<string>public.shell-script</string> <!-- .sh -->
 				<string>public.source-code</string>
 				<string>public.swift-source</string> <!-- .swift -->
+				<string>public.toml</string> <!-- .toml -->
 				<string>public.tcsh-script</string> <!-- .tcsh -->
 				<string>public.tex</string> <!-- .tex -->
 				<string>public.text</string>
