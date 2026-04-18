@@ -91,9 +91,11 @@ enum PreviewSupport {
 	}
 
 	static func getPreviewFileType(fileURL: URL) -> PreviewFileType {
+		let normalizedPath = fileURL.path.lowercased()
+
 		switch fileURL.pathExtension.lowercased() {
 			case "gz":
-				return fileURL.path.hasSuffix(".tar.gz") ? .tar : .unsupported
+				return normalizedPath.hasSuffix(".tar.gz") ? .tar : .unsupported
 			case "md", "markdown", "mdown", "mkdn", "mkd", "rmd", "qmd":
 				return .markdown
 			case "ipynb":
