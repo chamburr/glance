@@ -1,70 +1,6 @@
 import Foundation
 import os.log
 
-let dotfileLexers = [
-	// Files with syntax supported by Chroma
-	".bashrc": ".bashrc",
-	".vimrc": ".vimrc",
-	".zprofile": "zsh",
-	".zshrc": ".zshrc",
-	"dockerfile": "Dockerfile",
-	"gemfile": "Gemfile",
-	"gnumakefile": "Makefile",
-	"makefile": "Makefile",
-	"pkgbuild": "PKGBUILD",
-	"rakefile": "Rakefile",
-
-	// Files for which a different, similar syntax is used
-	".dockerignore": "bash",
-	".editorconfig": "ini",
-	".gitattributes": "bash",
-	".gitconfig": "ini",
-	".gitignore": "bash",
-	".npmignore": "bash",
-	".zsh_history": "txt",
-]
-
-let fileExtensionLexers = [
-	// Files with syntax supported by Chroma
-	"alfredappearance": "json",
-	"mobileconfig": "xml",
-	"cjs": "js",
-	"cls": "tex",
-	"csproj": "xml",
-	"entitlements": "xml",
-	"hbs": "handlebars",
-	"iml": "xml",
-	"mjs": "js",
-	"plist": "xml",
-	"props": "xml",
-	"resolved": "json",
-	"scpt": "applescript",
-	"scptd": "applescript",
-	"spf": "xml",
-	"spTheme": "xml",
-	"storyboard": "xml",
-	"stringsdict": "xml",
-	"sty": "tex",
-	"targets": "xml",
-	"webmanifest": "json",
-	"xcscheme": "xml",
-	"xib": "xml",
-	"xmp": "xml",
-
-	// Files for which a different, similar syntax is used
-	"ass": "txt",
-	"liquid": "twig",
-	"lrc": "txt",
-	"modulemap": "hcl",
-	"nfo": "txt",
-	"njk": "twig",
-	"pbxproj": "txt",
-	"sln": "txt",
-	"srt": "txt",
-	"strings": "c",
-	"vtt": "txt",
-]
-
 class CodePreview: Preview {
 	private let chromaStylesheetURL = Bundle.main.url(
 		forResource: "shared-chroma",
@@ -72,24 +8,6 @@ class CodePreview: Preview {
 	)
 
 	required init() {}
-
-	/// Returns the name of the Chroma lexer to use for the file. This is determined based on the
-	/// file name/extension.
-	private func getLexer(fileURL: URL) -> String {
-		if fileURL.pathExtension.isEmpty {
-			// Dotfile
-			return dotfileLexers[fileURL.lastPathComponent.lowercased(), default: "autodetect"]
-		} else if fileURL.pathExtension.lowercased() == "dist" {
-			// .dist file
-			return getLexer(fileURL: fileURL.deletingPathExtension())
-		} else {
-			// File with extension
-			return fileExtensionLexers[
-				fileURL.pathExtension.lowercased(),
-				default: fileURL.pathExtension
-			]
-		}
-	}
 
 	func getSource(file: File) throws -> String {
 		try file.read()
@@ -109,7 +27,7 @@ class CodePreview: Preview {
 			throw error
 		}
 
-		let lexer = getLexer(fileURL: file.url)
+		let lexer = PreviewSupport.getCodeLexer(fileURL: file.url)
 		do {
 			return try HTMLRenderer.renderCode(source, lexer: lexer)
 		} catch {

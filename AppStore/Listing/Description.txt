@@ -8,7 +8,7 @@ Features:
 • Full compatibility with Dark Mode
 
 Supported file types:
-• Source code (.cpp, .js, .json, .py, .swift, .yml and many more)
+• Source code (.cpp, .js, .json, .py, .swift, .toml, .ttml, .yml and many more)
 • Markdown (.md, .markdown, .mdown, .mkdn, .mkd, .Rmd, .qmd)
 • Archive (.tar, .tar.gz, .zip)
 • Jupyter Notebook (.ipynb)

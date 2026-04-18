@@ -4,24 +4,23 @@ import Foundation
 /// May return `nil` if the file is not supported.
 class PreviewVCFactory {
 	static func getPreviewInitializer(fileURL: URL) -> Preview.Type? {
-		switch fileURL.pathExtension.lowercased() {
-			case "gz":
-				// `gzip` is only supported for tarballs
-				return fileURL.path.hasSuffix(".tar.gz") ? TARPreview.self : nil
-			case "md", "markdown", "mdown", "mkdn", "mkd", "rmd", "qmd":
+		switch PreviewSupport.getPreviewFileType(fileURL: fileURL) {
+			case .markdown:
 				return MarkdownPreview.self
-			case "ipynb":
+			case .jupyter:
 				return JupyterPreview.self
-			case "tar", "tgz":
+			case .tar:
 				return TARPreview.self
-			case "tab", "tsv":
+			case .tsv:
 				return TSVPreview.self
-			case "7z":
+			case .sevenZip:
 				return SevenZipPreview.self
-			case "ear", "jar", "war", "zip":
+			case .zip:
 				return ZIPPreview.self
-			default:
+			case .code:
 				return CodePreview.self
+			case .unsupported:
+				return nil
 		}
 	}
 }
