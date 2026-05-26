@@ -1,6 +1,8 @@
 # Xcode
 project.xcworkspace/
 xcuserdata/
+build/
+.DS_Store
 
 # `go build` output
 HTMLConverter/htmlconverter*.a
