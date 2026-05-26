@@ -6,9 +6,9 @@ class TSVPreview: Preview {
 
 	func createPreviewVC(file: File) throws -> PreviewVC {
 		// Read and parse TSV file
-		var csv: CSV
+		var csv: NamedCSV
 		do {
-			csv = try CSV(url: file.url, delimiter: "\t")
+			csv = try NamedCSV(url: file.url, delimiter: .tab)
 		} catch {
 			os_log(
 				"Could not parse TSV file: %{public}s",
@@ -19,6 +19,6 @@ class TSVPreview: Preview {
 			throw error
 		}
 
-		return TablePreviewVC(headers: csv.header, cells: csv.namedRows)
+		return TablePreviewVC(headers: csv.header, cells: csv.rows)
 	}
 }
