@@ -2,7 +2,7 @@ import Cocoa
 import Foundation
 import WebKit
 
-class WebPreviewVC: NSViewController, PreviewVC {
+class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 	private let html: String
 	private let stylesheets: [Stylesheet]
 	private let scripts: [Script]
@@ -49,10 +49,47 @@ class WebPreviewVC: NSViewController, PreviewVC {
 		loadPreview()
 	}
 
+	/// Lazily created temp directory for preview HTML files, shared across all instances
+	private static let previewDirectory: URL? = {
+		let tempDir = FileManager.default.temporaryDirectory
+			.appendingPathComponent("glance-preview", isDirectory: true)
+		do {
+			try FileManager.default.createDirectory(
+				at: tempDir,
+				withIntermediateDirectories: true
+			)
+			// Symlink bundle resources once into the temp directory
+			if let resourceURL = Bundle.main.resourceURL {
+				let resourceContents = try FileManager.default.contentsOfDirectory(
+					at: resourceURL,
+					includingPropertiesForKeys: nil
+				)
+				for resourceFile in resourceContents {
+					let destination = tempDir.appendingPathComponent(resourceFile.lastPathComponent)
+					try? FileManager.default.removeItem(at: destination)
+					try FileManager.default.createSymbolicLink(
+						at: destination,
+						withDestinationURL: resourceFile
+					)
+				}
+			}
+			return tempDir
+		} catch {
+			Log.render.error(
+				"Failed to create preview directory: \(error.localizedDescription, privacy: .public)"
+			)
+			return nil
+		}
+	}()
+
 	private func loadPreview() {
 		let webView = WKWebView(frame: view.bounds)
 		webView.autoresizingMask = [.height, .width]
 		webView.setValue(false, forKey: "drawsBackground")
+		webView.navigationDelegate = self
+
+		// Hide the web view until content is fully loaded to prevent flickering
+		webView.alphaValue = 0
 		view.addSubview(webView)
 
 		let linkTags = stylesheets
@@ -83,68 +120,64 @@ class WebPreviewVC: NSViewController, PreviewVC {
 		// WKWebView runs web content in a separate process. Using loadFileURL
 		// with allowingReadAccessTo grants that process explicit file system
 		// access, which is necessary in sandboxed Quick Look extensions.
-		// Write the HTML to a temp file inside the bundle's resource directory
-		// equivalent, then load it with access to the resources folder so
-		// relative CSS/JS/font references resolve correctly.
-		let resourceURL = Bundle.main.resourceURL ?? Bundle.main.bundleURL
-
-		do {
-			let tempDir = FileManager.default.temporaryDirectory
-				.appendingPathComponent("glance-preview", isDirectory: true)
-			try FileManager.default.createDirectory(
-				at: tempDir,
-				withIntermediateDirectories: true
-			)
-
-			// Symlink the bundle resources into the temp directory so relative
-			// href/src paths in <link> and <script> tags resolve correctly
-			let resourceContents = try FileManager.default.contentsOfDirectory(
-				at: resourceURL,
-				includingPropertiesForKeys: nil
-			)
-			for resourceFile in resourceContents {
-				let destination = tempDir.appendingPathComponent(resourceFile.lastPathComponent)
-				// Remove existing symlinks/files before creating new ones
-				try? FileManager.default.removeItem(at: destination)
-				try FileManager.default.createSymbolicLink(
-					at: destination,
-					withDestinationURL: resourceFile
+		if let previewDir = Self.previewDirectory {
+			do {
+				let tempFile = previewDir.appendingPathComponent("preview.html")
+				try fullHTML.write(to: tempFile, atomically: true, encoding: .utf8)
+				webView.loadFileURL(tempFile, allowingReadAccessTo: previewDir)
+				return
+			} catch {
+				Log.render.error(
+					"Failed to write preview HTML: \(error.localizedDescription, privacy: .public)"
 				)
 			}
-
-			let tempFile = tempDir.appendingPathComponent("preview.html")
-			try fullHTML.write(to: tempFile, atomically: true, encoding: .utf8)
-			webView.loadFileURL(tempFile, allowingReadAccessTo: tempDir)
-		} catch {
-			Log.render.error(
-				"Failed to write temporary preview file: \(error.localizedDescription, privacy: .public)"
-			)
-			// Fall back to loadHTMLString with inlined content as last resort
-			let inlineStyleTags = stylesheets
-				.map { $0.getInlineHTML() }
-				.joined(separator: "\n")
-			let inlineScriptTags = scripts
-				.map { $0.getInlineHTML() }
-				.joined(separator: "\n")
-
-			let fallbackHTML = """
-			<!DOCTYPE html>
-			<html>
-				<head>
-					<meta charset="utf-8" />
-					<meta
-						name="viewport"
-						content="width=device-width, initial-scale=1, shrink-to-fit=no"
-					/>
-					\(inlineStyleTags)
-				</head>
-				<body>
-					\(html)
-					\(inlineScriptTags)
-				</body>
-			</html>
-			"""
-			webView.loadHTMLString(fallbackHTML, baseURL: nil)
 		}
+
+		// Fall back to loadHTMLString with inlined content as last resort
+		let inlineStyleTags = stylesheets
+			.map { $0.getInlineHTML() }
+			.joined(separator: "\n")
+		let inlineScriptTags = scripts
+			.map { $0.getInlineHTML() }
+			.joined(separator: "\n")
+
+		let fallbackHTML = """
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<meta charset="utf-8" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1, shrink-to-fit=no"
+				/>
+				\(inlineStyleTags)
+			</head>
+			<body>
+				\(html)
+				\(inlineScriptTags)
+			</body>
+		</html>
+		"""
+		webView.loadHTMLString(fallbackHTML, baseURL: nil)
+	}
+
+	// MARK: - WKNavigationDelegate
+
+	/// Reveal the web view once the content has finished loading to prevent flickering
+	func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
+		webView.alphaValue = 1
+	}
+
+	/// On navigation failure, show the web view anyway so the user sees something
+	func webView(_ webView: WKWebView, didFail _: WKNavigation!, withError _: Error) {
+		webView.alphaValue = 1
+	}
+
+	func webView(
+		_ webView: WKWebView,
+		didFailProvisionalNavigation _: WKNavigation!,
+		withError _: Error
+	) {
+		webView.alphaValue = 1
 	}
 }

@@ -208,7 +208,7 @@
             </constraints>
             <point key="canvasLocation" x="293" y="232"/>
         </customView>
-        <treeController childrenKeyPath="childrenList" countKeyPath="childrenCount" leafKeyPath="hasChildren" id="Bni-mu-PmG">
+        <treeController childrenKeyPath="childrenList" countKeyPath="childrenCount" leafKeyPath="isLeaf" id="Bni-mu-PmG">
             <connections>
                 <binding destination="-2" name="sortDescriptors" keyPath="customSortDescriptors" id="nf5-zY-56E"/>
             </connections>

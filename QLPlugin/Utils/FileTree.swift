@@ -34,6 +34,8 @@ class FileTreeNode: NSObject {
 	@objc var childrenList: [FileTreeNode] { Array(children.values) }
 	/// Whether the node has any children (required for rendering the tree in an `NSOutlineView`)
 	@objc var hasChildren: Bool { !children.isEmpty }
+	/// Whether the node is a leaf (has no children) — used by `NSTreeController`'s `leafKeyPath`
+	@objc var isLeaf: Bool { children.isEmpty }
 
 	convenience init(name: String, size: Int, isDirectory: Bool) {
 		self.init(name: name, size: size, isDirectory: isDirectory, dateModified: nil)
