@@ -19,4 +19,12 @@ class Stylesheet: WebAsset {
 			"<style>\(content ?? "")</style>"
 		}
 	}
+
+	func getInlineHTML() -> String {
+		if let url, let fileContent = try? String(contentsOf: url, encoding: .utf8) {
+			"<style>\(fileContent)</style>"
+		} else {
+			"<style>\(content ?? "")</style>"
+		}
+	}
 }

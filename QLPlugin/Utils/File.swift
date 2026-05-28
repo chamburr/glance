@@ -41,7 +41,7 @@ class File {
 	/// Looks for a file at the provided URL and saves its metadata as object properties.
 	init(url: URL) throws {
 		self.url = url
-		path = url.path
+		path = url.path(percentEncoded: false)
 
 		// Check whether the provided URL points to a directory
 		var isDirectoryObjC: ObjCBool = false

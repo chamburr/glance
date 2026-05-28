@@ -19,4 +19,12 @@ class Script: WebAsset {
 			"<script>\(content ?? "")</script>"
 		}
 	}
+
+	func getInlineHTML() -> String {
+		if let url, let fileContent = try? String(contentsOf: url, encoding: .utf8) {
+			"<script>\(fileContent)</script>"
+		} else {
+			"<script>\(content ?? "")</script>"
+		}
+	}
 }
