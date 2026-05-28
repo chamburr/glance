@@ -137,6 +137,8 @@ only_rules:
 analyzer_rules:
   - unused_declaration
   - unused_import
+excluded:
+  - build
 number_separator:
   minimum_length: 5
 object_literal:

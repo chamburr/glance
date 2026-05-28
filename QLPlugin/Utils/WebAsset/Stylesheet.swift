@@ -14,7 +14,7 @@ class Stylesheet: WebAsset {
 
 	func getHTML() -> String {
 		if let url {
-			"<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url.absoluteString)\" />"
+			"<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url.lastPathComponent)\" />"
 		} else {
 			"<style>\(content ?? "")</style>"
 		}

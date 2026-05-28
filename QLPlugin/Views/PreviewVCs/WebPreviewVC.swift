@@ -77,6 +77,6 @@ class WebPreviewVC: NSViewController, PreviewVC {
 				\(scriptTags)
 			</body>
 		</html>
-		""", baseURL: Bundle.main.bundleURL)
+		""", baseURL: Bundle.main.resourceURL)
 	}
 }

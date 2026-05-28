@@ -14,7 +14,7 @@ class Script: WebAsset {
 
 	func getHTML() -> String {
 		if let url {
-			"<script src=\"\(url.absoluteString)\"></script>"
+			"<script src=\"\(url.lastPathComponent)\"></script>"
 		} else {
 			"<script>\(content ?? "")</script>"
 		}
