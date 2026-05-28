@@ -1,5 +1,4 @@
 import Foundation
-import os.log
 import SWCompression
 
 class SevenZipPreview: Preview {
@@ -27,7 +26,7 @@ class SevenZipPreview: Preview {
 					dateModified: entry.modificationTime
 				)
 			} catch {
-				os_log("%{public}s", log: Log.parse, type: .error, error.localizedDescription)
+				Log.parse.error("\(error.localizedDescription, privacy: .public)")
 			}
 		}
 

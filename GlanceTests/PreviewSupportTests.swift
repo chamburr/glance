@@ -1,5 +1,5 @@
-import XCTest
 @testable import Glance
+import XCTest
 
 final class PreviewSupportTests: XCTestCase {
 	func testPreviewTypeUsesTarPreviewForUppercaseTarGzFiles() {

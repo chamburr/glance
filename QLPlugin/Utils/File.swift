@@ -10,14 +10,14 @@ extension FileError: LocalizedError {
 	var errorDescription: String? {
 		switch self {
 			case let .fileAttributeError(path, message):
-				return NSLocalizedString(
+				NSLocalizedString(
 					"Could not get attributes for file at path \(path): \(message)",
 					comment: ""
 				)
 			case let .fileNotFoundError(path):
-				return NSLocalizedString("Could not find file at path \(path)", comment: "")
+				NSLocalizedString("Could not find file at path \(path)", comment: "")
 			case let .fileReadError(path, message):
-				return NSLocalizedString(
+				NSLocalizedString(
 					"Could not read file at path \(path): \(message)",
 					comment: ""
 				)

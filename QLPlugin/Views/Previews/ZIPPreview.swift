@@ -1,5 +1,4 @@
 import Foundation
-import os.log
 import ZIPFoundation
 
 class ZIPPreview: Preview {
@@ -17,9 +16,7 @@ class ZIPPreview: Preview {
 
 	private func runZIPInfoCommand(filePath: String) throws -> String {
 		let archiveURL = URL(fileURLWithPath: filePath)
-		guard let archive = Archive(url: archiveURL, accessMode: .read) else {
-			return ""
-		}
+		let archive = try Archive(url: archiveURL, accessMode: .read)
 
 		var result = ""
 		var entries = [String]()
@@ -40,8 +37,10 @@ class ZIPPreview: Preview {
 			formatted += "2.0 unx "
 			formatted += String(entry.uncompressedSize) + " "
 			formatted += "bx stor "
+			let modificationDate = entry.fileAttributes[.modificationDate] as? Date
+				?? Date(timeIntervalSince1970: 0)
 			formatted += dateFormatter
-				.string(from: entry.fileAttributes[.modificationDate] as! Date) + " "
+				.string(from: modificationDate) + " "
 			formatted += entry.path
 
 			entries.append(formatted)
@@ -86,6 +85,10 @@ class ZIPPreview: Preview {
 		// - Column 4: File size in bytes
 		// - Columns 7-8: Date modified
 		// - Column 9: File path
+		guard linesSplit.count >= 3 else {
+			return (fileTree, 0, 0)
+		}
+
 		let filesString = linesSplit[2 ..< linesSplit.count - 1].joined(separator: "\n")
 		let fileMatches = filesString.matchRegex(regex: filesRegex)
 		for fileMatch in fileMatches {
@@ -104,7 +107,7 @@ class ZIPPreview: Preview {
 						dateModified: dateModified
 					)
 				} catch {
-					os_log("%{public}s", log: Log.parse, type: .error, error.localizedDescription)
+					Log.parse.error("\(error.localizedDescription, privacy: .public)")
 				}
 			}
 		}
@@ -114,8 +117,12 @@ class ZIPPreview: Preview {
 		// - If empty: "Empty zipfile."
 		if let lastLine = linesSplit.last, lastLine != "Empty zipfile." {
 			let sizeMatches = String(lastLine).matchRegex(regex: sizeRegex)
-			let sizeUncompressed = Int(sizeMatches[0][1])
-			let compressionRatio = Double(sizeMatches[0][2])
+			guard let sizeMatch = sizeMatches.first else {
+				return (fileTree, nil, nil)
+			}
+
+			let sizeUncompressed = Int(sizeMatch[1])
+			let compressionRatio = Double(sizeMatch[2])
 			return (fileTree, sizeUncompressed, compressionRatio)
 		} else {
 			return (fileTree, 0, 0)
@@ -131,10 +138,11 @@ class ZIPPreview: Preview {
 		let (fileTree, sizeUncompressed, compressionRatio) = parseZIPInfo(lines: zipInfoOutput)
 
 		// Build label
+		let compressionRatioText = compressionRatio.map { String($0) } ?? "--"
 		let labelText = """
 		Compressed: \(byteCountFormatter.string(for: file.size) ?? "--")
 		Uncompressed: \(byteCountFormatter.string(for: sizeUncompressed) ?? "--")
-		Compression ratio: \(compressionRatio == nil ? "--" : String(compressionRatio!)) %
+		Compression ratio: \(compressionRatioText) %
 		"""
 
 		return OutlinePreviewVC(rootNodes: fileTree.root.childrenList, labelText: labelText)

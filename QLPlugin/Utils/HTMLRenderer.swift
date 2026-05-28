@@ -1,13 +1,6 @@
 import Foundation
 import HTMLConverter
 
-extension String {
-	/// Converts the Swift string to a C string.
-	func toCString() -> UnsafeMutablePointer<Int8> {
-		UnsafeMutablePointer<Int8>(mutating: (self as NSString).utf8String!)
-	}
-}
-
 enum HTMLRendererError {
 	case rendererError(fileType: String, errorMessage: String)
 }
@@ -16,7 +9,7 @@ extension HTMLRendererError: LocalizedError {
 	var errorDescription: String? {
 		switch self {
 			case let .rendererError(fileType, errorMessage):
-				return NSLocalizedString(
+				NSLocalizedString(
 					"Could not convert \(fileType) to HTML: \(errorMessage)",
 					comment: ""
 				)
@@ -40,25 +33,51 @@ enum HTMLRenderer {
 
 	/// Converts a code string to HTML with support for syntax highlighting.
 	static func renderCode(_ source: String, lexer: String) throws -> String {
-		let htmlCString = convertCodeToHTML(source.toCString(), lexer.toCString())
-		let htmlString = String(cString: htmlCString!)
+		let htmlCString = source.withCString { sourcePointer in
+			lexer.withCString { lexerPointer in
+				convertCodeToHTML(
+					UnsafeMutablePointer<Int8>(mutating: sourcePointer),
+					UnsafeMutablePointer<Int8>(mutating: lexerPointer)
+				)
+			}
+		}
+		let htmlString = try makeHTMLString(fileType: "code", htmlCString: htmlCString)
 		try throwIfErrored(fileType: "code", returnValue: htmlString)
 		return htmlString
 	}
 
 	/// Converts a Markdown string to HTML.
 	static func renderMarkdown(_ source: String) throws -> String {
-		let htmlCString = convertMarkdownToHTML(source.toCString())
-		let htmlString = String(cString: htmlCString!)
+		let htmlCString = source.withCString { sourcePointer in
+			convertMarkdownToHTML(UnsafeMutablePointer<Int8>(mutating: sourcePointer))
+		}
+		let htmlString = try makeHTMLString(fileType: "Markdown", htmlCString: htmlCString)
 		try throwIfErrored(fileType: "Markdown", returnValue: htmlString)
 		return htmlString
 	}
 
 	/// Converts a Jupyter Notebook JSON file to HTML.
 	static func renderNotebook(_ source: String) throws -> String {
-		let htmlCString = convertNotebookToHTML(source.toCString())
-		let htmlString = String(cString: htmlCString!)
+		let htmlCString = source.withCString { sourcePointer in
+			convertNotebookToHTML(UnsafeMutablePointer<Int8>(mutating: sourcePointer))
+		}
+		let htmlString = try makeHTMLString(fileType: "Jupyter Notebook", htmlCString: htmlCString)
 		try throwIfErrored(fileType: "Jupyter Notebook", returnValue: htmlString)
 		return htmlString
+	}
+
+	private static func makeHTMLString(
+		fileType: String,
+		htmlCString: UnsafeMutablePointer<Int8>?
+	) throws -> String {
+		guard let htmlCString else {
+			throw HTMLRendererError.rendererError(
+				fileType: fileType,
+				errorMessage: "renderer returned an empty response"
+			)
+		}
+
+		defer { free(htmlCString) }
+		return String(cString: htmlCString)
 	}
 }

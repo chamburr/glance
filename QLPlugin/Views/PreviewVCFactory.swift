@@ -6,21 +6,21 @@ class PreviewVCFactory {
 	static func getPreviewInitializer(fileURL: URL) -> Preview.Type? {
 		switch PreviewSupport.getPreviewFileType(fileURL: fileURL) {
 			case .markdown:
-				return MarkdownPreview.self
+				MarkdownPreview.self
 			case .jupyter:
-				return JupyterPreview.self
+				JupyterPreview.self
 			case .tar:
-				return TARPreview.self
+				TARPreview.self
 			case .tsv:
-				return TSVPreview.self
+				TSVPreview.self
 			case .sevenZip:
-				return SevenZipPreview.self
+				SevenZipPreview.self
 			case .zip:
-				return ZIPPreview.self
+				ZIPPreview.self
 			case .code:
-				return CodePreview.self
+				CodePreview.self
 			case .unsupported:
-				return nil
+				nil
 		}
 	}
 }

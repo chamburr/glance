@@ -1,5 +1,4 @@
 import Foundation
-import os.log
 
 class CodePreview: Preview {
 	private let chromaStylesheetURL = Bundle.main.url(
@@ -18,12 +17,8 @@ class CodePreview: Preview {
 		do {
 			source = try getSource(file: file)
 		} catch {
-			os_log(
-				"Could not read code file: %{public}s",
-				log: Log.parse,
-				type: .error,
-				error.localizedDescription
-			)
+			Log.parse
+				.error("Could not read code file: \(error.localizedDescription, privacy: .public)")
 			throw error
 		}
 
@@ -31,12 +26,10 @@ class CodePreview: Preview {
 		do {
 			return try HTMLRenderer.renderCode(source, lexer: lexer)
 		} catch {
-			os_log(
-				"Could not generate code HTML: %{public}s",
-				log: Log.render,
-				type: .error,
-				error.localizedDescription
-			)
+			Log.render
+				.error(
+					"Could not generate code HTML: \(error.localizedDescription, privacy: .public)"
+				)
 			throw error
 		}
 	}
@@ -45,10 +38,10 @@ class CodePreview: Preview {
 		var stylesheets = [Stylesheet]()
 
 		// Chroma stylesheet (for code syntax highlighting)
-		if let chromaStylesheetURL = chromaStylesheetURL {
+		if let chromaStylesheetURL {
 			stylesheets.append(Stylesheet(url: chromaStylesheetURL))
 		} else {
-			os_log("Could not find Chroma stylesheet", log: Log.render, type: .error)
+			Log.render.error("Could not find Chroma stylesheet")
 		}
 
 		return stylesheets

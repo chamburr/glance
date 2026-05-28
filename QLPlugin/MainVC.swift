@@ -1,5 +1,4 @@
 import Cocoa
-import os.log
 import Quartz
 
 enum PreviewError: Error {
@@ -10,7 +9,7 @@ extension PreviewError: LocalizedError {
 	var errorDescription: String? {
 		switch self {
 			case let .fileSizeError(path):
-				return NSLocalizedString("File \(path) is too large to preview", comment: "")
+				NSLocalizedString("File \(path) is too large to preview", comment: "")
 		}
 	}
 }
@@ -49,12 +48,8 @@ class MainVC: NSViewController, QLPreviewingController {
 			do {
 				file = try File(url: fileUrl)
 			} catch {
-				os_log(
-					"Could not obtain information about file %{public}s: %{public}s",
-					log: Log.general,
-					type: .error,
-					fileUrl.path,
-					error.localizedDescription
+				Log.general.error(
+					"Could not obtain information about file \(fileUrl.path, privacy: .public): \(error.localizedDescription, privacy: .public)"
 				)
 				handler(error)
 				return
@@ -65,33 +60,21 @@ class MainVC: NSViewController, QLPreviewingController {
 				// Log error and fall back to default preview (by calling the completion handler
 				// with the error)
 				let error = PreviewError.fileSizeError(path: file.path)
-				os_log(
-					"Skipping file preview: %{public}s",
-					log: Log.general,
-					error.localizedDescription
-				)
+				Log.general
+					.error("Skipping file preview: \(error.localizedDescription, privacy: .public)")
 				handler(error)
 				return
 			}
 
 			// Render file preview
-			os_log(
-				"Generating preview for file %{public}s",
-				log: Log.general,
-				type: .info,
-				file.path
-			)
+			Log.general.info("Generating preview for file \(file.path, privacy: .public)")
 			do {
 				try self.previewFile(file: file)
 			} catch {
 				// Log error and fall back to default preview (by calling the completion handler
 				// with the error)
-				os_log(
-					"Could not generate preview for file %{public}s: %{public}s",
-					log: Log.general,
-					type: .error,
-					file.path,
-					error.localizedDescription
+				Log.general.error(
+					"Could not generate preview for file \(file.path, privacy: .public): \(error.localizedDescription, privacy: .public)"
 				)
 				handler(error)
 				return
@@ -119,11 +102,8 @@ class MainVC: NSViewController, QLPreviewingController {
 			// Update stats
 			stats.increaseStatsCounts(fileExtension: file.url.pathExtension)
 		} else {
-			os_log(
-				"Skipping preview for file %{public}s: File type not supported",
-				log: Log.general,
-				type: .info,
-				file.path
+			Log.general.info(
+				"Skipping preview for file \(file.path, privacy: .public): File type not supported"
 			)
 		}
 	}

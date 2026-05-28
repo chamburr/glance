@@ -28,7 +28,7 @@ import Foundation
 final class ObjectAssociation<T: Any> {
 	subscript(index: AnyObject) -> T? {
 		get {
-			objc_getAssociatedObject(index, Unmanaged.passUnretained(self).toOpaque()) as! T?
+			objc_getAssociatedObject(index, Unmanaged.passUnretained(self).toOpaque()) as? T
 		} set {
 			objc_setAssociatedObject(
 				index,

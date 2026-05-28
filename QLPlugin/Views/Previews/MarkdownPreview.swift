@@ -1,5 +1,4 @@
 import Foundation
-import os.log
 
 class MarkdownPreview: Preview {
 	private let chromaStylesheetURL = Bundle.main.url(
@@ -18,12 +17,10 @@ class MarkdownPreview: Preview {
 		do {
 			source = try file.read()
 		} catch {
-			os_log(
-				"Could not read Markdown file: %{public}s",
-				log: Log.parse,
-				type: .error,
-				error.localizedDescription
-			)
+			Log.parse
+				.error(
+					"Could not read Markdown file: \(error.localizedDescription, privacy: .public)"
+				)
 			throw error
 		}
 
@@ -31,12 +28,10 @@ class MarkdownPreview: Preview {
 			let html = try HTMLRenderer.renderMarkdown(source)
 			return "<div class=\"markdown-body\">\(html)</div>"
 		} catch {
-			os_log(
-				"Could not generate Markdown HTML: %{public}s",
-				log: Log.render,
-				type: .error,
-				error.localizedDescription
-			)
+			Log.render
+				.error(
+					"Could not generate Markdown HTML: \(error.localizedDescription, privacy: .public)"
+				)
 			throw error
 		}
 	}
@@ -45,17 +40,17 @@ class MarkdownPreview: Preview {
 		var stylesheets = [Stylesheet]()
 
 		// Main Markdown stylesheet
-		if let mainStylesheetURL = mainStylesheetURL {
+		if let mainStylesheetURL {
 			stylesheets.append(Stylesheet(url: mainStylesheetURL))
 		} else {
-			os_log("Could not find main Markdown stylesheet", log: Log.render, type: .error)
+			Log.render.error("Could not find main Markdown stylesheet")
 		}
 
 		// Chroma stylesheet (for code syntax highlighting)
-		if let chromaStylesheetURL = chromaStylesheetURL {
+		if let chromaStylesheetURL {
 			stylesheets.append(Stylesheet(url: chromaStylesheetURL))
 		} else {
-			os_log("Could not find Chroma stylesheet", log: Log.render, type: .error)
+			Log.render.error("Could not find Chroma stylesheet")
 		}
 
 		return stylesheets

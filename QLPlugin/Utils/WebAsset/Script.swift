@@ -13,10 +13,10 @@ class Script: WebAsset {
 	}
 
 	func getHTML() -> String {
-		if let url = url {
-			return "<script src=\"\(url.path)\"></script>"
+		if let url {
+			"<script src=\"\(url.absoluteString)\"></script>"
 		} else {
-			return "<script>\(content ?? "")</script>"
+			"<script>\(content ?? "")</script>"
 		}
 	}
 }

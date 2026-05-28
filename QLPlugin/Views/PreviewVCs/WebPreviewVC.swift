@@ -1,6 +1,5 @@
 import Cocoa
 import Foundation
-import os.log
 import WebKit
 
 class WebPreviewVC: NSViewController, PreviewVC {
@@ -30,7 +29,12 @@ class WebPreviewVC: NSViewController, PreviewVC {
 		scripts: [Script] = []
 	) {
 		self.html = html
-		self.stylesheets = [Stylesheet(url: sharedStylesheetURL!)] + stylesheets
+		if let sharedStylesheetURL {
+			self.stylesheets = [Stylesheet(url: sharedStylesheetURL)] + stylesheets
+		} else {
+			Log.render.error("Could not find shared stylesheet")
+			self.stylesheets = stylesheets
+		}
 		self.scripts = scripts
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 	}
@@ -46,11 +50,8 @@ class WebPreviewVC: NSViewController, PreviewVC {
 	}
 
 	private func loadPreview() {
-		let webView = WebView(frame: view.bounds)
+		let webView = WKWebView(frame: view.bounds)
 		webView.autoresizingMask = [.height, .width]
-
-		webView.drawsBackground = false
-
 		view.addSubview(webView)
 
 		let linkTags = stylesheets
@@ -60,7 +61,7 @@ class WebPreviewVC: NSViewController, PreviewVC {
 			.map { $0.getHTML() }
 			.joined(separator: "\n")
 
-		webView.mainFrame.loadHTMLString("""
+		webView.loadHTMLString("""
 		<!DOCTYPE html>
 		<html>
 			<head>

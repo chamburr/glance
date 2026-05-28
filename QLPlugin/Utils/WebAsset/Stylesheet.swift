@@ -13,10 +13,10 @@ class Stylesheet: WebAsset {
 	}
 
 	func getHTML() -> String {
-		if let url = url {
-			return "<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url.path)\" />"
+		if let url {
+			"<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url.absoluteString)\" />"
 		} else {
-			return "<style>\(content ?? "")</style>"
+			"<style>\(content ?? "")</style>"
 		}
 	}
 }

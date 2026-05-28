@@ -1,4 +1,3 @@
-import os.log
 import SwiftCSV
 
 class TSVPreview: Preview {
@@ -10,12 +9,8 @@ class TSVPreview: Preview {
 		do {
 			csv = try NamedCSV(url: file.url, delimiter: .tab)
 		} catch {
-			os_log(
-				"Could not parse TSV file: %{public}s",
-				log: Log.parse,
-				type: .error,
-				error.localizedDescription
-			)
+			Log.parse
+				.error("Could not parse TSV file: \(error.localizedDescription, privacy: .public)")
 			throw error
 		}
 
