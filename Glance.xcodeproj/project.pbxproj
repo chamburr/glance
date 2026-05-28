@@ -837,6 +837,8 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/HTMLConverter/htmlconverter.a",
+				"$(PROJECT_DIR)/HTMLConverter/htmlconverter.h",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
