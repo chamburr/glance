@@ -32,7 +32,7 @@ func TestConvertCodeToHTML(t *testing.T) {
 print("Hello world");`
 	actual := convertToGoString(convertCodeToHTML(convertToCString(source), convertToCString("js")))
 	actualTrimmed := strings.TrimSpace(actual)
-	assert.True(t, strings.HasPrefix(actualTrimmed, `<pre tabindex="0" class="chroma">`))
+	assert.True(t, strings.HasPrefix(actualTrimmed, `<pre class="chroma">`))
 	assert.True(t, strings.HasSuffix(actualTrimmed, `</pre>`))
 }
 
@@ -55,14 +55,14 @@ key2: Another value
 
 Text`
 	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
-	assert.True(t, strings.Contains(actual, `<pre tabindex="0" class="chroma">`))
+	assert.True(t, strings.Contains(actual, `<pre class="chroma">`))
 	assert.True(t, strings.Contains(minifyHTML(actual), `<h1>Heading</h1><p>Text</p>`))
 }
 
 func TestConvertMarkdownToHTMLWithSyntaxHighlighting(t *testing.T) {
 	source := "# Heading\n\nText\n\n```js\nconst print = (text) => console.log(text);\nprint(\"Hello world\");\n```" // nolint:lll
 	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
-	assert.True(t, strings.Contains(actual, `<pre tabindex="0" class="chroma">`))
+	assert.True(t, strings.Contains(actual, `<pre class="chroma">`))
 }
 
 func TestConvertNotebookToHTML(t *testing.T) {
