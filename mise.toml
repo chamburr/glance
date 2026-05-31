@@ -1,0 +1,118 @@
+[tools]
+go = "1.26.3"
+swiftformat = "0.61.1"
+swiftlint = "0.63.3"
+
+[tasks.build]
+description = "Build the application in the build directory"
+run = '''
+APP_NAME="${APP_NAME:-Glance}"
+echo "Building Quick Look extension..."
+rm -rf build
+xcodebuild -scheme "$APP_NAME" -configuration Release -derivedDataPath build clean build
+echo "Build complete"
+'''
+
+[tasks.install]
+description = "Install the application into INSTALL_PATH, /Applications by default"
+depends = ["build"]
+run = '''
+APP_NAME="${APP_NAME:-Glance}"
+INSTALL_PATH="${INSTALL_PATH:-/Applications}"
+echo "Installing to $INSTALL_PATH..."
+rm -rf "$INSTALL_PATH/$APP_NAME.app"
+cp -R "build/Build/Products/Release/$APP_NAME.app" "$INSTALL_PATH/"
+echo "Installed to $INSTALL_PATH/$APP_NAME.app"
+'''
+
+[tasks.register]
+description = "Register the Quick Look extension with pluginkit"
+run = '''
+APP_NAME="${APP_NAME:-Glance}"
+INSTALL_PATH="${INSTALL_PATH:-/Applications}"
+echo "Registering extension with system..."
+pluginkit -a "$INSTALL_PATH/$APP_NAME.app/Contents/PlugIns/QLPlugin.appex" || true
+echo "Registration complete"
+'''
+
+[tasks.reset]
+description = "Reset Quick Look"
+run = '''
+echo "Resetting Quick Look..."
+qlmanage -r
+qlmanage -r cache
+killall Finder 2>/dev/null || true
+killall quicklookd 2>/dev/null || true
+echo "Quick Look reset"
+'''
+
+[tasks.check]
+description = "Check whether the Quick Look extension is installed"
+run = '''
+APP_NAME="${APP_NAME:-Glance}"
+INSTALL_PATH="${INSTALL_PATH:-/Applications}"
+echo "Checking extension status..."
+echo ""
+echo "Extension registration:"
+pluginkit -m -v | grep -A3 -i "$APP_NAME" || echo "Not registered"
+echo ""
+echo "Installed location:"
+ls -la "$INSTALL_PATH/$APP_NAME.app/Contents/PlugIns/"*.appex 2>/dev/null || echo "Not found"
+echo ""
+'''
+
+[tasks.clean]
+description = "Clean build artifacts"
+run = '''
+APP_NAME="${APP_NAME:-Glance}"
+echo "Cleaning build artifacts..."
+rm -rf build
+rm -rf "$HOME/Library/Developer/Xcode/DerivedData/$APP_NAME"-*
+echo "Clean complete"
+'''
+
+[tasks.uninstall]
+description = "Uninstall the application from INSTALL_PATH, /Applications by default"
+run = '''
+APP_NAME="${APP_NAME:-Glance}"
+INSTALL_PATH="${INSTALL_PATH:-/Applications}"
+echo "Uninstalling..."
+pluginkit -r "$INSTALL_PATH/$APP_NAME.app/Contents/PlugIns/QLPlugin.appex" 2>/dev/null || true
+rm -rf "$INSTALL_PATH/$APP_NAME.app"
+mise run clean
+mise run reset
+echo "Uninstalled"
+'''
+
+[tasks.all]
+description = "Build, install, register, and reset Quick Look"
+run = '''
+mise run install
+mise run register
+mise run reset
+'''
+
+[tasks."test:go"]
+description = "Run Go tests for HTMLConverter"
+run = "cd HTMLConverter && go test ./..."
+
+[tasks."test:xcode"]
+description = "Run Xcode tests"
+run = '''
+APP_NAME="${APP_NAME:-Glance}"
+xcodebuild test -scheme "$APP_NAME" -configuration Debug -derivedDataPath build -quiet
+'''
+
+[tasks.test]
+description = "Run all tests"
+run = '''
+mise run test:go
+mise run test:xcode
+'''
+
+[tasks.verify]
+description = "Run tests and build the release app"
+run = '''
+mise run test
+mise run build
+'''

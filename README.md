@@ -34,7 +34,7 @@ Alternatively, you can install Glance directly. The installation is slightly com
 
   <p><img src="./AppStore/Assets/Screenshots/ScreenshotMarkdown.png" alt="" width="600"></p>
 
-- **Archive**: `.7z`, `.tar`, `.tar.gz`, `.zip`
+- **Archive**: `.7z`, `.ear`, `.jar`, `.tar`, `.tar.gz`, `.tgz`, `.war`, `.zip`
 
   <p><img src="./AppStore/Assets/Screenshots/ScreenshotArchive.png" alt="" width="600"></p>
 
@@ -83,7 +83,15 @@ It's possible that your file's extension or [UTI](https://en.wikipedia.org/wiki/
 
 Suggestions and contributions are always welcome! Please discuss larger changes (e.g. adding support for a new file type) via issue before submitting a pull request.
 
-Xcode, Swift and Go need to be installed to build the app locally.
+Xcode and [mise-en-place](https://mise.jdx.dev/) need to be installed to build the app
+locally. From the repository root, run `mise install` once to install the pinned tools.
+Common local commands are:
+
+- `mise run test` to run the Go and Xcode test suites
+- `mise run build` to build the app in the `build` directory
+- `mise run verify` to run tests and a release build
+- `mise run all` to build, install into `/Applications`, register the Quick Look extension, and
+  reset Quick Look
 
 To add previews for a new file extension, please follow these steps:
 

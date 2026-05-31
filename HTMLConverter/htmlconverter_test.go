@@ -21,7 +21,7 @@ func minifyHTML(htmlString string) string {
 
 	minified, err := minifier.String("text/html", htmlString)
 	if err != nil {
-		panic(fmt.Sprintf("Could not minify HTML: %d", err))
+		panic(fmt.Sprintf("Could not minify HTML: %s", err))
 	}
 
 	return minified
@@ -36,6 +36,25 @@ print("Hello world");`
 	assert.True(t, strings.HasSuffix(actualTrimmed, `</pre>`))
 }
 
+func TestConvertCodeToHTMLEmptyInput(t *testing.T) {
+	actual := convertToGoString(convertCodeToHTML(convertToCString(""), convertToCString("swift")))
+	actualTrimmed := strings.TrimSpace(actual)
+
+	assert.True(t, strings.HasPrefix(actualTrimmed, `<pre class="chroma">`))
+	assert.True(t, strings.HasSuffix(actualTrimmed, `</pre>`))
+}
+
+func TestConvertCodeToHTMLUnknownLexerUsesFallback(t *testing.T) {
+	actual := convertToGoString(convertCodeToHTML(
+		convertToCString("plain text"),
+		convertToCString("not-a-real-lexer"),
+	))
+	actualTrimmed := strings.TrimSpace(actual)
+
+	assert.True(t, strings.HasPrefix(actualTrimmed, `<pre class="chroma">`))
+	assert.True(t, strings.HasSuffix(actualTrimmed, `</pre>`))
+}
+
 func TestConvertMarkdownToHTML(t *testing.T) {
 	source := `# Heading
 
@@ -43,6 +62,12 @@ Text`
 	expected := "<h1>Heading</h1><p>Text</p>"
 	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
 	assert.Equal(t, expected, minifyHTML(actual))
+}
+
+func TestConvertMarkdownToHTMLEmptyInput(t *testing.T) {
+	actual := convertToGoString(convertMarkdownToHTML(convertToCString("")))
+
+	assert.Equal(t, "", actual)
 }
 
 func TestConvertMarkdownToHTMLWithFrontMatter(t *testing.T) {
@@ -59,10 +84,29 @@ Text`
 	assert.True(t, strings.Contains(minifyHTML(actual), `<h1>Heading</h1><p>Text</p>`))
 }
 
+func TestConvertMarkdownToHTMLWithCRLFFrontMatter(t *testing.T) {
+	source := "---\r\nkey: Value\r\n---\r\n\r\n# Heading\r\n\r\nText"
+	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
+
+	assert.True(t, strings.Contains(actual, `<pre class="chroma">`))
+	assert.True(t, strings.Contains(minifyHTML(actual), `<h1>Heading</h1><p>Text</p>`))
+}
+
 func TestConvertMarkdownToHTMLWithSyntaxHighlighting(t *testing.T) {
 	source := "# Heading\n\nText\n\n```js\nconst print = (text) => console.log(text);\nprint(\"Hello world\");\n```" // nolint:lll
 	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
 	assert.True(t, strings.Contains(actual, `<pre class="chroma">`))
+}
+
+func TestConvertMarkdownToHTMLSanitizesRawHTMLAndUnsafeLinks(t *testing.T) {
+	source := `<script>alert("bad")</script>
+
+[bad](javascript:alert("bad"))`
+	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
+	actualLower := strings.ToLower(actual)
+
+	assert.NotContains(t, actualLower, "<script")
+	assert.NotContains(t, actualLower, "javascript:")
 }
 
 func TestConvertNotebookToHTML(t *testing.T) {

@@ -36,6 +36,17 @@ class FileTreeTests: XCTestCase {
 		XCTAssert(fileTree!.root.children.isEmpty)
 	}
 
+	func testAddEmptyPathDoesNothing() throws {
+		try fileTree?.addNode(
+			path: "",
+			isDirectory: false,
+			size: 123,
+			dateModified: now
+		)
+
+		XCTAssert(fileTree!.root.children.isEmpty)
+	}
+
 	// Tree:
 	//
 	// └── file
@@ -328,6 +339,79 @@ class FileTreeTests: XCTestCase {
 			size: 123,
 			isDirectory: false,
 			dateModified: now
+		)
+	}
+
+	func testAddPathWithRepeatedSlashes() throws {
+		try fileTree?.addNode(
+			path: "directory//nested///file.txt",
+			isDirectory: false,
+			size: 123,
+			dateModified: now
+		)
+
+		let directory = assertNode(
+			parent: fileTree!.root,
+			name: "directory",
+			size: 0,
+			isDirectory: true,
+			dateModified: nil
+		)
+		let nested = assertNode(
+			parent: directory,
+			name: "nested",
+			size: 0,
+			isDirectory: true,
+			dateModified: nil
+		)
+		_ = assertNode(
+			parent: nested,
+			name: "file.txt",
+			size: 123,
+			isDirectory: false,
+			dateModified: now
+		)
+	}
+
+	func testAddUnicodeAndSpacePath() throws {
+		try fileTree?.addNode(
+			path: "folder with spaces/unicode-\u{00E9}.txt",
+			isDirectory: false,
+			size: 123,
+			dateModified: now
+		)
+
+		let directory = assertNode(
+			parent: fileTree!.root,
+			name: "folder with spaces",
+			size: 0,
+			isDirectory: true,
+			dateModified: nil
+		)
+		_ = assertNode(
+			parent: directory,
+			name: "unicode-\u{00E9}.txt",
+			size: 123,
+			isDirectory: false,
+			dateModified: now
+		)
+	}
+
+	func testAddingChildBelowFileThrows() throws {
+		try fileTree?.addNode(
+			path: "file",
+			isDirectory: false,
+			size: 123,
+			dateModified: now
+		)
+
+		XCTAssertThrowsError(
+			try fileTree?.addNode(
+				path: "file/child",
+				isDirectory: false,
+				size: 456,
+				dateModified: now
+			)
 		)
 	}
 }
