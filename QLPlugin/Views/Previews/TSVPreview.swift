@@ -10,7 +10,7 @@ class TSVPreview: Preview {
 			csv = try NamedCSV(url: file.url, delimiter: .tab)
 		} catch {
 			Log.parse
-				.error("Could not parse TSV file: \(error.localizedDescription, privacy: .public)")
+				.error("Could not parse TSV file: \(error.localizedDescription, privacy: .private)")
 			throw error
 		}
 

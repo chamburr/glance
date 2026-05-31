@@ -49,7 +49,7 @@ class MainVC: NSViewController, QLPreviewingController {
 				file = try File(url: fileUrl)
 			} catch {
 				Log.general.error(
-					"Could not obtain information about file \(fileUrl.path, privacy: .public): \(error.localizedDescription, privacy: .public)"
+					"Could not obtain information about file \(fileUrl.path, privacy: .private): \(error.localizedDescription, privacy: .private)"
 				)
 				handler(error)
 				return
@@ -61,20 +61,20 @@ class MainVC: NSViewController, QLPreviewingController {
 				// with the error)
 				let error = PreviewError.fileSizeError(path: file.path)
 				Log.general
-					.error("Skipping file preview: \(error.localizedDescription, privacy: .public)")
+					.error("Skipping file preview: \(error.localizedDescription, privacy: .private)")
 				handler(error)
 				return
 			}
 
 			// Render file preview
-			Log.general.info("Generating preview for file \(file.path, privacy: .public)")
+			Log.general.info("Generating preview for file \(file.path, privacy: .private)")
 			do {
 				try self.previewFile(file: file)
 			} catch {
 				// Log error and fall back to default preview (by calling the completion handler
 				// with the error)
 				Log.general.error(
-					"Could not generate preview for file \(file.path, privacy: .public): \(error.localizedDescription, privacy: .public)"
+					"Could not generate preview for file \(file.path, privacy: .private): \(error.localizedDescription, privacy: .private)"
 				)
 				handler(error)
 				return
@@ -103,7 +103,7 @@ class MainVC: NSViewController, QLPreviewingController {
 			stats.increaseStatsCounts(fileExtension: file.url.pathExtension)
 		} else {
 			Log.general.info(
-				"Skipping preview for file \(file.path, privacy: .public): File type not supported"
+				"Skipping preview for file \(file.path, privacy: .private): File type not supported"
 			)
 		}
 	}

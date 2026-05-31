@@ -19,7 +19,7 @@ class MarkdownPreview: Preview {
 		} catch {
 			Log.parse
 				.error(
-					"Could not read Markdown file: \(error.localizedDescription, privacy: .public)"
+					"Could not read Markdown file: \(error.localizedDescription, privacy: .private)"
 				)
 			throw error
 		}
@@ -30,7 +30,7 @@ class MarkdownPreview: Preview {
 		} catch {
 			Log.render
 				.error(
-					"Could not generate Markdown HTML: \(error.localizedDescription, privacy: .public)"
+					"Could not generate Markdown HTML: \(error.localizedDescription, privacy: .private)"
 				)
 			throw error
 		}

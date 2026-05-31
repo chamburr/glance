@@ -123,7 +123,7 @@ class TARPreview: Preview {
 					dateModified: dateModified
 				)
 			} catch {
-				Log.parse.error("\(error.localizedDescription, privacy: .public)")
+				Log.parse.error("\(error.localizedDescription, privacy: .private)")
 			}
 		}
 

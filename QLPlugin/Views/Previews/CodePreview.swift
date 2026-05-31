@@ -18,7 +18,7 @@ class CodePreview: Preview {
 			source = try getSource(file: file)
 		} catch {
 			Log.parse
-				.error("Could not read code file: \(error.localizedDescription, privacy: .public)")
+				.error("Could not read code file: \(error.localizedDescription, privacy: .private)")
 			throw error
 		}
 
@@ -28,7 +28,7 @@ class CodePreview: Preview {
 		} catch {
 			Log.render
 				.error(
-					"Could not generate code HTML: \(error.localizedDescription, privacy: .public)"
+					"Could not generate code HTML: \(error.localizedDescription, privacy: .private)"
 				)
 			throw error
 		}

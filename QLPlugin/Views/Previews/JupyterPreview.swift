@@ -30,7 +30,7 @@ class JupyterPreview: Preview {
 			source = try file.read()
 		} catch {
 			Log.parse.error(
-				"Could not read Jupyter Notebook file: \(error.localizedDescription, privacy: .public)"
+				"Could not read Jupyter Notebook file: \(error.localizedDescription, privacy: .private)"
 			)
 			throw error
 		}
@@ -39,7 +39,7 @@ class JupyterPreview: Preview {
 			return try HTMLRenderer.renderNotebook(source)
 		} catch {
 			Log.render.error(
-				"Could not generate Jupyter Notebook HTML: \(error.localizedDescription, privacy: .public)"
+				"Could not generate Jupyter Notebook HTML: \(error.localizedDescription, privacy: .private)"
 			)
 			throw error
 		}

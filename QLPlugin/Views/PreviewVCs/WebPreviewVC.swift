@@ -6,6 +6,7 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 	private let html: String
 	private let stylesheets: [Stylesheet]
 	private let scripts: [Script]
+	private var previewFileURL: URL?
 
 	/// Stylesheet with CSS that applies to all file types
 	private let sharedStylesheetURL = Bundle.main.url(
@@ -44,6 +45,12 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 
+	deinit {
+		if let previewFileURL {
+			try? FileManager.default.removeItem(at: previewFileURL)
+		}
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadPreview()
@@ -76,7 +83,7 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 			return tempDir
 		} catch {
 			Log.render.error(
-				"Failed to create preview directory: \(error.localizedDescription, privacy: .public)"
+				"Failed to create preview directory: \(error.localizedDescription, privacy: .private)"
 			)
 			return nil
 		}
@@ -85,7 +92,7 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 	private func loadPreview() {
 		let webView = WKWebView(frame: view.bounds)
 		webView.autoresizingMask = [.height, .width]
-		webView.setValue(false, forKey: "drawsBackground")
+		webView.underPageBackgroundColor = .clear
 		webView.navigationDelegate = self
 
 		// Hide the web view until content is fully loaded to prevent flickering
@@ -122,13 +129,14 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 		// access, which is necessary in sandboxed Quick Look extensions.
 		if let previewDir = Self.previewDirectory {
 			do {
-				let tempFile = previewDir.appendingPathComponent("preview.html")
+				let tempFile = previewDir.appendingPathComponent("\(UUID().uuidString).html")
 				try fullHTML.write(to: tempFile, atomically: true, encoding: .utf8)
+				previewFileURL = tempFile
 				webView.loadFileURL(tempFile, allowingReadAccessTo: previewDir)
 				return
 			} catch {
 				Log.render.error(
-					"Failed to write preview HTML: \(error.localizedDescription, privacy: .public)"
+					"Failed to write preview HTML: \(error.localizedDescription, privacy: .private)"
 				)
 			}
 		}
