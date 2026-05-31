@@ -840,7 +840,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ./HTMLConverter/\n[ ! -d /opt/homebrew ] || eval \"$(/opt/homebrew/bin/brew shellenv)\"\nexport MACOSX_DEPLOYMENT_TARGET=\"${MACOSX_DEPLOYMENT_TARGET:-14.0}\"\nexport CGO_CFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_CFLAGS}\"\nexport CGO_LDFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_LDFLAGS}\"\nGOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-amd64.a\nGOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-arm64.a\nlipo -create -output htmlconverter.a htmlconverter-amd64.a htmlconverter-arm64.a\ncp htmlconverter-amd64.h htmlconverter.h\n";
+			shellScript = "cd ./HTMLConverter/\nset -e\n[ ! -d /opt/homebrew ] || eval \"$(/opt/homebrew/bin/brew shellenv)\"\nrm -f htmlconverter-amd64.a htmlconverter-arm64.a htmlconverter.a htmlconverter-amd64.h htmlconverter-arm64.h htmlconverter.h\nexport MACOSX_DEPLOYMENT_TARGET=\"${MACOSX_DEPLOYMENT_TARGET:-14.0}\"\nexport CGO_CFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_CFLAGS}\"\nexport CGO_LDFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_LDFLAGS}\"\n# Force rebuilds so cached Go objects use the selected macOS deployment target.\nGOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-amd64.a\nGOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-arm64.a\nlipo -create -output htmlconverter.a htmlconverter-amd64.a htmlconverter-arm64.a\ncp htmlconverter-amd64.h htmlconverter.h\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1258,7 +1258,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/swiftcsv/SwiftCSV";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 0.10.0;
 			};
 		};
