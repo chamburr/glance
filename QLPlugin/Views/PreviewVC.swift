@@ -1,6 +1,5 @@
 import Cocoa
 import Foundation
-import os.log
 
 /// View controller for rendering previews of a specific file type.
 protocol PreviewVC: NSViewController {}

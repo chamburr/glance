@@ -79,11 +79,11 @@ enum PreviewSupport {
 
 	static func getCodeLexer(fileURL: URL) -> String {
 		if fileURL.pathExtension.isEmpty {
-			return dotfileLexers[fileURL.lastPathComponent.lowercased(), default: "autodetect"]
+			dotfileLexers[fileURL.lastPathComponent.lowercased(), default: "autodetect"]
 		} else if fileURL.pathExtension.lowercased() == "dist" {
-			return getCodeLexer(fileURL: fileURL.deletingPathExtension())
+			getCodeLexer(fileURL: fileURL.deletingPathExtension())
 		} else {
-			return fileExtensionLexers[
+			fileExtensionLexers[
 				fileURL.pathExtension.lowercased(),
 				default: fileURL.pathExtension
 			]

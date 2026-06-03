@@ -1,5 +1,4 @@
 import Foundation
-import os.log
 import SWCompression
 
 /// View controller for previewing tarballs (may be gzipped).
@@ -95,9 +94,9 @@ class TARPreview: Preview {
 	/// Parses a date string from `tar` output to a `Date` object.
 	private func parseDate(dateString: String) -> Date? {
 		if dateString.contains(":") {
-			return dateFormatter1.date(from: dateString)
+			dateFormatter1.date(from: dateString)
 		} else {
-			return dateFormatter2.date(from: dateString)
+			dateFormatter2.date(from: dateString)
 		}
 	}
 
@@ -124,7 +123,7 @@ class TARPreview: Preview {
 					dateModified: dateModified
 				)
 			} catch {
-				os_log("%{public}s", log: Log.parse, type: .error, error.localizedDescription)
+				Log.parse.error("\(error.localizedDescription, privacy: .private)")
 			}
 		}
 
@@ -135,8 +134,12 @@ class TARPreview: Preview {
 		-> (sizeUncompressed: Int?, compressionRatio: Double?)
 	{
 		let sizeMatches = lines.matchRegex(regex: sizeRegex)
-		let sizeUncompressed = Int(sizeMatches[0][1])
-		let compressionRatio = Double(sizeMatches[0][2])
+		guard let sizeMatch = sizeMatches.first else {
+			return (nil, nil)
+		}
+
+		let sizeUncompressed = Int(sizeMatch[1])
+		let compressionRatio = Double(sizeMatch[2])
 		return (sizeUncompressed, compressionRatio)
 	}
 
@@ -153,10 +156,11 @@ class TARPreview: Preview {
 		if isGzipped {
 			let sizeOutput = try runGZIPSizeCommand(filePath: file.path)
 			let (sizeUncompressed, compressionRatio) = parseGZIPSize(lines: sizeOutput)
+			let compressionRatioText = compressionRatio.map { String($0) } ?? "--"
 			labelText += """
 
 			Uncompressed: \(byteCountFormatter.string(for: sizeUncompressed) ?? "--")
-			Compression ratio: \(compressionRatio == nil ? "--" : String(compressionRatio!)) %
+			Compression ratio: \(compressionRatioText) %
 			"""
 		}
 

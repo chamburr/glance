@@ -9,7 +9,7 @@
 
 ## About
 
-This is a fork of the [original Glance plugin](https://github.com/samuelmeuli/glance). Unfortunately, the owner seems to have discarded the project a while ago, and the app is largely broken on newer macOS systems. The aim of this fork is to revive the project and maintain it for future updates. For now, we have added support for macOS Big Sur and fixed several internal bugs.
+This is a fork of the [original Glance plugin](https://github.com/samuelmeuli/glance). Unfortunately, the owner seems to have discarded the project a while ago, and the app is largely broken on newer macOS systems. The aim of this fork is to revive the project and maintain it for future updates. Current builds target macOS 14 or newer and include fixes for newer macOS releases.
 
 ## Installation
 
@@ -55,9 +55,9 @@ Alternatively, you can install Glance directly. The installation is slightly com
 - Some plugins still use the deprecated Quick Look Generator API and might stop working in the future.
 - Glance can easily be extended to support other file types.
 
-**Why isn't the app available on macOS 10.14 or older?**
+**Why isn't the app available on older macOS versions?**
 
-The app uses the [new Quick Look API](https://developer.apple.com/documentation/quartz/qlpreviewingcontroller/2867936-preparepreviewoffile) that was introduced in 10.15, so it unfortunately won't work with older versions of macOS.
+The app uses modern Quick Look, WebKit, and archive dependencies that now require macOS 14 or newer.
 
 **Why are images in my Markdown files not loading?**
 

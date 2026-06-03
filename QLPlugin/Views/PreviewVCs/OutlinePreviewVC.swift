@@ -54,8 +54,8 @@ class OutlinePreviewVC: NSViewController, PreviewVC {
 	/// If the root contains a single item, this function expands its children.
 	private func expandSingleRootItem() {
 		let root = treeController.arrangedObjects
-		if root.children?.count == 1 {
-			outlineView.expandItem(root.children?.first!)
+		if root.children?.count == 1, let firstChild = root.children?.first {
+			outlineView.expandItem(firstChild)
 		}
 	}
 }

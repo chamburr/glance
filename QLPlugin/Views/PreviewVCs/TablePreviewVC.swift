@@ -1,5 +1,4 @@
 import Cocoa
-import os.log
 
 class TablePreviewVC: NSViewController, PreviewVC {
 	let headers: [String]
@@ -72,8 +71,12 @@ extension TablePreviewVC: NSTableViewDataSource, NSTableViewDelegate {
 		viewFor tableColumn: NSTableColumn?,
 		row rowIndex: Int
 	) -> NSView? {
+		guard let tableColumn else {
+			return nil
+		}
+
 		let row = cells[rowIndex]
-		let cellValue = row[tableColumn!.identifier.rawValue] ?? ""
+		let cellValue = row[tableColumn.identifier.rawValue] ?? ""
 
 		let textField = NSTextField()
 		textField.stringValue = cellValue

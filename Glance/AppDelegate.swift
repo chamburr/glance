@@ -1,6 +1,6 @@
 import Cocoa
 
-@NSApplicationMain
+@main
 class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool { true }
 }

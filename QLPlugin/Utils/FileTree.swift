@@ -8,7 +8,7 @@ extension FileTreeError: LocalizedError {
 	var errorDescription: String? {
 		switch self {
 			case let .notADirectoryError(pathParts, pathPartIndex):
-				return NSLocalizedString(
+				NSLocalizedString(
 					"Cannot create file tree node with path \"\(pathParts.joined())\": \"\(pathParts[pathPartIndex])\" is not a directory",
 					comment: ""
 				)
@@ -33,7 +33,9 @@ class FileTreeNode: NSObject {
 	/// List of child nodes (required for rendering the tree in an `NSOutlineView`)
 	@objc var childrenList: [FileTreeNode] { Array(children.values) }
 	/// Whether the node has any children (required for rendering the tree in an `NSOutlineView`)
-	@objc var hasChildren: Bool { children.isEmpty }
+	@objc var hasChildren: Bool { !children.isEmpty }
+	/// Whether the node is a leaf (has no children) — used by `NSTreeController`'s `leafKeyPath`
+	@objc var isLeaf: Bool { children.isEmpty }
 
 	convenience init(name: String, size: Int, isDirectory: Bool) {
 		self.init(name: name, size: size, isDirectory: isDirectory, dateModified: nil)
@@ -56,9 +58,14 @@ class FileTree {
 	/// position in the tree. If a file/directory's parent directory doesn't exist yet, it will
 	/// be created (with `dateModified` set to `nil`).
 	func addNode(path: String, isDirectory: Bool, size: Int, dateModified: Date?) throws {
+		let pathParts = path.split(separator: "/", omittingEmptySubsequences: true)
+		guard !pathParts.isEmpty else {
+			return
+		}
+
 		try addNode(
 			parentNode: root,
-			pathParts: path.split(separator: "/", omittingEmptySubsequences: true),
+			pathParts: pathParts,
 			pathPartIndex: 0,
 			isDirectory: isDirectory,
 			size: size,
@@ -94,7 +101,7 @@ class FileTree {
 			} else {
 				// Node already exists (i.e. directory has been created implicitly in a previous
 				// function call): Update the directory node with the missing `dateModified` info
-				currentNode!.dateModified = dateModified
+				currentNode?.dateModified = dateModified
 			}
 		} else {
 			// Not yet at end of path: Recurse into subdirectory
@@ -108,16 +115,20 @@ class FileTree {
 				parentNode.children[name] = currentNode
 			} else {
 				// Directory exists: Make sure it's not a file
-				if !currentNode!.isDirectory {
+				if currentNode?.isDirectory == false {
 					throw FileTreeError.notADirectoryError(
 						pathParts: pathParts,
 						pathPartIndex: pathPartIndex
 					)
 				}
 			}
+			guard let currentNode else {
+				return
+			}
+
 			// Recurse: Execute function again for next path part
 			try addNode(
-				parentNode: currentNode!,
+				parentNode: currentNode,
 				pathParts: pathParts,
 				pathPartIndex: pathPartIndex + 1,
 				isDirectory: isDirectory,
