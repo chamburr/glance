@@ -1,30 +1,39 @@
 import Foundation
 
-class Script: WebAsset {
-	private var content: String?
-	private var url: URL?
+final class Script: WebAsset {
+	private enum Source {
+		case content(String)
+		case url(URL)
+	}
+
+	private let source: Source
+	private lazy var inlineContent: String = {
+		switch source {
+			case let .content(content):
+				return content
+			case let .url(url):
+				return (try? String(contentsOf: url, encoding: .utf8)) ?? ""
+		}
+	}()
 
 	required init(content: String) {
-		self.content = content
+		source = .content(content)
 	}
 
 	required init(url: URL) {
-		self.url = url
+		source = .url(url)
 	}
 
 	func getHTML() -> String {
-		if let url {
-			"<script src=\"\(url.lastPathComponent)\"></script>"
-		} else {
-			"<script>\(content ?? "")</script>"
+		switch source {
+			case let .content(content):
+				return "<script>\(content)</script>"
+			case let .url(url):
+				return "<script src=\"\(url.lastPathComponent)\"></script>"
 		}
 	}
 
 	func getInlineHTML() -> String {
-		if let url, let fileContent = try? String(contentsOf: url, encoding: .utf8) {
-			"<script>\(fileContent)</script>"
-		} else {
-			"<script>\(content ?? "")</script>"
-		}
+		"<script>\(inlineContent)</script>"
 	}
 }

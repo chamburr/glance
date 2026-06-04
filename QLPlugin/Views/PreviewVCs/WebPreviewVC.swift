@@ -6,6 +6,7 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 	private let html: String
 	private let stylesheets: [Stylesheet]
 	private let scripts: [Script]
+	private var webView: WKWebView?
 	private var previewFileURL: URL?
 
 	/// Stylesheet with CSS that applies to all file types
@@ -46,6 +47,8 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 	}
 
 	deinit {
+		webView?.navigationDelegate = nil
+		webView?.stopLoading()
 		if let previewFileURL {
 			try? FileManager.default.removeItem(at: previewFileURL)
 		}
@@ -58,23 +61,32 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 
 	/// Lazily created temp directory for preview HTML files, shared across all instances
 	private static let previewDirectory: URL? = {
-		let tempDir = FileManager.default.temporaryDirectory
+		let fileManager = FileManager.default
+		let tempDir = fileManager.temporaryDirectory
 			.appendingPathComponent("glance-preview", isDirectory: true)
 		do {
-			try FileManager.default.createDirectory(
+			try fileManager.createDirectory(
 				at: tempDir,
 				withIntermediateDirectories: true
 			)
-			// Symlink bundle resources once into the temp directory
+
+			let tempContents = try fileManager.contentsOfDirectory(
+				at: tempDir,
+				includingPropertiesForKeys: nil
+			)
+			for tempFile in tempContents where tempFile.pathExtension == "html" {
+				try? fileManager.removeItem(at: tempFile)
+			}
+
 			if let resourceURL = Bundle.main.resourceURL {
-				let resourceContents = try FileManager.default.contentsOfDirectory(
+				let resourceContents = try fileManager.contentsOfDirectory(
 					at: resourceURL,
 					includingPropertiesForKeys: nil
 				)
 				for resourceFile in resourceContents {
 					let destination = tempDir.appendingPathComponent(resourceFile.lastPathComponent)
-					try? FileManager.default.removeItem(at: destination)
-					try FileManager.default.createSymbolicLink(
+					try? fileManager.removeItem(at: destination)
+					try fileManager.createSymbolicLink(
 						at: destination,
 						withDestinationURL: resourceFile
 					)
@@ -94,6 +106,7 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 		webView.autoresizingMask = [.height, .width]
 		webView.underPageBackgroundColor = .clear
 		webView.navigationDelegate = self
+		self.webView = webView
 
 		// Hide the web view until content is fully loaded to prevent flickering
 		webView.alphaValue = 0

@@ -1,30 +1,39 @@
 import Foundation
 
-class Stylesheet: WebAsset {
-	private var content: String?
-	private var url: URL?
+final class Stylesheet: WebAsset {
+	private enum Source {
+		case content(String)
+		case url(URL)
+	}
+
+	private let source: Source
+	private lazy var inlineContent: String = {
+		switch source {
+			case let .content(content):
+				return content
+			case let .url(url):
+				return (try? String(contentsOf: url, encoding: .utf8)) ?? ""
+		}
+	}()
 
 	required init(content: String) {
-		self.content = content
+		source = .content(content)
 	}
 
 	required init(url: URL) {
-		self.url = url
+		source = .url(url)
 	}
 
 	func getHTML() -> String {
-		if let url {
-			"<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url.lastPathComponent)\" />"
-		} else {
-			"<style>\(content ?? "")</style>"
+		switch source {
+			case let .content(content):
+				return "<style>\(content)</style>"
+			case let .url(url):
+				return "<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url.lastPathComponent)\" />"
 		}
 	}
 
 	func getInlineHTML() -> String {
-		if let url, let fileContent = try? String(contentsOf: url, encoding: .utf8) {
-			"<style>\(fileContent)</style>"
-		} else {
-			"<style>\(content ?? "")</style>"
-		}
+		"<style>\(inlineContent)</style>"
 	}
 }

@@ -4,12 +4,11 @@ swiftformat = "0.61.1"
 swiftlint = "0.63.3"
 
 [tasks.build]
-description = "Build the application in the build directory"
+description = "Build the application incrementally in the build directory"
 run = '''
 APP_NAME="${APP_NAME:-Glance}"
 echo "Building Quick Look extension..."
-rm -rf build
-xcodebuild -scheme "$APP_NAME" -configuration Release -derivedDataPath build clean build
+xcodebuild -scheme "$APP_NAME" -configuration Release -derivedDataPath build build
 echo "Build complete"
 '''
 
@@ -68,6 +67,12 @@ APP_NAME="${APP_NAME:-Glance}"
 echo "Cleaning build artifacts..."
 rm -rf build
 rm -rf "$HOME/Library/Developer/Xcode/DerivedData/$APP_NAME"-*
+rm -f HTMLConverter/htmlconverter-amd64.a \
+	HTMLConverter/htmlconverter-arm64.a \
+	HTMLConverter/htmlconverter.a \
+	HTMLConverter/htmlconverter-amd64.h \
+	HTMLConverter/htmlconverter-arm64.h \
+	HTMLConverter/htmlconverter.h
 echo "Clean complete"
 '''
 
@@ -111,8 +116,9 @@ mise run test:xcode
 '''
 
 [tasks.verify]
-description = "Run tests and build the release app"
+description = "Run tests and build the release app from a clean build directory"
 run = '''
 mise run test
+mise run clean
 mise run build
 '''

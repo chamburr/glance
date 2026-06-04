@@ -10,6 +10,12 @@ class OutlinePreviewVC: NSViewController, PreviewVC {
 	@IBOutlet private var outlineView: NSOutlineView!
 	@IBOutlet private var label: NSTextField!
 
+	private static let registerValueTransformersOnce: Void = {
+		ValueTransformer.setValueTransformer(DateTransformer(), forName: .dateTransformerName)
+		ValueTransformer.setValueTransformer(IconTransformer(), forName: .iconTransformerName)
+		ValueTransformer.setValueTransformer(SizeTransformer(), forName: .sizeTransformerName)
+	}()
+
 	required convenience init(rootNodes: [FileTreeNode], labelText: String?) {
 		self.init(nibName: nil, bundle: nil, rootNodes: rootNodes, labelText: labelText)
 	}
@@ -23,11 +29,7 @@ class OutlinePreviewVC: NSViewController, PreviewVC {
 		self.rootNodes = rootNodes
 		self.labelText = labelText
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
-		// Register required value transformers
-		ValueTransformer.setValueTransformer(DateTransformer(), forName: .dateTransformerName)
-		ValueTransformer.setValueTransformer(IconTransformer(), forName: .iconTransformerName)
-		ValueTransformer.setValueTransformer(SizeTransformer(), forName: .sizeTransformerName)
+		_ = Self.registerValueTransformersOnce
 	}
 
 	@available(*, unavailable)
@@ -90,10 +92,10 @@ class DateTransformer: ValueTransformer {
 /// `ValueTransformer` which returns the correct icon depending on whether the current row
 /// represents a file or directory.
 class IconTransformer: ValueTransformer {
-	let directoryIcon = NSImage(
+	private static let directoryIcon = NSImage(
 		contentsOfFile: "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/GenericFolderIcon.icns"
 	)
-	let fileIcon = NSImage(
+	private static let fileIcon = NSImage(
 		contentsOfFile: "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/GenericDocumentIcon.icns"
 	)
 
@@ -106,7 +108,7 @@ class IconTransformer: ValueTransformer {
 			return nil
 		}
 		let isDirectory = Bool(truncating: isDirectoryNumber)
-		return isDirectory ? directoryIcon : fileIcon
+		return isDirectory ? Self.directoryIcon : Self.fileIcon
 	}
 }
 

@@ -1,13 +1,8 @@
 import Cocoa
 
 class ViewController: NSViewController {
-	override func viewDidLoad() {
-		super.viewDidLoad()
-	}
-
 	@IBAction private func openSupportedFilesWindow(_: NSButton) {
-		let supportedFilesWC = SupportedFilesWC(windowNibName: NSNib.Name("SupportedFilesWC"))
-		supportedFilesWC.showWindow(nil)
+		SupportedFilesWC.shared.showSupportedFilesWindow()
 	}
 
 	@IBAction private func openGitHubRepository(_: NSButton) {
