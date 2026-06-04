@@ -1,30 +1,37 @@
 import Foundation
 
-class Stylesheet: WebAsset {
-	private var content: String?
-	private var url: URL?
+final class Stylesheet: WebAsset {
+	private enum Source {
+		case content(String)
+		case url(URL)
+	}
+
+	private let source: Source
+	private lazy var inlineContent: String = {
+		switch source {
+			case let .content(content):
+				return content
+			case let .url(url):
+				do {
+					return try String(contentsOf: url, encoding: .utf8)
+				} catch {
+					Log.render.error(
+						"Could not read stylesheet asset \(url.path, privacy: .private): \(error.localizedDescription, privacy: .private)"
+					)
+					return ""
+				}
+		}
+	}()
 
 	required init(content: String) {
-		self.content = content
+		source = .content(content)
 	}
 
 	required init(url: URL) {
-		self.url = url
-	}
-
-	func getHTML() -> String {
-		if let url {
-			"<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url.lastPathComponent)\" />"
-		} else {
-			"<style>\(content ?? "")</style>"
-		}
+		source = .url(url)
 	}
 
 	func getInlineHTML() -> String {
-		if let url, let fileContent = try? String(contentsOf: url, encoding: .utf8) {
-			"<style>\(fileContent)</style>"
-		} else {
-			"<style>\(content ?? "")</style>"
-		}
+		"<style>\(inlineContent)</style>"
 	}
 }

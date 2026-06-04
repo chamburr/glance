@@ -15,6 +15,37 @@
 		A19F4D4226218B2B008A903C /* PreviewSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19F4D4526218B2B008A903C /* PreviewSupport.swift */; };
 		A19F4D4326218B2B008A903C /* PreviewSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19F4D4526218B2B008A903C /* PreviewSupport.swift */; };
 		A19F4D4426218B2B008A903C /* PreviewSupportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19F4D4626218B2B008A903C /* PreviewSupportTests.swift */; };
+		C0DE00000000000000000201 /* FileTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000101 /* FileTreeTests.swift */; };
+		C0DE00000000000000000202 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000102 /* FileTests.swift */; };
+		C0DE00000000000000000203 /* PreviewFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000103 /* PreviewFactoryTests.swift */; };
+		C0DE00000000000000000204 /* PreviewSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000104 /* PreviewSmokeTests.swift */; };
+		C0DE00000000000000000205 /* PlistCoverageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000105 /* PlistCoverageTests.swift */; };
+		C0DE00000000000000000206 /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 7E616BAF244997420043F7AB /* SwiftCSV */; };
+		C0DE00000000000000000207 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 10779BC32621502C008A903C /* ZIPFoundation */; };
+		C0DE00000000000000000208 /* SWCompression in Frameworks */ = {isa = PBXBuildFile; productRef = 10779BEA26217F25008A903C /* SWCompression */; };
+		C0DE00000000000000000209 /* htmlconverter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E42B61D245857D9008D7116 /* htmlconverter.a */; };
+		C0DE00000000000000000301 /* PreviewSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19F4D4526218B2B008A903C /* PreviewSupport.swift */; };
+		C0DE00000000000000000302 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE10F82244F6774007214D8 /* Log.swift */; };
+		C0DE00000000000000000303 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21C89024390E3100818EB2 /* Date.swift */; };
+		C0DE00000000000000000304 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB36487244B65D900D7F96F /* String.swift */; };
+		C0DE00000000000000000305 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC01EB240D220B009505D0 /* File.swift */; };
+		C0DE00000000000000000306 /* FileTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F898244DA45500BFB869 /* FileTree.swift */; };
+		C0DE00000000000000000307 /* HTMLRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B16912455D93E00E2B84D /* HTMLRenderer.swift */; };
+		C0DE00000000000000000308 /* WebAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F0D7C24168870007F1008 /* WebAsset.swift */; };
+		C0DE00000000000000000309 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F0D7B24168870007F1008 /* Script.swift */; };
+		C0DE00000000000000000310 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F0D7A24168870007F1008 /* Stylesheet.swift */; };
+		C0DE00000000000000000311 /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DC51E240E6CE300D0A061 /* PreviewVC.swift */; };
+		C0DE00000000000000000312 /* PreviewVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DC527240E6F4A00D0A061 /* PreviewVCFactory.swift */; };
+		C0DE00000000000000000313 /* MarkdownPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DC520240E6D8000D0A061 /* MarkdownPreview.swift */; };
+		C0DE00000000000000000314 /* JupyterPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB7491824228549007265A4 /* JupyterPreview.swift */; };
+		C0DE00000000000000000315 /* CodePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DC529240E6FDE00D0A061 /* CodePreview.swift */; };
+		C0DE00000000000000000316 /* TSVPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E413F7F2418DD6200CFBB1D /* TSVPreview.swift */; };
+		C0DE00000000000000000317 /* TARPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A9DAC244F24B900276E51 /* TARPreview.swift */; };
+		C0DE00000000000000000318 /* ZIPPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB36489244B665700D7F96F /* ZIPPreview.swift */; };
+		C0DE00000000000000000319 /* SevenZipPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103654F32F72623D006F2538 /* SevenZipPreview.swift */; };
+		C0DE00000000000000000320 /* WebPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E022BE32452181F000EFCD3 /* WebPreviewVC.swift */; };
+		C0DE00000000000000000321 /* TablePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E08A50D2454372200B7FF53 /* TablePreviewVC.swift */; };
+		C0DE00000000000000000322 /* OutlinePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E022BEB245253B3000EFCD3 /* OutlinePreviewVC.swift */; };
 		7E022BE52452181F000EFCD3 /* WebPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E022BE32452181F000EFCD3 /* WebPreviewVC.swift */; };
 		7E022BE62452181F000EFCD3 /* WebPreviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E022BE42452181F000EFCD3 /* WebPreviewVC.xib */; };
 		7E022BED245253B3000EFCD3 /* OutlinePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E022BEB245253B3000EFCD3 /* OutlinePreviewVC.swift */; };
@@ -173,6 +204,11 @@
 		10779C1126218B2B008A903C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A19F4D4526218B2B008A903C /* PreviewSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSupport.swift; sourceTree = "<group>"; };
 		A19F4D4626218B2B008A903C /* PreviewSupportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSupportTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000101 /* FileTreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTreeTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000102 /* FileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000103 /* PreviewFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewFactoryTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000104 /* PreviewSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSmokeTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000105 /* PlistCoverageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistCoverageTests.swift; sourceTree = "<group>"; };
 		7E022BE32452181F000EFCD3 /* WebPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewVC.swift; sourceTree = "<group>"; };
 		7E022BE42452181F000EFCD3 /* WebPreviewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebPreviewVC.xib; sourceTree = "<group>"; };
 		7E022BEB245253B3000EFCD3 /* OutlinePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinePreviewVC.swift; sourceTree = "<group>"; };
@@ -293,6 +329,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0DE00000000000000000208 /* SWCompression in Frameworks */,
+				C0DE00000000000000000209 /* htmlconverter.a in Frameworks */,
+				C0DE00000000000000000206 /* SwiftCSV in Frameworks */,
+				C0DE00000000000000000207 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +361,11 @@
 		10779C0E26218B2B008A903C /* GlanceTests */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE00000000000000000102 /* FileTests.swift */,
+				C0DE00000000000000000101 /* FileTreeTests.swift */,
+				C0DE00000000000000000105 /* PlistCoverageTests.swift */,
+				C0DE00000000000000000103 /* PreviewFactoryTests.swift */,
+				C0DE00000000000000000104 /* PreviewSmokeTests.swift */,
 				A19F4D4626218B2B008A903C /* PreviewSupportTests.swift */,
 				10779C1126218B2B008A903C /* Info.plist */,
 			);
@@ -629,6 +674,11 @@
 				10779C1326218B2B008A903C /* PBXTargetDependency */,
 			);
 			name = GlanceTests;
+			packageProductDependencies = (
+				7E616BAF244997420043F7AB /* SwiftCSV */,
+				10779BC32621502C008A903C /* ZIPFoundation */,
+				10779BEA26217F25008A903C /* SWCompression */,
+			);
 			productName = GlanceTests;
 			productReference = 10779C0D26218B2B008A903C /* GlanceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -833,6 +883,10 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(PROJECT_DIR)/mise.toml",
+				"$(PROJECT_DIR)/HTMLConverter/go.mod",
+				"$(PROJECT_DIR)/HTMLConverter/go.sum",
+				"$(PROJECT_DIR)/HTMLConverter/htmlconverter.go",
 			);
 			outputFileListPaths = (
 			);
@@ -842,7 +896,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ./HTMLConverter/\nset -e\n[ ! -d /opt/homebrew ] || eval \"$(/opt/homebrew/bin/brew shellenv)\"\nrm -f htmlconverter-amd64.a htmlconverter-arm64.a htmlconverter.a htmlconverter-amd64.h htmlconverter-arm64.h htmlconverter.h\nexport MACOSX_DEPLOYMENT_TARGET=\"${MACOSX_DEPLOYMENT_TARGET:-14.0}\"\nexport CGO_CFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_CFLAGS}\"\nexport CGO_LDFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_LDFLAGS}\"\n# Force rebuilds so cached Go objects use the selected macOS deployment target.\nGOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-amd64.a\nGOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-arm64.a\nlipo -create -output htmlconverter.a htmlconverter-amd64.a htmlconverter-arm64.a\ncp htmlconverter-amd64.h htmlconverter.h\n";
+			shellScript = "cd \"$PROJECT_DIR/HTMLConverter\"\nset -e\n[ ! -d /opt/homebrew ] || eval \"$(/opt/homebrew/bin/brew shellenv)\"\nMISE_BIN=\"${MISE_BIN:-}\"\nif [ -z \"$MISE_BIN\" ]; then\n\tif command -v mise >/dev/null 2>&1; then\n\t\tMISE_BIN=\"$(command -v mise)\"\n\telif [ -x \"$HOME/.local/bin/mise\" ]; then\n\t\tMISE_BIN=\"$HOME/.local/bin/mise\"\n\telif [ -x \"/opt/homebrew/bin/mise\" ]; then\n\t\tMISE_BIN=\"/opt/homebrew/bin/mise\"\n\telif [ -x \"/usr/local/bin/mise\" ]; then\n\t\tMISE_BIN=\"/usr/local/bin/mise\"\n\tfi\nfi\nif [ -z \"$MISE_BIN\" ]; then\n\techo \"mise is required to build HTMLConverter with the pinned Go toolchain\" >&2\n\texit 1\nfi\nexport MISE_TRUSTED_CONFIG_PATHS=\"$PROJECT_DIR${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUSTED_CONFIG_PATHS}\"\nrm -f htmlconverter-amd64.a htmlconverter-arm64.a htmlconverter.a htmlconverter-amd64.h htmlconverter-arm64.h htmlconverter.h\nexport MACOSX_DEPLOYMENT_TARGET=\"${MACOSX_DEPLOYMENT_TARGET:-14.0}\"\nexport CGO_CFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_CFLAGS}\"\nexport CGO_LDFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_LDFLAGS}\"\n# Force rebuilds so cached Go objects use the selected macOS deployment target.\nGOOS=darwin GOARCH=amd64 CGO_ENABLED=1 \"$MISE_BIN\" exec -- go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-amd64.a\nGOOS=darwin GOARCH=arm64 CGO_ENABLED=1 \"$MISE_BIN\" exec -- go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-arm64.a\nlipo -create -output htmlconverter.a htmlconverter-amd64.a htmlconverter-arm64.a\ncp htmlconverter-amd64.h htmlconverter.h\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -851,6 +905,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0DE00000000000000000315 /* CodePreview.swift in Sources */,
+				C0DE00000000000000000303 /* Date.swift in Sources */,
+				C0DE00000000000000000302 /* Log.swift in Sources */,
+				C0DE00000000000000000311 /* PreviewVC.swift in Sources */,
+				C0DE00000000000000000320 /* WebPreviewVC.swift in Sources */,
+				C0DE00000000000000000313 /* MarkdownPreview.swift in Sources */,
+				C0DE00000000000000000321 /* TablePreviewVC.swift in Sources */,
+				C0DE00000000000000000201 /* FileTreeTests.swift in Sources */,
+				C0DE00000000000000000305 /* File.swift in Sources */,
+				C0DE00000000000000000316 /* TSVPreview.swift in Sources */,
+				C0DE00000000000000000318 /* ZIPPreview.swift in Sources */,
+				C0DE00000000000000000304 /* String.swift in Sources */,
+				C0DE00000000000000000312 /* PreviewVCFactory.swift in Sources */,
+				C0DE00000000000000000204 /* PreviewSmokeTests.swift in Sources */,
+				C0DE00000000000000000317 /* TARPreview.swift in Sources */,
+				C0DE00000000000000000306 /* FileTree.swift in Sources */,
+				C0DE00000000000000000301 /* PreviewSupport.swift in Sources */,
+				C0DE00000000000000000310 /* Stylesheet.swift in Sources */,
+				C0DE00000000000000000309 /* Script.swift in Sources */,
+				C0DE00000000000000000205 /* PlistCoverageTests.swift in Sources */,
+				C0DE00000000000000000307 /* HTMLRenderer.swift in Sources */,
+				C0DE00000000000000000202 /* FileTests.swift in Sources */,
+				C0DE00000000000000000322 /* OutlinePreviewVC.swift in Sources */,
+				C0DE00000000000000000319 /* SevenZipPreview.swift in Sources */,
+				C0DE00000000000000000308 /* WebAsset.swift in Sources */,
+				C0DE00000000000000000203 /* PreviewFactoryTests.swift in Sources */,
+				C0DE00000000000000000314 /* JupyterPreview.swift in Sources */,
 				A19F4D4426218B2B008A903C /* PreviewSupportTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -935,9 +1016,13 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/HTMLConverter",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.GlanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Glance.app/Contents/MacOS/Glance";
 			};
@@ -958,9 +1043,13 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/HTMLConverter",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.GlanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Glance.app/Contents/MacOS/Glance";
 			};
@@ -972,7 +1061,7 @@
 				CODE_SIGN_ENTITLEMENTS = QLPlugin/QLPlugin.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -984,10 +1073,9 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.QLPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1003,7 +1091,7 @@
 				CODE_SIGN_ENTITLEMENTS = QLPlugin/QLPlugin.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1015,10 +1103,9 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.QLPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1156,7 +1243,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1165,7 +1252,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1181,7 +1268,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1190,7 +1277,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

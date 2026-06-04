@@ -1,23 +1,23 @@
 import Foundation
 
 class JupyterPreview: Preview {
-	private let chromaStylesheetURL = Bundle.main.url(
+	private let chromaStylesheetURL = WebPreviewVC.resourceBundle.url(
 		forResource: "shared-chroma",
 		withExtension: "css"
 	)
-	private let katexAutoRenderScriptURL = Bundle.main.url(
+	private let katexAutoRenderScriptURL = WebPreviewVC.resourceBundle.url(
 		forResource: "jupyter-katex-auto-render.min",
 		withExtension: "js"
 	)
-	private let katexScriptURL = Bundle.main.url(
+	private let katexScriptURL = WebPreviewVC.resourceBundle.url(
 		forResource: "jupyter-katex.min",
 		withExtension: "js"
 	)
-	private let katexStylesheetURL = Bundle.main.url(
+	private let katexStylesheetURL = WebPreviewVC.resourceBundle.url(
 		forResource: "jupyter-katex.min",
 		withExtension: "css"
 	)
-	private let mainStylesheetURL = Bundle.main.url(
+	private let mainStylesheetURL = WebPreviewVC.resourceBundle.url(
 		forResource: "jupyter-main",
 		withExtension: "css"
 	)

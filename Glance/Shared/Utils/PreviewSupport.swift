@@ -52,7 +52,7 @@ enum PreviewSupport {
 		"scpt": "applescript",
 		"scptd": "applescript",
 		"spf": "xml",
-		"spTheme": "xml",
+		"sptheme": "xml",
 		"storyboard": "xml",
 		"stringsdict": "xml",
 		"sty": "tex",

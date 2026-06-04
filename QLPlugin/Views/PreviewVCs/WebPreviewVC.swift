@@ -6,10 +6,26 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 	private let html: String
 	private let stylesheets: [Stylesheet]
 	private let scripts: [Script]
-	private var previewFileURL: URL?
+	private let previewNonce = UUID().uuidString.replacingOccurrences(of: "-", with: "")
+	private var webView: WKWebView?
+
+	static let resourceBundle: Bundle = {
+		let embeddedPluginBundle = Bundle.main.builtInPlugInsURL
+			.flatMap { Bundle(url: $0.appendingPathComponent("QLPlugin.appex")) }
+		let candidates = [
+			Bundle(for: WebPreviewVC.self),
+			Bundle(identifier: "com.chamburr.Glance.QLPlugin"),
+			embeddedPluginBundle,
+			Bundle.main,
+		].compactMap { $0 }
+
+		return candidates.first {
+			$0.url(forResource: "shared-main", withExtension: "css") != nil
+		} ?? Bundle(for: WebPreviewVC.self)
+	}()
 
 	/// Stylesheet with CSS that applies to all file types
-	private let sharedStylesheetURL = Bundle.main.url(
+	private let sharedStylesheetURL = WebPreviewVC.resourceBundle.url(
 		forResource: "shared-main",
 		withExtension: "css"
 	)
@@ -46,9 +62,8 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 	}
 
 	deinit {
-		if let previewFileURL {
-			try? FileManager.default.removeItem(at: previewFileURL)
-		}
+		webView?.navigationDelegate = nil
+		webView?.stopLoading()
 	}
 
 	override func viewDidLoad() {
@@ -56,55 +71,22 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 		loadPreview()
 	}
 
-	/// Lazily created temp directory for preview HTML files, shared across all instances
-	private static let previewDirectory: URL? = {
-		let tempDir = FileManager.default.temporaryDirectory
-			.appendingPathComponent("glance-preview", isDirectory: true)
-		do {
-			try FileManager.default.createDirectory(
-				at: tempDir,
-				withIntermediateDirectories: true
-			)
-			// Symlink bundle resources once into the temp directory
-			if let resourceURL = Bundle.main.resourceURL {
-				let resourceContents = try FileManager.default.contentsOfDirectory(
-					at: resourceURL,
-					includingPropertiesForKeys: nil
-				)
-				for resourceFile in resourceContents {
-					let destination = tempDir.appendingPathComponent(resourceFile.lastPathComponent)
-					try? FileManager.default.removeItem(at: destination)
-					try FileManager.default.createSymbolicLink(
-						at: destination,
-						withDestinationURL: resourceFile
-					)
-				}
-			}
-			return tempDir
-		} catch {
-			Log.render.error(
-				"Failed to create preview directory: \(error.localizedDescription, privacy: .private)"
-			)
-			return nil
-		}
-	}()
-
 	private func loadPreview() {
 		let webView = WKWebView(frame: view.bounds)
 		webView.autoresizingMask = [.height, .width]
 		webView.underPageBackgroundColor = .clear
 		webView.navigationDelegate = self
+		self.webView = webView
 
-		// Hide the web view until content is fully loaded to prevent flickering
-		webView.alphaValue = 0
 		view.addSubview(webView)
 
 		let linkTags = stylesheets
-			.map { $0.getHTML() }
+			.map { $0.getInlineHTML() }
 			.joined(separator: "\n")
 		let scriptTags = scripts
-			.map { $0.getHTML() }
+			.map { $0.getInlineHTML(nonce: previewNonce) }
 			.joined(separator: "\n")
+		let sanitizedHTML = Self.sanitizePreviewHTML(html)
 
 		let fullHTML = """
 		<!DOCTYPE html>
@@ -115,58 +97,55 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 					name="viewport"
 					content="width=device-width, initial-scale=1, shrink-to-fit=no"
 				/>
+				<meta
+					http-equiv="Content-Security-Policy"
+					content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-\(previewNonce)'; img-src data: file: blob:; font-src data: file:; media-src data: file: blob:; object-src 'none'; base-uri 'none'; form-action 'none'; connect-src 'none'"
+				/>
 				\(linkTags)
 			</head>
 			<body>
-				\(html)
+				\(sanitizedHTML)
 				\(scriptTags)
 			</body>
 		</html>
 		"""
+		webView.loadHTMLString(fullHTML, baseURL: Self.resourceBundle.resourceURL)
+	}
 
-		// WKWebView runs web content in a separate process. Using loadFileURL
-		// with allowingReadAccessTo grants that process explicit file system
-		// access, which is necessary in sandboxed Quick Look extensions.
-		if let previewDir = Self.previewDirectory {
-			do {
-				let tempFile = previewDir.appendingPathComponent("\(UUID().uuidString).html")
-				try fullHTML.write(to: tempFile, atomically: true, encoding: .utf8)
-				previewFileURL = tempFile
-				webView.loadFileURL(tempFile, allowingReadAccessTo: previewDir)
-				return
-			} catch {
-				Log.render.error(
-					"Failed to write preview HTML: \(error.localizedDescription, privacy: .private)"
-				)
-			}
+	private static func sanitizePreviewHTML(_ html: String) -> String {
+		var sanitized = replaceMatches(
+			in: html,
+			pattern: #"<script\b[^>]*>.*?(</script\s*>|$)"#,
+			options: [.caseInsensitive, .dotMatchesLineSeparators]
+		)
+
+		let unsafeAttributePatterns = [
+			#"\s+on[a-zA-Z0-9_-]+\s*=\s*"[^"]*""#,
+			#"\s+on[a-zA-Z0-9_-]+\s*=\s*'[^']*'"#,
+			#"\s+on[a-zA-Z0-9_-]+\s*=\s*[^\s>]+"#,
+			#"\s+(href|src)\s*=\s*"[^"]*javascript:[^"]*""#,
+			#"\s+(href|src)\s*=\s*'[^']*javascript:[^']*'"#,
+			#"\s+(href|src)\s*=\s*[^\s>]*javascript:[^\s>]+"#,
+		]
+
+		for pattern in unsafeAttributePatterns {
+			sanitized = replaceMatches(in: sanitized, pattern: pattern, options: [.caseInsensitive])
 		}
 
-		// Fall back to loadHTMLString with inlined content as last resort
-		let inlineStyleTags = stylesheets
-			.map { $0.getInlineHTML() }
-			.joined(separator: "\n")
-		let inlineScriptTags = scripts
-			.map { $0.getInlineHTML() }
-			.joined(separator: "\n")
+		return sanitized
+	}
 
-		let fallbackHTML = """
-		<!DOCTYPE html>
-		<html>
-			<head>
-				<meta charset="utf-8" />
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1, shrink-to-fit=no"
-				/>
-				\(inlineStyleTags)
-			</head>
-			<body>
-				\(html)
-				\(inlineScriptTags)
-			</body>
-		</html>
-		"""
-		webView.loadHTMLString(fallbackHTML, baseURL: nil)
+	private static func replaceMatches(
+		in html: String,
+		pattern: String,
+		options: NSRegularExpression.Options
+	) -> String {
+		guard let expression = try? NSRegularExpression(pattern: pattern, options: options) else {
+			return html
+		}
+
+		let range = NSRange(html.startIndex..<html.endIndex, in: html)
+		return expression.stringByReplacingMatches(in: html, options: [], range: range, withTemplate: "")
 	}
 
 	// MARK: - WKNavigationDelegate

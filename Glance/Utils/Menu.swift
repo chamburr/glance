@@ -12,8 +12,7 @@ final class SupportedFilesMenuItem: NSMenuItem {
 		super.init(coder: decoder)
 
 		onAction = { _ in
-			let supportedFilesWC = SupportedFilesWC(windowNibName: NSNib.Name("SupportedFilesWC"))
-			supportedFilesWC.showWindow(nil)
+			SupportedFilesWC.shared.showSupportedFilesWindow()
 		}
 	}
 }
