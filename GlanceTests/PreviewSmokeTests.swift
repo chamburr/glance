@@ -71,24 +71,38 @@ final class PreviewSmokeTests: XCTestCase {
 	}
 
 	func testWebPreviewRendersInlineContentAndStyles() throws {
-		let previewVC = WebPreviewVC(html: "<p>Visible content</p>")
+		let previewVC = WebPreviewVC(
+			html: #"<script>document.body.dataset.bad = "script"</script><p onclick="document.body.dataset.bad = 'event'">Visible content</p>"#
+		)
 		previewVC.loadViewIfNeeded()
 
 		let webView = try XCTUnwrap(previewVC.view.subviews.compactMap { $0 as? WKWebView }.first)
 		let expectation = expectation(description: "web preview rendered")
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-			webView.evaluateJavaScript(
-				"document.body.textContent.trim() + '|' + document.styleSheets.length"
+		waitForWebViewToFinishLoading(webView)
+		webView.evaluateJavaScript(
+			"""
+			[
+				document.body.textContent.trim(),
+				document.styleSheets.length,
+				document.querySelector('script') === null,
+				document.querySelector('p').getAttribute('onclick') === null,
+				document.body.dataset.bad || ''
+			].join('|')
+			"""
 			) { result, error in
 				XCTAssertNil(error)
 				let renderedState = result as? String
-				XCTAssertEqual(renderedState?.hasPrefix("Visible content|"), true)
-				let styleSheetCount = Int(renderedState?.split(separator: "|").last ?? "0") ?? 0
+				let renderedStateParts = renderedState?.split(separator: "|", omittingEmptySubsequences: false) ?? []
+				XCTAssertEqual(renderedStateParts.count, 5)
+				XCTAssertEqual(renderedStateParts.first.map(String.init), "Visible content")
+				let styleSheetCount = Int(renderedStateParts.dropFirst().first ?? "0") ?? 0
 				XCTAssertGreaterThan(styleSheetCount, 0)
+				XCTAssertEqual(renderedStateParts.dropFirst(2).first.map(String.init), "true")
+				XCTAssertEqual(renderedStateParts.dropFirst(3).first.map(String.init), "true")
+				XCTAssertEqual(renderedStateParts.dropFirst(4).first.map(String.init), "")
 				expectation.fulfill()
 			}
-		}
 
 		wait(for: [expectation], timeout: 5)
 	}
@@ -166,6 +180,29 @@ final class PreviewSmokeTests: XCTestCase {
 		XCTAssertNotNil(node(named: "folder", in: tgzPreviewVC.rootNodes))
 	}
 
+	func testTARPreviewSkipsLargeFilePayloadsWhileBuildingTree() throws {
+		let tarRoot = temporaryDirectory.appendingPathComponent("large-tar-root", isDirectory: true)
+		try FileManager.default.createDirectory(at: tarRoot, withIntermediateDirectories: true)
+		let largeFileURL = tarRoot.appendingPathComponent("large.bin")
+		XCTAssertTrue(FileManager.default.createFile(atPath: largeFileURL.path, contents: nil))
+		let largeFileHandle = try FileHandle(forWritingTo: largeFileURL)
+		let chunk = Data(repeating: 0, count: 1_000_000)
+		for _ in 0..<12 {
+			try largeFileHandle.write(contentsOf: chunk)
+		}
+		try largeFileHandle.close()
+
+		let tarURL = temporaryDirectory.appendingPathComponent("large.tar")
+		try runProcess("/usr/bin/tar", arguments: ["-cf", tarURL.path, "-C", tarRoot.path, "large.bin"])
+
+		let previewVC = try XCTUnwrap(
+			TARPreview().createPreviewVC(file: File(url: tarURL)) as? OutlinePreviewVC
+		)
+
+		let largeFileNode = try XCTUnwrap(node(named: "large.bin", in: previewVC.rootNodes))
+		XCTAssertEqual(largeFileNode.size, 12_000_000)
+	}
+
 	func testArchivePreviewsRejectCorruptedTarAndSevenZipFiles() throws {
 		let tarURL = try writeFile(named: "corrupted.tar", contents: "not-a-tar")
 		let sevenZipURL = try writeFile(named: "corrupted.7z", contents: "not-a-sevenzip")
@@ -185,7 +222,26 @@ final class PreviewSmokeTests: XCTestCase {
 	}
 
 	private func node(named name: String, in nodes: [FileTreeNode]) -> FileTreeNode? {
-		nodes.first { $0.name == name }
+		for node in nodes {
+			if node.name == name {
+				return node
+			}
+			if let childNode = self.node(named: name, in: node.childrenList) {
+				return childNode
+			}
+		}
+		return nil
+	}
+
+	private func waitForWebViewToFinishLoading(_ webView: WKWebView, timeout: TimeInterval = 5) {
+		guard webView.isLoading else {
+			return
+		}
+
+		let loadExpectation = keyValueObservingExpectation(for: webView, keyPath: "loading") { object, _ in
+			(object as? WKWebView)?.isLoading == false
+		}
+		wait(for: [loadExpectation], timeout: timeout)
 	}
 
 	private func runProcess(_ executable: String, arguments: [String], in directory: URL? = nil) throws {

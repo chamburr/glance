@@ -48,7 +48,7 @@ final class PlistCoverageTests: XCTestCase {
 			let attributes = extensionDictionary["NSExtensionAttributes"] as? [String: Any],
 			let supportedTypes = attributes["QLSupportedContentTypes"] as? [String]
 		else {
-			return XCTFailAndReturn("Could not read QLSupportedContentTypes from \(plistURL.path)")
+			throw PlistCoverageError.missingSupportedContentTypes(plistURL)
 		}
 
 		return supportedTypes
@@ -61,9 +61,13 @@ final class PlistCoverageTests: XCTestCase {
 	}
 }
 
-private func XCTFailAndReturn<T>(_ message: String, file: StaticString = #filePath, line: UInt = #line)
-	-> T
-{
-	XCTFail(message, file: file, line: line)
-	fatalError(message)
+private enum PlistCoverageError: LocalizedError {
+	case missingSupportedContentTypes(URL)
+
+	var errorDescription: String? {
+		switch self {
+			case let .missingSupportedContentTypes(plistURL):
+				"Could not read QLSupportedContentTypes from \(plistURL.path)"
+		}
+	}
 }

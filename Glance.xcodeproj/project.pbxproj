@@ -883,6 +883,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(PROJECT_DIR)/mise.toml",
 				"$(PROJECT_DIR)/HTMLConverter/go.mod",
 				"$(PROJECT_DIR)/HTMLConverter/go.sum",
 				"$(PROJECT_DIR)/HTMLConverter/htmlconverter.go",
@@ -895,7 +896,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$PROJECT_DIR/HTMLConverter\"\nset -e\n[ ! -d /opt/homebrew ] || eval \"$(/opt/homebrew/bin/brew shellenv)\"\nrm -f htmlconverter-amd64.a htmlconverter-arm64.a htmlconverter.a htmlconverter-amd64.h htmlconverter-arm64.h htmlconverter.h\nexport MACOSX_DEPLOYMENT_TARGET=\"${MACOSX_DEPLOYMENT_TARGET:-14.0}\"\nexport CGO_CFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_CFLAGS}\"\nexport CGO_LDFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_LDFLAGS}\"\n# Force rebuilds so cached Go objects use the selected macOS deployment target.\nGOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-amd64.a\nGOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-arm64.a\nlipo -create -output htmlconverter.a htmlconverter-amd64.a htmlconverter-arm64.a\ncp htmlconverter-amd64.h htmlconverter.h\n";
+			shellScript = "cd \"$PROJECT_DIR/HTMLConverter\"\nset -e\n[ ! -d /opt/homebrew ] || eval \"$(/opt/homebrew/bin/brew shellenv)\"\nMISE_BIN=\"${MISE_BIN:-}\"\nif [ -z \"$MISE_BIN\" ]; then\n\tif command -v mise >/dev/null 2>&1; then\n\t\tMISE_BIN=\"$(command -v mise)\"\n\telif [ -x \"$HOME/.local/bin/mise\" ]; then\n\t\tMISE_BIN=\"$HOME/.local/bin/mise\"\n\telif [ -x \"/opt/homebrew/bin/mise\" ]; then\n\t\tMISE_BIN=\"/opt/homebrew/bin/mise\"\n\telif [ -x \"/usr/local/bin/mise\" ]; then\n\t\tMISE_BIN=\"/usr/local/bin/mise\"\n\tfi\nfi\nif [ -z \"$MISE_BIN\" ]; then\n\techo \"mise is required to build HTMLConverter with the pinned Go toolchain\" >&2\n\texit 1\nfi\nexport MISE_TRUSTED_CONFIG_PATHS=\"$PROJECT_DIR${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUSTED_CONFIG_PATHS}\"\nrm -f htmlconverter-amd64.a htmlconverter-arm64.a htmlconverter.a htmlconverter-amd64.h htmlconverter-arm64.h htmlconverter.h\nexport MACOSX_DEPLOYMENT_TARGET=\"${MACOSX_DEPLOYMENT_TARGET:-14.0}\"\nexport CGO_CFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_CFLAGS}\"\nexport CGO_LDFLAGS=\"-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} ${CGO_LDFLAGS}\"\n# Force rebuilds so cached Go objects use the selected macOS deployment target.\nGOOS=darwin GOARCH=amd64 CGO_ENABLED=1 \"$MISE_BIN\" exec -- go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-amd64.a\nGOOS=darwin GOARCH=arm64 CGO_ENABLED=1 \"$MISE_BIN\" exec -- go build -a --buildmode=c-archive -ldflags \"-s -w\" -o ./htmlconverter-arm64.a\nlipo -create -output htmlconverter.a htmlconverter-amd64.a htmlconverter-arm64.a\ncp htmlconverter-amd64.h htmlconverter.h\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1016,7 +1017,6 @@
 					"@loader_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.GlanceTests;
@@ -1044,7 +1044,6 @@
 					"@loader_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.GlanceTests;
@@ -1074,7 +1073,6 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
 				MARKETING_VERSION = 1.5.5;
@@ -1105,7 +1103,6 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
 				MARKETING_VERSION = 1.5.5;

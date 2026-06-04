@@ -21,7 +21,7 @@ func minifyHTML(htmlString string) string {
 
 	minified, err := minifier.String("text/html", htmlString)
 	if err != nil {
-		panic(fmt.Sprintf("Could not minify HTML: %s", err))
+		panic(fmt.Sprintf("Could not minify HTML: %v", err))
 	}
 
 	return minified

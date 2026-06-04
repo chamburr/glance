@@ -6,6 +6,7 @@ swiftlint = "0.63.3"
 [tasks.build]
 description = "Build the application incrementally in the build directory"
 run = '''
+set -e
 APP_NAME="${APP_NAME:-Glance}"
 echo "Building Quick Look extension..."
 xcodebuild -scheme "$APP_NAME" -configuration Release -derivedDataPath build build
@@ -16,6 +17,7 @@ echo "Build complete"
 description = "Install the application into INSTALL_PATH, /Applications by default"
 depends = ["build"]
 run = '''
+set -e
 APP_NAME="${APP_NAME:-Glance}"
 INSTALL_PATH="${INSTALL_PATH:-/Applications}"
 echo "Installing to $INSTALL_PATH..."
@@ -27,6 +29,7 @@ echo "Installed to $INSTALL_PATH/$APP_NAME.app"
 [tasks.register]
 description = "Register the Quick Look extension with pluginkit"
 run = '''
+set -e
 APP_NAME="${APP_NAME:-Glance}"
 INSTALL_PATH="${INSTALL_PATH:-/Applications}"
 echo "Registering extension with system..."
@@ -37,6 +40,7 @@ echo "Registration complete"
 [tasks.reset]
 description = "Reset Quick Look"
 run = '''
+set -e
 echo "Resetting Quick Look..."
 qlmanage -r
 qlmanage -r cache
@@ -48,6 +52,7 @@ echo "Quick Look reset"
 [tasks.check]
 description = "Check whether the Quick Look extension is installed"
 run = '''
+set -e
 APP_NAME="${APP_NAME:-Glance}"
 INSTALL_PATH="${INSTALL_PATH:-/Applications}"
 echo "Checking extension status..."
@@ -63,6 +68,7 @@ echo ""
 [tasks.clean]
 description = "Clean build artifacts"
 run = '''
+set -e
 APP_NAME="${APP_NAME:-Glance}"
 echo "Cleaning build artifacts..."
 rm -rf build
@@ -79,6 +85,7 @@ echo "Clean complete"
 [tasks.uninstall]
 description = "Uninstall the application from INSTALL_PATH, /Applications by default"
 run = '''
+set -e
 APP_NAME="${APP_NAME:-Glance}"
 INSTALL_PATH="${INSTALL_PATH:-/Applications}"
 echo "Uninstalling..."
@@ -92,6 +99,7 @@ echo "Uninstalled"
 [tasks.all]
 description = "Build, install, register, and reset Quick Look"
 run = '''
+set -e
 mise run install
 mise run register
 mise run reset
@@ -104,6 +112,7 @@ run = "cd HTMLConverter && go test ./..."
 [tasks."test:xcode"]
 description = "Run Xcode tests"
 run = '''
+set -e
 APP_NAME="${APP_NAME:-Glance}"
 xcodebuild test -scheme "$APP_NAME" -configuration Debug -derivedDataPath build -quiet
 '''
@@ -111,6 +120,7 @@ xcodebuild test -scheme "$APP_NAME" -configuration Debug -derivedDataPath build 
 [tasks.test]
 description = "Run all tests"
 run = '''
+set -e
 mise run test:go
 mise run test:xcode
 '''
@@ -118,6 +128,7 @@ mise run test:xcode
 [tasks.verify]
 description = "Run tests and build the release app from a clean build directory"
 run = '''
+set -e
 mise run test
 mise run clean
 mise run build

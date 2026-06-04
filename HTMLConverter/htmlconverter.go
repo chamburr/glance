@@ -72,13 +72,13 @@ func convertCodeToHTML(source *C.char, lexer *C.char) *C.char {
 
 	iterator, err := l.Tokenise(nil, sourceString)
 	if err != nil {
-		errMessage := fmt.Sprintf("error: Could not render source code (tokenization error): %s", err)
+		errMessage := fmt.Sprintf("error: Could not render source code (tokenization error): %v", err)
 		return convertToCString(errMessage)
 	}
 
 	err = formatter.Format(htmlBuffer, styles.GitHub, iterator)
 	if err != nil {
-		errMessage := fmt.Sprintf("error: Could not render source code (formatting error): %s", err)
+		errMessage := fmt.Sprintf("error: Could not render source code (formatting error): %v", err)
 		return convertToCString(errMessage)
 	}
 
@@ -101,7 +101,7 @@ func convertMarkdownToHTML(source *C.char) *C.char {
 	var htmlBuffer bytes.Buffer
 	err := markdownParser.Convert([]byte(sourceString), &htmlBuffer)
 	if err != nil {
-		errMessage := fmt.Sprintf("error: Could not convert Markdown to HTML: %s", err)
+		errMessage := fmt.Sprintf("error: Could not convert Markdown to HTML: %v", err)
 		return convertToCString(errMessage)
 	}
 	// goldmark does not render raw HTML or potentially-dangerous URLs, so HTML should be safe from
@@ -118,7 +118,7 @@ func convertNotebookToHTML(source *C.char) *C.char {
 	html := new(bytes.Buffer)
 	err := nbtohtml.ConvertString(html, sourceString)
 	if err != nil {
-		errMessage := fmt.Sprintf("error: Could not convert Notebook to HTML: %s", err)
+		errMessage := fmt.Sprintf("error: Could not convert Notebook to HTML: %v", err)
 		return convertToCString(errMessage)
 	}
 	htmlString := html.String()

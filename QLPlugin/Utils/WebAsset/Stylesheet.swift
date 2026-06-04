@@ -12,7 +12,14 @@ final class Stylesheet: WebAsset {
 			case let .content(content):
 				return content
 			case let .url(url):
-				return (try? String(contentsOf: url, encoding: .utf8)) ?? ""
+				do {
+					return try String(contentsOf: url, encoding: .utf8)
+				} catch {
+					Log.render.error(
+						"Could not read stylesheet asset \(url.path, privacy: .private): \(error.localizedDescription, privacy: .private)"
+					)
+					return ""
+				}
 		}
 	}()
 

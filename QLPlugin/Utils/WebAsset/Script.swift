@@ -12,7 +12,14 @@ final class Script: WebAsset {
 			case let .content(content):
 				return content
 			case let .url(url):
-				return (try? String(contentsOf: url, encoding: .utf8)) ?? ""
+				do {
+					return try String(contentsOf: url, encoding: .utf8)
+				} catch {
+					Log.render.error(
+						"Could not read script asset \(url.path, privacy: .private): \(error.localizedDescription, privacy: .private)"
+					)
+					return ""
+				}
 		}
 	}()
 
@@ -25,6 +32,11 @@ final class Script: WebAsset {
 	}
 
 	func getInlineHTML() -> String {
-		"<script>\(inlineContent)</script>"
+		getInlineHTML(nonce: nil)
+	}
+
+	func getInlineHTML(nonce: String?) -> String {
+		let nonceAttribute = nonce.map { " nonce=\"\($0)\"" } ?? ""
+		return "<script\(nonceAttribute)>\(inlineContent)</script>"
 	}
 }

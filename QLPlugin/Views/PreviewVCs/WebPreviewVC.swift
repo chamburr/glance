@@ -6,6 +6,7 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 	private let html: String
 	private let stylesheets: [Stylesheet]
 	private let scripts: [Script]
+	private let previewNonce = UUID().uuidString.replacingOccurrences(of: "-", with: "")
 	private var webView: WKWebView?
 
 	static let resourceBundle: Bundle = {
@@ -83,8 +84,9 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 			.map { $0.getInlineHTML() }
 			.joined(separator: "\n")
 		let scriptTags = scripts
-			.map { $0.getInlineHTML() }
+			.map { $0.getInlineHTML(nonce: previewNonce) }
 			.joined(separator: "\n")
+		let sanitizedHTML = Self.sanitizePreviewHTML(html)
 
 		let fullHTML = """
 		<!DOCTYPE html>
@@ -97,17 +99,53 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 				/>
 				<meta
 					http-equiv="Content-Security-Policy"
-					content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data: file: blob:; font-src data: file:; media-src data: file: blob:; object-src 'none'; base-uri 'none'; form-action 'none'; connect-src 'none'"
+					content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-\(previewNonce)'; img-src data: file: blob:; font-src data: file:; media-src data: file: blob:; object-src 'none'; base-uri 'none'; form-action 'none'; connect-src 'none'"
 				/>
 				\(linkTags)
 			</head>
 			<body>
-				\(html)
+				\(sanitizedHTML)
 				\(scriptTags)
 			</body>
 		</html>
 		"""
 		webView.loadHTMLString(fullHTML, baseURL: Self.resourceBundle.resourceURL)
+	}
+
+	private static func sanitizePreviewHTML(_ html: String) -> String {
+		var sanitized = replaceMatches(
+			in: html,
+			pattern: #"<script\b[^>]*>.*?(</script\s*>|$)"#,
+			options: [.caseInsensitive, .dotMatchesLineSeparators]
+		)
+
+		let unsafeAttributePatterns = [
+			#"\s+on[a-zA-Z0-9_-]+\s*=\s*"[^"]*""#,
+			#"\s+on[a-zA-Z0-9_-]+\s*=\s*'[^']*'"#,
+			#"\s+on[a-zA-Z0-9_-]+\s*=\s*[^\s>]+"#,
+			#"\s+(href|src)\s*=\s*"[^"]*javascript:[^"]*""#,
+			#"\s+(href|src)\s*=\s*'[^']*javascript:[^']*'"#,
+			#"\s+(href|src)\s*=\s*[^\s>]*javascript:[^\s>]+"#,
+		]
+
+		for pattern in unsafeAttributePatterns {
+			sanitized = replaceMatches(in: sanitized, pattern: pattern, options: [.caseInsensitive])
+		}
+
+		return sanitized
+	}
+
+	private static func replaceMatches(
+		in html: String,
+		pattern: String,
+		options: NSRegularExpression.Options
+	) -> String {
+		guard let expression = try? NSRegularExpression(pattern: pattern, options: options) else {
+			return html
+		}
+
+		let range = NSRange(html.startIndex..<html.endIndex, in: html)
+		return expression.stringByReplacingMatches(in: html, options: [], range: range, withTemplate: "")
 	}
 
 	// MARK: - WKNavigationDelegate
