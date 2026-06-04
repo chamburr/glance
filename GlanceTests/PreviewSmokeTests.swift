@@ -70,6 +70,29 @@ final class PreviewSmokeTests: XCTestCase {
 		XCTAssertEqual(webView.alphaValue, 1)
 	}
 
+	func testWebPreviewRendersInlineContentAndStyles() throws {
+		let previewVC = WebPreviewVC(html: "<p>Visible content</p>")
+		previewVC.loadViewIfNeeded()
+
+		let webView = try XCTUnwrap(previewVC.view.subviews.compactMap { $0 as? WKWebView }.first)
+		let expectation = expectation(description: "web preview rendered")
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+			webView.evaluateJavaScript(
+				"document.body.textContent.trim() + '|' + document.styleSheets.length"
+			) { result, error in
+				XCTAssertNil(error)
+				let renderedState = result as? String
+				XCTAssertEqual(renderedState?.hasPrefix("Visible content|"), true)
+				let styleSheetCount = Int(renderedState?.split(separator: "|").last ?? "0") ?? 0
+				XCTAssertGreaterThan(styleSheetCount, 0)
+				expectation.fulfill()
+			}
+		}
+
+		wait(for: [expectation], timeout: 5)
+	}
+
 	func testTSVPreviewHandlesQuotedTabsUnicodeAndBlankCells() throws {
 		let tsv = """
 		name\tvalue

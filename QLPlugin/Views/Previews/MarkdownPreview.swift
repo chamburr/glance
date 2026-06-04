@@ -1,11 +1,11 @@
 import Foundation
 
 class MarkdownPreview: Preview {
-	private let chromaStylesheetURL = Bundle.main.url(
+	private let chromaStylesheetURL = WebPreviewVC.resourceBundle.url(
 		forResource: "shared-chroma",
 		withExtension: "css"
 	)
-	private let mainStylesheetURL = Bundle.main.url(
+	private let mainStylesheetURL = WebPreviewVC.resourceBundle.url(
 		forResource: "markdown-main",
 		withExtension: "css"
 	)

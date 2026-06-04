@@ -24,15 +24,6 @@ final class Script: WebAsset {
 		source = .url(url)
 	}
 
-	func getHTML() -> String {
-		switch source {
-			case let .content(content):
-				return "<script>\(content)</script>"
-			case let .url(url):
-				return "<script src=\"\(url.lastPathComponent)\"></script>"
-		}
-	}
-
 	func getInlineHTML() -> String {
 		"<script>\(inlineContent)</script>"
 	}

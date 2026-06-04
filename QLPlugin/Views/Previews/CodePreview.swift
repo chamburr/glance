@@ -1,7 +1,7 @@
 import Foundation
 
 class CodePreview: Preview {
-	private let chromaStylesheetURL = Bundle.main.url(
+	private let chromaStylesheetURL = WebPreviewVC.resourceBundle.url(
 		forResource: "shared-chroma",
 		withExtension: "css"
 	)

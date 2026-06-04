@@ -24,15 +24,6 @@ final class Stylesheet: WebAsset {
 		source = .url(url)
 	}
 
-	func getHTML() -> String {
-		switch source {
-			case let .content(content):
-				return "<style>\(content)</style>"
-			case let .url(url):
-				return "<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url.lastPathComponent)\" />"
-		}
-	}
-
 	func getInlineHTML() -> String {
 		"<style>\(inlineContent)</style>"
 	}
