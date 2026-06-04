@@ -418,7 +418,7 @@ private struct TarHeader {
 
 		let storedChecksum = try data.tarOctalInteger(in: 148..<156)
 		let computedChecksum = data.tarChecksum()
-		guard storedChecksum == 0 || storedChecksum == computedChecksum else {
+		guard storedChecksum == computedChecksum else {
 			throw TARPreviewError.invalidHeader
 		}
 
@@ -519,18 +519,18 @@ private struct TarPAXHeaders {
 	}
 }
 
-private extension Data {
-	var isZeroTarBlock: Bool {
+extension Data {
+	fileprivate var isZeroTarBlock: Bool {
 		count == 512 && allSatisfy { $0 == 0 }
 	}
 
-	func tarString(in range: Range<Int>) -> String {
+	fileprivate func tarString(in range: Range<Int>) -> String {
 		let bytes = Array(self[range])
 		let endIndex = bytes.firstIndex(of: 0) ?? bytes.count
 		return String(decoding: bytes[..<endIndex], as: UTF8.self)
 	}
 
-	func tarOctalInteger(in range: Range<Int>) throws -> Int64 {
+	fileprivate func tarOctalInteger(in range: Range<Int>) throws -> Int64 {
 		let bytes = Array(self[range])
 		if let firstByte = bytes.first, firstByte & 0x80 != 0 {
 			return try tarBase256Integer(bytes: bytes)
@@ -549,7 +549,7 @@ private extension Data {
 		return value
 	}
 
-	func tarChecksum() -> Int64 {
+	fileprivate func tarChecksum() -> Int64 {
 		enumerated().reduce(0) { partialResult, byte in
 			partialResult + Int64(byte.offset >= 148 && byte.offset < 156 ? UInt8(ascii: " ") : byte.element)
 		}
