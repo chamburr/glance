@@ -86,9 +86,9 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 				for resourceFile in resourceContents {
 					let destination = tempDir.appendingPathComponent(resourceFile.lastPathComponent)
 					try? fileManager.removeItem(at: destination)
-					try fileManager.createSymbolicLink(
-						at: destination,
-						withDestinationURL: resourceFile
+					try fileManager.copyItem(
+						at: resourceFile,
+						to: destination
 					)
 				}
 			}
@@ -108,8 +108,6 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 		webView.navigationDelegate = self
 		self.webView = webView
 
-		// Hide the web view until content is fully loaded to prevent flickering
-		webView.alphaValue = 0
 		view.addSubview(webView)
 
 		let linkTags = stylesheets

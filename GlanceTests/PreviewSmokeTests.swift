@@ -1,4 +1,5 @@
 import Foundation
+import WebKit
 import XCTest
 
 final class PreviewSmokeTests: XCTestCase {
@@ -57,6 +58,16 @@ final class PreviewSmokeTests: XCTestCase {
 
 		XCTAssertTrue(previewVC is WebPreviewVC)
 		XCTAssertThrowsError(try JupyterPreview().createPreviewVC(file: File(url: invalidURL)))
+	}
+
+	func testWebPreviewViewIsVisibleImmediatelyAfterLoading() throws {
+		let previewVC = WebPreviewVC(html: "<p>Visible content</p>")
+
+		previewVC.loadViewIfNeeded()
+
+		let webView = try XCTUnwrap(previewVC.view.subviews.compactMap { $0 as? WKWebView }.first)
+		XCTAssertFalse(webView.isHidden)
+		XCTAssertEqual(webView.alphaValue, 1)
 	}
 
 	func testTSVPreviewHandlesQuotedTabsUnicodeAndBlankCells() throws {
