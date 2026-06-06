@@ -7,6 +7,20 @@
 	<p><img src="./AppStore/Listing/Screenshots/Screenshot1.jpg" alt=""></p>
 </div>
 
+> [!NOTE]
+> This repository is a fork of [chamburr/glance](https://github.com/chamburr/glance) with additional maintenance and distribution work.
+> Compared with upstream, this fork includes:
+>
+> - macOS 14+ modernization
+> - newer Quick Look and WebKit fixes
+> - `.toml`, `.ttml`, and `.elrc` source-code previews
+> - expanded archive support
+> - safer bundled WebKit rendering
+> - a `mise` build/test workflow
+> - expanded tests
+> - downloadable unsigned DMGs from this fork's GitHub Releases
+> Release DMGs are unsigned and unnotarized, so users may still need the quarantine-removal command shown in the installation steps.
+
 ## About
 
 This is a fork of the [original Glance plugin](https://github.com/samuelmeuli/glance). Unfortunately, the owner seems to have discarded the project a while ago, and the app is largely broken on newer macOS systems. The aim of this fork is to revive the project and maintain it for future updates. Current builds target macOS 14 or newer and include fixes for newer macOS releases.
@@ -17,7 +31,7 @@ You can install Glance through Homebrew using `brew install --no-quarantine glan
 
 Alternatively, you can install Glance directly. The installation is slightly complex as the package is not notarized. The steps are as follows:
 
-1. Download the `.dmg` file from [releases](https://github.com/chamburr/glance/releases), open the file and drag Glance.app to Applications.
+1. Download the `.dmg` file from [releases](https://github.com/ranokay/glance/releases), open the file and drag Glance.app to Applications.
 2. Open a terminal and run the following command.
 	```sh
 	xattr -rd com.apple.quarantine /Applications/Glance.app
@@ -26,7 +40,7 @@ Alternatively, you can install Glance directly. The installation is slightly com
 
 ## Supported file types
 
-- **Source code** (with [Chroma](https://github.com/alecthomas/chroma) syntax highlighting): `.cpp`, `.js`, `.json`, `.py`, `.swift`, `.toml`, `.ttml`, `.yml` and many more
+- **Source code** (with [Chroma](https://github.com/alecthomas/chroma) syntax highlighting): `.cpp`, `.elrc`, `.js`, `.json`, `.py`, `.swift`, `.toml`, `.ttml`, `.yml` and many more
 
   <p><img src="./AppStore/Assets/Screenshots/ScreenshotSourceCode.png" alt="" width="600"></p>
 

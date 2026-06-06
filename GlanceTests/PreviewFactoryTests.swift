@@ -4,6 +4,8 @@ final class PreviewFactoryTests: XCTestCase {
 	func testFactoryReturnsPreviewForEveryPreviewFamilyAlias() {
 		let cases: [(path: String, expected: Preview.Type?)] = [
 			("/tmp/source.swift", CodePreview.self),
+			("/tmp/.elrc", CodePreview.self),
+			("/tmp/config.elrc", CodePreview.self),
 			("/tmp/readme.md", MarkdownPreview.self),
 			("/tmp/readme.markdown", MarkdownPreview.self),
 			("/tmp/readme.mdown", MarkdownPreview.self),

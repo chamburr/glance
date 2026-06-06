@@ -22,6 +22,8 @@ final class PreviewSupportTests: XCTestCase {
 			("/tmp/archive.war", .zip),
 			("/tmp/archive.zip", .zip),
 			("/tmp/archive.gz", .unsupported),
+			("/tmp/.elrc", .code),
+			("/tmp/config.elrc", .code),
 			("/tmp/source.swift", .code),
 		]
 
@@ -53,6 +55,7 @@ final class PreviewSupportTests: XCTestCase {
 	func testCodeLexerUsesDotfileMappings() {
 		let cases = [
 			(".bashrc", ".bashrc"),
+			(".elrc", "elisp"),
 			(".vimrc", ".vimrc"),
 			(".zprofile", "zsh"),
 			(".zshrc", ".zshrc"),
@@ -84,6 +87,7 @@ final class PreviewSupportTests: XCTestCase {
 			("cjs", "js"),
 			("cls", "tex"),
 			("csproj", "xml"),
+			("elrc", "elisp"),
 			("entitlements", "xml"),
 			("hbs", "handlebars"),
 			("iml", "xml"),

@@ -15,6 +15,7 @@ enum PreviewSupport {
 	private static let dotfileLexers = [
 		// Files with syntax supported by Chroma
 		".bashrc": ".bashrc",
+		".elrc": "elisp",
 		".vimrc": ".vimrc",
 		".zprofile": "zsh",
 		".zshrc": ".zshrc",
@@ -42,6 +43,7 @@ enum PreviewSupport {
 		"cjs": "js",
 		"cls": "tex",
 		"csproj": "xml",
+		"elrc": "elisp",
 		"entitlements": "xml",
 		"hbs": "handlebars",
 		"iml": "xml",

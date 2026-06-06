@@ -42,7 +42,7 @@
                                             </attributes>
                                         </fragment>
                                         <fragment>
-                                            <string key="content"> .cpp, .js, .json, .py, .swift, .toml, .ttml, .yml and many more
+                                            <string key="content"> .cpp, .elrc, .js, .json, .py, .swift, .toml, .ttml, .yml and many more
 
 </string>
                                             <attributes>
@@ -78,7 +78,7 @@
                                         </fragment>
                                         <fragment>
                                             <string key="content">
-.7z, .tar, .tar.gz, .zip
+.7z, .ear, .jar, .tar, .tar.gz, .tgz, .war, .zip
 
 </string>
                                             <attributes>

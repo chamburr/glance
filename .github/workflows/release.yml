@@ -1,0 +1,107 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish DMG
+    runs-on: macos-15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install mise
+        run: |
+          set -euo pipefail
+          brew install mise
+          mise --version
+
+      - name: Install pinned tools
+        env:
+          MISE_YES: "1"
+        run: |
+          set -euo pipefail
+          mise trust mise.toml
+          mise install
+
+      - name: Run tests
+        run: |
+          set -euo pipefail
+          mise run test
+
+      - name: Build release app
+        run: |
+          set -euo pipefail
+          mise run clean
+          mise run build
+
+      - name: Package DMG
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          VERSION="${TAG_NAME#v}"
+          APP_NAME="Glance"
+          APP_PATH="build/Build/Products/Release/${APP_NAME}.app"
+          DIST_DIR="dist"
+          STAGING_DIR="${DIST_DIR}/dmg-root"
+          DMG_PATH="${DIST_DIR}/${APP_NAME}-${VERSION}.dmg"
+
+          test -d "$APP_PATH"
+
+          rm -rf "$DIST_DIR"
+          mkdir -p "$STAGING_DIR"
+          cp -R "$APP_PATH" "$STAGING_DIR/"
+          ln -s /Applications "$STAGING_DIR/Applications"
+
+          hdiutil create \
+            -volname "$APP_NAME" \
+            -srcfolder "$STAGING_DIR" \
+            -ov \
+            -format UDZO \
+            "$DMG_PATH"
+
+          shasum -a 256 "$DMG_PATH" | tee "$DMG_PATH.sha256"
+
+      - name: Verify DMG contents
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          VERSION="${TAG_NAME#v}"
+          DMG_PATH="dist/Glance-${VERSION}.dmg"
+          MOUNT_DIR="$(mktemp -d)"
+
+          hdiutil attach "$DMG_PATH" -mountpoint "$MOUNT_DIR" -nobrowse -quiet
+          trap 'hdiutil detach "$MOUNT_DIR" -quiet || true; rmdir "$MOUNT_DIR" || true' EXIT
+
+          test -d "$MOUNT_DIR/Glance.app"
+          test -d "$MOUNT_DIR/Glance.app/Contents/PlugIns/QLPlugin.appex"
+
+          hdiutil detach "$MOUNT_DIR" -quiet
+          trap - EXIT
+          rmdir "$MOUNT_DIR"
+
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          VERSION="${TAG_NAME#v}"
+          gh release create "$TAG_NAME" \
+            "dist/Glance-${VERSION}.dmg" \
+            "dist/Glance-${VERSION}.dmg.sha256" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Glance ${VERSION}" \
+            --notes "Unsigned and unnotarized macOS DMG for Glance ${VERSION}. You may need to remove quarantine after installing."
