@@ -145,6 +145,8 @@
 		7EB36488244B65D900D7F96F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB36487244B65D900D7F96F /* String.swift */; };
 		7EB3648A244B665700D7F96F /* ZIPPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB36489244B665700D7F96F /* ZIPPreview.swift */; };
 		7EB7491924228549007265A4 /* JupyterPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB7491824228549007265A4 /* JupyterPreview.swift */; };
+		B0DAFC86DF163898CC16D716 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CBD1B8E3D86A3D965DD6D0 /* AppSettings.swift */; };
+		E978FD0ADCD5765A54672E67 /* SettingsWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048855925A27D336EC30FC7 /* SettingsWC.swift */; };
 		7ECC8CF2240CB4CC000D6970 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECC8CF1240CB4CC000D6970 /* AppDelegate.swift */; };
 		7ECC8CF4240CB4CC000D6970 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECC8CF3240CB4CC000D6970 /* ViewController.swift */; };
 		7ECC8CF6240CB4CC000D6970 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ECC8CF5240CB4CC000D6970 /* Assets.xcassets */; };
@@ -311,6 +313,8 @@
 		7EB36487244B65D900D7F96F /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		7EB36489244B665700D7F96F /* ZIPPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZIPPreview.swift; sourceTree = "<group>"; };
 		7EB7491824228549007265A4 /* JupyterPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JupyterPreview.swift; sourceTree = "<group>"; };
+		77CBD1B8E3D86A3D965DD6D0 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		3048855925A27D336EC30FC7 /* SettingsWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWC.swift; sourceTree = "<group>"; };
 		7ECC8CEE240CB4CC000D6970 /* Glance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ECC8CF1240CB4CC000D6970 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ECC8CF3240CB4CC000D6970 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -649,9 +653,11 @@
 				7ED140632450C4A7007A7C70 /* Credits.rtf */,
 				7E3DF744242CBE7F00DE7CD6 /* Main.storyboard */,
 				7ECC8CF1240CB4CC000D6970 /* AppDelegate.swift */,
+				77CBD1B8E3D86A3D965DD6D0 /* AppSettings.swift */,
 				7ECC8CF3240CB4CC000D6970 /* ViewController.swift */,
 				7ED140602450B36D007A7C70 /* SupportedFilesWC.xib */,
 				7ED140652450C671007A7C70 /* SupportedFilesWC.swift */,
+				3048855925A27D336EC30FC7 /* SettingsWC.swift */,
 				7EE0465B246EB5DE006172D9 /* AppIcon.swift */,
 			);
 			path = Glance;
@@ -974,6 +980,7 @@
 				7EE0465C246EB5DE006172D9 /* AppIcon.swift in Sources */,
 				7E458AF0243944810091BD0F /* URL.swift in Sources */,
 				7ECC8CF4240CB4CC000D6970 /* ViewController.swift in Sources */,
+				B0DAFC86DF163898CC16D716 /* AppSettings.swift in Sources */,
 				7EE10F85244F696F007214D8 /* Log.swift in Sources */,
 				7E458AF52439481F0091BD0F /* Menu.swift in Sources */,
 				7E21C88D2438CAA500818EB2 /* Stats.swift in Sources */,
@@ -981,6 +988,7 @@
 				7ECC8CF2240CB4CC000D6970 /* AppDelegate.swift in Sources */,
 				7E458AF22439474E0091BD0F /* NSMenuItem.swift in Sources */,
 				7ED140662450C671007A7C70 /* SupportedFilesWC.swift in Sources */,
+				E978FD0ADCD5765A54672E67 /* SettingsWC.swift in Sources */,
 				7E21C89124390E3100818EB2 /* Date.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1061,7 +1069,7 @@
 				CODE_SIGN_ENTITLEMENTS = QLPlugin/QLPlugin.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1075,7 +1083,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.QLPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1091,7 +1099,7 @@
 				CODE_SIGN_ENTITLEMENTS = QLPlugin/QLPlugin.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1105,7 +1113,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.QLPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1243,7 +1251,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1252,7 +1260,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1268,7 +1276,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1277,7 +1285,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

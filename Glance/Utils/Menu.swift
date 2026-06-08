@@ -18,6 +18,17 @@ final class SupportedFilesMenuItem: NSMenuItem {
 }
 
 /// Used as a subclass for the menu item in Interface Builder
+final class SettingsMenuItem: NSMenuItem {
+	required init(coder decoder: NSCoder) {
+		super.init(coder: decoder)
+
+		onAction = { _ in
+			SettingsWC.shared.showSettingsWindow()
+		}
+	}
+}
+
+/// Used as a subclass for the menu item in Interface Builder
 final class FeedbackMenuItem: NSMenuItem {
 	required init(coder decoder: NSCoder) {
 		super.init(coder: decoder)
