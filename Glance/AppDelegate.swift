@@ -7,6 +7,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func applicationDidFinishLaunching(_: Notification) {
 		setUpStatusItem()
+		cacheMainWindowController()
+		AppSettings.applyDockIconPreference()
 	}
 
 	func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool { false }
@@ -39,6 +41,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		menu.addItem(NSMenuItem(
 			title: "Open GitHub Repository",
 			action: #selector(openGitHubRepository),
+			keyEquivalent: ""
+		))
+		menu.addItem(NSMenuItem(
+			title: "Settings\u{2026}",
+			action: #selector(openSettingsWindow),
 			keyEquivalent: ""
 		))
 		menu.addItem(.separator())
@@ -81,11 +88,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		websiteURL.open()
 	}
 
+	@objc private func openSettingsWindow() {
+		SettingsWC.shared.showSettingsWindow()
+	}
+
 	@objc private func quitGlance() {
 		NSApp.terminate(nil)
 	}
 
 	private func existingMainWindow() -> NSWindow? {
-		NSApp.windows.first { $0.title == "Glance" }
+		if let window = mainWindowController?.window {
+			return window
+		}
+
+		cacheMainWindowController()
+		return mainWindowController?.window
+	}
+
+	private func cacheMainWindowController() {
+		guard mainWindowController?.window == nil else { return }
+
+		mainWindowController = NSApp.windows.first {
+			$0.contentViewController is ViewController
+		}?.windowController
 	}
 }
