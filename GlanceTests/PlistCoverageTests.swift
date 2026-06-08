@@ -16,6 +16,7 @@ final class PlistCoverageTests: XCTestCase {
 			"public.markdown",
 			"net.daringfireball.markdown",
 			"public.tab-separated-values-text",
+			"dyn.ah62d4rv4ge80n5dwqq",
 			"public.source-code",
 			"public.swift-source",
 			"public.toml",

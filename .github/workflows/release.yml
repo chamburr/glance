@@ -1,0 +1,124 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish DMG
+    runs-on: macos-15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Install mise
+        run: |
+          set -euo pipefail
+          MISE_VERSION="2026.6.0"
+          case "$(uname -m)" in
+            arm64) MISE_ARCH="arm64"; MISE_SHA256="8830cf720025583bfbc5ca77bcf15958bf6efb4743fb84be6b572fd85d3a6cd0" ;;
+            x86_64) MISE_ARCH="x64"; MISE_SHA256="fc2630a1cd4a9e16d097cc5d4feec8d868c8a014a9a419cdb41f817da022e8b2" ;;
+            *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+          esac
+
+          MISE_TARBALL="mise-v${MISE_VERSION}-macos-${MISE_ARCH}.tar.gz"
+          curl -fsSLO "https://github.com/jdx/mise/releases/download/v${MISE_VERSION}/${MISE_TARBALL}"
+          echo "${MISE_SHA256}  ${MISE_TARBALL}" | shasum -a 256 -c -
+          tar -xzf "$MISE_TARBALL"
+          mkdir -p "$HOME/.local/bin"
+          cp mise/bin/mise "$HOME/.local/bin/mise"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.local/bin:$PATH"
+
+          mise --version
+
+      - name: Install pinned tools
+        env:
+          MISE_YES: "1"
+        run: |
+          set -euo pipefail
+          mise trust mise.toml
+          mise install
+
+      - name: Run tests
+        run: |
+          set -euo pipefail
+          mise run test
+
+      - name: Build release app
+        run: |
+          set -euo pipefail
+          mise run clean
+          mise run build
+
+      - name: Package DMG
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          VERSION="${TAG_NAME#v}"
+          APP_NAME="Glance"
+          APP_PATH="build/Build/Products/Release/${APP_NAME}.app"
+          DIST_DIR="dist"
+          STAGING_DIR="${DIST_DIR}/dmg-root"
+          DMG_PATH="${DIST_DIR}/${APP_NAME}-${VERSION}.dmg"
+
+          test -d "$APP_PATH"
+
+          rm -rf "$DIST_DIR"
+          mkdir -p "$STAGING_DIR"
+          cp -R "$APP_PATH" "$STAGING_DIR/"
+          ln -s /Applications "$STAGING_DIR/Applications"
+
+          hdiutil create \
+            -volname "$APP_NAME" \
+            -srcfolder "$STAGING_DIR" \
+            -ov \
+            -format UDZO \
+            "$DMG_PATH"
+
+          shasum -a 256 "$DMG_PATH" | tee "$DMG_PATH.sha256"
+
+      - name: Verify DMG contents
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          VERSION="${TAG_NAME#v}"
+          DMG_PATH="dist/Glance-${VERSION}.dmg"
+          MOUNT_DIR="$(mktemp -d)"
+
+          hdiutil attach "$DMG_PATH" -mountpoint "$MOUNT_DIR" -nobrowse -quiet
+          trap 'hdiutil detach "$MOUNT_DIR" -quiet || true; rmdir "$MOUNT_DIR" || true' EXIT
+
+          test -d "$MOUNT_DIR/Glance.app"
+          test -d "$MOUNT_DIR/Glance.app/Contents/PlugIns/QLPlugin.appex"
+
+          hdiutil detach "$MOUNT_DIR" -quiet
+          trap - EXIT
+          rmdir "$MOUNT_DIR"
+
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          VERSION="${TAG_NAME#v}"
+          gh release create "$TAG_NAME" \
+            "dist/Glance-${VERSION}.dmg" \
+            "dist/Glance-${VERSION}.dmg.sha256" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Glance ${VERSION}" \
+            --notes "Unsigned and unnotarized macOS DMG for Glance ${VERSION}. You may need to remove quarantine after installing."
