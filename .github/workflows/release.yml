@@ -15,12 +15,29 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
 
       - name: Install mise
         run: |
           set -euo pipefail
-          brew install mise
+          MISE_VERSION="2026.6.0"
+          case "$(uname -m)" in
+            arm64) MISE_ARCH="arm64"; MISE_SHA256="8830cf720025583bfbc5ca77bcf15958bf6efb4743fb84be6b572fd85d3a6cd0" ;;
+            x86_64) MISE_ARCH="x64"; MISE_SHA256="fc2630a1cd4a9e16d097cc5d4feec8d868c8a014a9a419cdb41f817da022e8b2" ;;
+            *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+          esac
+
+          MISE_TARBALL="mise-v${MISE_VERSION}-macos-${MISE_ARCH}.tar.gz"
+          curl -fsSLO "https://github.com/jdx/mise/releases/download/v${MISE_VERSION}/${MISE_TARBALL}"
+          echo "${MISE_SHA256}  ${MISE_TARBALL}" | shasum -a 256 -c -
+          tar -xzf "$MISE_TARBALL"
+          mkdir -p "$HOME/.local/bin"
+          cp mise/bin/mise "$HOME/.local/bin/mise"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.local/bin:$PATH"
+
           mise --version
 
       - name: Install pinned tools
