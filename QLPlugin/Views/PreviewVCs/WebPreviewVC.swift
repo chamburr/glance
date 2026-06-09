@@ -75,6 +75,7 @@ class WebPreviewVC: NSViewController, PreviewVC, WKNavigationDelegate {
 		let webView = WKWebView(frame: view.bounds)
 		webView.autoresizingMask = [.height, .width]
 		webView.underPageBackgroundColor = .clear
+		webView.alphaValue = 0
 		webView.navigationDelegate = self
 		self.webView = webView
 

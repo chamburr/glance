@@ -19,6 +19,7 @@
 > - a `mise` build/test workflow
 > - expanded tests
 > - downloadable unsigned DMGs from this fork's GitHub Releases
+> - Settings controls for hiding the Dock icon
 > Release DMGs are unsigned and unnotarized, so users may still need the quarantine-removal command shown in the installation steps.
 
 ## About
@@ -83,6 +84,9 @@ Feel free to [open an issue](https://github.com/chamburr/glance/issues/new) or [
 
 Please note that macOS doesn't allow the handling of some file types (e.g. `.plist`, `.ts` and `.xml`).
 
+**How do I disable Glance for a file type?**
+
+Glance doesn't currently support disabling individual file types.
 **You claim to support [file type], but previews aren't showing up.**
 
 Please note that Glance skips previews for large files to avoid slowing down your Mac.

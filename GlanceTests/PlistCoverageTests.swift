@@ -7,7 +7,6 @@ final class PlistCoverageTests: XCTestCase {
 			"org.7-zip.7-zip-archive",
 			"com.sun.java-archive",
 			"com.sun.web-application-archive",
-			"org.gnu.gnu-zip-archive",
 			"org.gnu.gnu-zip-tar-archive",
 			"public.tar-archive",
 			"public.zip-archive",

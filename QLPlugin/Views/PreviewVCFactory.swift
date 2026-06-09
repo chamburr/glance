@@ -1,10 +1,14 @@
 import Foundation
 
 /// Returns a `PreviewVC` subclass that can be used to generate a preview of the provided file.
-/// May return `nil` if the file is not supported.
+/// Returns `nil` if the file type is not supported.
 class PreviewVCFactory {
 	static func getPreviewInitializer(fileURL: URL) -> Preview.Type? {
-		switch PreviewSupport.getPreviewFileType(fileURL: fileURL) {
+		guard let entry = SupportedPreviewRegistry.entry(matching: fileURL) else {
+			return nil
+		}
+
+		switch entry.previewFileType {
 			case .markdown:
 				return MarkdownPreview.self
 			case .jupyter:
