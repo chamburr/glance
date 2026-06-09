@@ -19,6 +19,7 @@
 > - a `mise` build/test workflow
 > - expanded tests
 > - downloadable unsigned DMGs from this fork's GitHub Releases
+> - Settings controls for hiding the Dock icon and disabling Glance for selected file extensions
 > Release DMGs are unsigned and unnotarized, so users may still need the quarantine-removal command shown in the installation steps.
 
 ## About
@@ -82,6 +83,10 @@ Glance blocks remote assets. Furthermore, the app only has access to the file th
 Feel free to [open an issue](https://github.com/chamburr/glance/issues/new) or [contribute](#contributing)! When opening an issue, please describe what kind of preview you'd expect for your file.
 
 Please note that macOS doesn't allow the handling of some file types (e.g. `.plist`, `.ts` and `.xml`).
+
+**How do I disable Glance for a file type?**
+
+Open Glance's Settings window and disable the file type under File Types. Glance will step aside for disabled types so macOS or another Quick Look provider can handle them when available.
 
 **You claim to support [file type], but previews aren't showing up.**
 

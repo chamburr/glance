@@ -145,6 +145,11 @@
 		7EB36488244B65D900D7F96F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB36487244B65D900D7F96F /* String.swift */; };
 		7EB3648A244B665700D7F96F /* ZIPPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB36489244B665700D7F96F /* ZIPPreview.swift */; };
 		7EB7491924228549007265A4 /* JupyterPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB7491824228549007265A4 /* JupyterPreview.swift */; };
+		0DD9FAE6C6A22D86C26594E8 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CBD1B8E3D86A3D965DD6D0 /* AppSettings.swift */; };
+		B67B634287C4C853BAA1F946 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CBD1B8E3D86A3D965DD6D0 /* AppSettings.swift */; };
+		1B0D39C0B31C21309338CCF4 /* SupportedPreviewRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E45E8BA05C598C36B7211 /* SupportedPreviewRegistry.swift */; };
+		B38FB6C9D7D7332C12C244CE /* SupportedPreviewRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E45E8BA05C598C36B7211 /* SupportedPreviewRegistry.swift */; };
+		3190EA51FD47FD7107E09140 /* SupportedPreviewRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E45E8BA05C598C36B7211 /* SupportedPreviewRegistry.swift */; };
 		B0DAFC86DF163898CC16D716 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CBD1B8E3D86A3D965DD6D0 /* AppSettings.swift */; };
 		E978FD0ADCD5765A54672E67 /* SettingsWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048855925A27D336EC30FC7 /* SettingsWC.swift */; };
 		7ECC8CF2240CB4CC000D6970 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECC8CF1240CB4CC000D6970 /* AppDelegate.swift */; };
@@ -314,6 +319,7 @@
 		7EB36489244B665700D7F96F /* ZIPPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZIPPreview.swift; sourceTree = "<group>"; };
 		7EB7491824228549007265A4 /* JupyterPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JupyterPreview.swift; sourceTree = "<group>"; };
 		77CBD1B8E3D86A3D965DD6D0 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		0E5E45E8BA05C598C36B7211 /* SupportedPreviewRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedPreviewRegistry.swift; sourceTree = "<group>"; };
 		3048855925A27D336EC30FC7 /* SettingsWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWC.swift; sourceTree = "<group>"; };
 		7ECC8CEE240CB4CC000D6970 /* Glance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ECC8CF1240CB4CC000D6970 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -426,8 +432,10 @@
 			isa = PBXGroup;
 			children = (
 				7EE10F82244F6774007214D8 /* Log.swift */,
+				77CBD1B8E3D86A3D965DD6D0 /* AppSettings.swift */,
 				A19F4D4526218B2B008A903C /* PreviewSupport.swift */,
 				7E21C88C2438CAA500818EB2 /* Stats.swift */,
+				0E5E45E8BA05C598C36B7211 /* SupportedPreviewRegistry.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -653,7 +661,6 @@
 				7ED140632450C4A7007A7C70 /* Credits.rtf */,
 				7E3DF744242CBE7F00DE7CD6 /* Main.storyboard */,
 				7ECC8CF1240CB4CC000D6970 /* AppDelegate.swift */,
-				77CBD1B8E3D86A3D965DD6D0 /* AppSettings.swift */,
 				7ECC8CF3240CB4CC000D6970 /* ViewController.swift */,
 				7ED140602450B36D007A7C70 /* SupportedFilesWC.xib */,
 				7ED140652450C671007A7C70 /* SupportedFilesWC.swift */,
@@ -923,11 +930,13 @@
 				C0DE00000000000000000316 /* TSVPreview.swift in Sources */,
 				C0DE00000000000000000318 /* ZIPPreview.swift in Sources */,
 				C0DE00000000000000000304 /* String.swift in Sources */,
+				B67B634287C4C853BAA1F946 /* AppSettings.swift in Sources */,
 				C0DE00000000000000000312 /* PreviewVCFactory.swift in Sources */,
 				C0DE00000000000000000204 /* PreviewSmokeTests.swift in Sources */,
 				C0DE00000000000000000317 /* TARPreview.swift in Sources */,
 				C0DE00000000000000000306 /* FileTree.swift in Sources */,
 				C0DE00000000000000000301 /* PreviewSupport.swift in Sources */,
+				3190EA51FD47FD7107E09140 /* SupportedPreviewRegistry.swift in Sources */,
 				C0DE00000000000000000310 /* Stylesheet.swift in Sources */,
 				C0DE00000000000000000309 /* Script.swift in Sources */,
 				C0DE00000000000000000205 /* PlistCoverageTests.swift in Sources */,
@@ -952,7 +961,9 @@
 				7EB7491924228549007265A4 /* JupyterPreview.swift in Sources */,
 				7E1B16922455D93E00E2B84D /* HTMLRenderer.swift in Sources */,
 				7EE10F84244F679B007214D8 /* Log.swift in Sources */,
+				0DD9FAE6C6A22D86C26594E8 /* AppSettings.swift in Sources */,
 				A19F4D4226218B2B008A903C /* PreviewSupport.swift in Sources */,
+				B38FB6C9D7D7332C12C244CE /* SupportedPreviewRegistry.swift in Sources */,
 				7E21C88E24390BE400818EB2 /* Stats.swift in Sources */,
 				7E1DC51F240E6CE300D0A061 /* PreviewVC.swift in Sources */,
 				7E45F899244DA45500BFB869 /* FileTree.swift in Sources */,
@@ -985,6 +996,7 @@
 				7E458AF52439481F0091BD0F /* Menu.swift in Sources */,
 				7E21C88D2438CAA500818EB2 /* Stats.swift in Sources */,
 				A19F4D4326218B2B008A903C /* PreviewSupport.swift in Sources */,
+				1B0D39C0B31C21309338CCF4 /* SupportedPreviewRegistry.swift in Sources */,
 				7ECC8CF2240CB4CC000D6970 /* AppDelegate.swift in Sources */,
 				7E458AF22439474E0091BD0F /* NSMenuItem.swift in Sources */,
 				7ED140662450C671007A7C70 /* SupportedFilesWC.swift in Sources */,
@@ -1069,7 +1081,7 @@
 				CODE_SIGN_ENTITLEMENTS = QLPlugin/QLPlugin.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1083,7 +1095,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
-				MARKETING_VERSION = 1.5.7;
+				MARKETING_VERSION = 1.5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.QLPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1099,7 +1111,7 @@
 				CODE_SIGN_ENTITLEMENTS = QLPlugin/QLPlugin.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1113,7 +1125,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/HTMLConverter",
 				);
-				MARKETING_VERSION = 1.5.7;
+				MARKETING_VERSION = 1.5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance.QLPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1251,7 +1263,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1260,7 +1272,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.7;
+				MARKETING_VERSION = 1.5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1276,7 +1288,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1285,7 +1297,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.7;
+				MARKETING_VERSION = 1.5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chamburr.Glance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

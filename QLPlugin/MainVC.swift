@@ -18,6 +18,10 @@ class MainVC: NSViewController, QLPreviewingController {
 	/// Max size of files to render
 	let maxFileSize = 10_000_000 // 10 MB
 
+	/// Bundle ID of the containing app. When the app isn't running, the QL extension
+	/// declines to preview and lets macOS fall back to the system handler.
+	private static let containingAppBundleID = "com.chamburr.Glance"
+
 	let stats = Stats()
 
 	override var nibName: NSNib.Name? {
@@ -43,6 +47,20 @@ class MainVC: NSViewController, QLPreviewingController {
 		completionHandler handler: @escaping (Error?) -> Void
 	) {
 		DispatchQueue.main.async {
+			// Only preview files when the containing app is running
+			if NSRunningApplication.runningApplications(
+				withBundleIdentifier: Self.containingAppBundleID
+			).isEmpty {
+				Log.general.info("Glance app is not running, declining preview")
+				let error = NSError(
+					domain: "com.chamburr.Glance.QLPlugin",
+					code: 1,
+					userInfo: [NSLocalizedDescriptionKey: "Glance app is not running"]
+				)
+				handler(error)
+				return
+			}
+
 			// Read information about the file to preview
 			var file: File
 			do {

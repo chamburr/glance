@@ -8,10 +8,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_: Notification) {
 		setUpStatusItem()
 		cacheMainWindowController()
-		AppSettings.applyDockIconPreference()
+		AppSettingsStore.shared.migrateStandardDefaultsIfNeeded()
+
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(windowDidBecomeMain),
+			name: NSWindow.didBecomeMainNotification,
+			object: nil
+		)
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(windowWillClose),
+			name: NSWindow.willCloseNotification,
+			object: nil
+		)
+
+		updateDockIconVisibility()
 	}
 
 	func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool { false }
+
 
 	private func setUpStatusItem() {
 		let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
@@ -111,5 +127,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		mainWindowController = NSApp.windows.first {
 			$0.contentViewController is ViewController
 		}?.windowController
+	}
+
+	// MARK: - Dock Icon Visibility
+
+	/// Shows the dock icon when any window is visible, hides it when all windows
+	/// are closed (only when the "Hide Dock icon" setting is enabled).
+	func updateDockIconVisibility() {
+		guard AppSettingsStore.shared.hideDockIcon else {
+			NSApp.setActivationPolicy(.regular)
+			return
+		}
+
+		let hasVisibleWindows = NSApp.windows.contains {
+			$0.isVisible && !($0.className.contains("NSStatusBar"))
+		}
+		NSApp.setActivationPolicy(hasVisibleWindows ? .regular : .accessory)
+	}
+
+	@objc private func windowDidBecomeMain(_: Notification) {
+		updateDockIconVisibility()
+	}
+
+	@objc private func windowWillClose(_: Notification) {
+		// Defer so the closing window is no longer visible when we check
+		DispatchQueue.main.async { [weak self] in
+			self?.updateDockIconVisibility()
+		}
 	}
 }

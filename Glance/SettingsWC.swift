@@ -11,7 +11,7 @@ final class SettingsWC: NSWindowController {
 
 	private init() {
 		let window = NSWindow(
-			contentRect: NSRect(x: 0, y: 0, width: 380, height: 132),
+			contentRect: NSRect(x: 0, y: 0, width: 400, height: 160),
 			styleMask: [.titled, .closable],
 			backing: .buffered,
 			defer: false
@@ -37,19 +37,27 @@ final class SettingsWC: NSWindowController {
 		window?.makeKeyAndOrderFront(nil)
 	}
 
+	// MARK: - Content Setup
+
 	private func setUpContent() {
 		guard let contentView = window?.contentView else { return }
 
 		hideDockIconCheckbox.target = self
 		hideDockIconCheckbox.action = #selector(hideDockIconChanged)
 
-		let descriptionLabel = NSTextField(labelWithString: "Glance stays available from the menu bar.")
+		let descriptionLabel = NSTextField(
+			labelWithString: "The Dock icon is hidden when all windows are closed. Glance stays available from the menu bar."
+		)
 		descriptionLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
 		descriptionLabel.textColor = .secondaryLabelColor
 		descriptionLabel.lineBreakMode = .byWordWrapping
 		descriptionLabel.maximumNumberOfLines = 0
 
-		let stackView = NSStackView(views: [hideDockIconCheckbox, descriptionLabel])
+		let stackView = NSStackView(views: [
+			sectionLabel("General"),
+			hideDockIconCheckbox,
+			descriptionLabel
+		])
 		stackView.orientation = .vertical
 		stackView.alignment = .leading
 		stackView.spacing = 8
@@ -58,17 +66,29 @@ final class SettingsWC: NSWindowController {
 
 		NSLayoutConstraint.activate([
 			stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
-			stackView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -24),
-			stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+			stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+			stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
 		])
 	}
 
+	// MARK: - State
+
 	private func syncState() {
-		hideDockIconCheckbox.state = AppSettings.hideDockIcon ? .on : .off
+		hideDockIconCheckbox.state = AppSettingsStore.shared.hideDockIcon ? .on : .off
 	}
 
 	@objc private func hideDockIconChanged(_ sender: NSButton) {
-		AppSettings.hideDockIcon = sender.state == .on
-		AppSettings.applyDockIconPreference()
+		AppSettingsStore.shared.hideDockIcon = sender.state == .on
+		if let appDelegate = NSApp.delegate as? AppDelegate {
+			appDelegate.updateDockIconVisibility()
+		}
+	}
+
+	// MARK: - View Helpers
+
+	private func sectionLabel(_ text: String) -> NSTextField {
+		let textField = NSTextField(labelWithString: text)
+		textField.font = .boldSystemFont(ofSize: NSFont.systemFontSize)
+		return textField
 	}
 }

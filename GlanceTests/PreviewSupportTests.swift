@@ -1,6 +1,45 @@
 import XCTest
 
 final class PreviewSupportTests: XCTestCase {
+	func testSupportedPreviewRegistryIDsAreUnique() {
+		let ids = SupportedPreviewRegistry.all.map(\.id)
+
+		XCTAssertEqual(Set(ids).count, ids.count)
+	}
+
+	func testSupportedPreviewRegistryMatchesAliasesAndFallbacks() throws {
+		let cases: [(path: String, expectedID: String?, expectedType: PreviewFileType)] = [
+			("/tmp/archive.tar.gz", "archive.extension.tar-gz", .tar),
+			("/tmp/ARCHIVE.TAR.GZ", "archive.extension.tar-gz", .tar),
+			("/tmp/readme.md", "markdown.extension.md", .markdown),
+			("/tmp/README.MD", "markdown.extension.md", .markdown),
+			("/tmp/readme.markdown", "markdown.extension.markdown", .markdown),
+			("/tmp/notebook.ipynb", "jupyter.extension.ipynb", .jupyter),
+			("/tmp/table.tsv", "tsv.extension.tsv", .tsv),
+			("/tmp/archive.zip", "archive.extension.zip", .zip),
+			("/tmp/archive.7z", "archive.extension.7z", .sevenZip),
+			("/tmp/.elrc", "code.extension.elrc", .code),
+			("/tmp/config.elrc", "code.extension.elrc", .code),
+			("/tmp/Makefile", "code.filename.makefile", .code),
+			("/tmp/example.unknownext", "code.other-source-text", .code),
+			("/tmp/plain.gz", nil, .unsupported),
+		]
+
+		for testCase in cases {
+			let fileURL = URL(fileURLWithPath: testCase.path)
+			XCTAssertEqual(
+				SupportedPreviewRegistry.entry(matching: fileURL)?.id,
+				testCase.expectedID,
+				testCase.path
+			)
+			XCTAssertEqual(
+				PreviewSupport.getPreviewFileType(fileURL: fileURL),
+				testCase.expectedType,
+				testCase.path
+			)
+		}
+	}
+
 	func testPreviewTypeUsesSpecializedPreviewForSupportedExtensionAliases() {
 		let cases: [(path: String, expected: PreviewFileType)] = [
 			("/tmp/readme.md", .markdown),
