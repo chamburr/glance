@@ -19,7 +19,7 @@
 > - a `mise` build/test workflow
 > - expanded tests
 > - downloadable unsigned DMGs from this fork's GitHub Releases
-> - Settings controls for hiding the Dock icon and disabling Glance for selected file extensions
+> - Settings controls for hiding the Dock icon
 > Release DMGs are unsigned and unnotarized, so users may still need the quarantine-removal command shown in the installation steps.
 
 ## About
