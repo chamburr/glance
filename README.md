@@ -86,8 +86,7 @@ Please note that macOS doesn't allow the handling of some file types (e.g. `.pli
 
 **How do I disable Glance for a file type?**
 
-Open Glance's Settings window and disable the file type under File Types. Glance will step aside for disabled types so macOS or another Quick Look provider can handle them when available.
-
+Glance doesn't currently support disabling individual file types.
 **You claim to support [file type], but previews aren't showing up.**
 
 Please note that Glance skips previews for large files to avoid slowing down your Mac.
