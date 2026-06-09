@@ -1,11 +1,20 @@
 import Foundation
 
 struct AppSettingsStore {
+import Foundation
+
+struct AppSettingsStore {
 	static let sharedDefaultsSuiteName = "group.com.chamburr.glance"
 
-	static let sharedDefaults: UserDefaults =
-		UserDefaults(suiteName: sharedDefaultsSuiteName) ?? .standard
-
+	static let sharedDefaults: UserDefaults = {
+		guard let defaults = UserDefaults(suiteName: sharedDefaultsSuiteName) else {
+			Log.general.error(
+				"Unable to initialize shared UserDefaults suite \(sharedDefaultsSuiteName, privacy: .public); falling back to standard defaults"
+			)
+			return .standard
+		}
+		return defaults
+	}()
 	static let shared = AppSettingsStore(
 		defaults: sharedDefaults,
 		standardDefaults: .standard
