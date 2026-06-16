@@ -120,10 +120,10 @@ private final class FileTarByteReader: TarByteReader {
 		}
 
 		let currentOffset = Int64(try handle.offset())
-		let targetOffset = currentOffset + count
-		guard targetOffset >= currentOffset, targetOffset <= fileSize else {
+		guard currentOffset <= fileSize, count <= fileSize - currentOffset else {
 			throw TARPreviewError.truncatedArchive
 		}
+		let targetOffset = currentOffset + count
 		try handle.seek(toOffset: UInt64(targetOffset))
 	}
 
@@ -368,7 +368,9 @@ private final class TarHeaderScanner {
 		guard shouldLimitPayloadSkips else {
 			return false
 		}
-		guard uncompressedByteCount + paddedPayloadSize <= maxGzippedUncompressedScanSize else {
+		guard uncompressedByteCount <= maxGzippedUncompressedScanSize,
+		      paddedPayloadSize <= maxGzippedUncompressedScanSize - uncompressedByteCount
+		else {
 			isTruncated = true
 			return true
 		}

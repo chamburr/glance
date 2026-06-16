@@ -3,10 +3,11 @@ import ZIPFoundation
 
 class ZIPPreview: Preview {
 	let byteCountFormatter = ByteCountFormatter()
+	private let maxEntryCount = 50_000
 
 	required init() {}
 
-	private func makeFileTree(from archive: Archive) -> (
+	private func makeFileTree(from archive: Archive) throws -> (
 		fileTree: FileTree,
 		uncompressedSize: Int,
 		compressedSize: Int
@@ -14,10 +15,18 @@ class ZIPPreview: Preview {
 		let fileTree = FileTree()
 		var uncompressedSize = 0
 		var compressedSize = 0
+		var entryCount = 0
 
 		for entry in archive {
-			uncompressedSize += Int(entry.uncompressedSize)
-			compressedSize += Int(entry.compressedSize)
+			guard entryCount < maxEntryCount else {
+				throw ZIPPreviewError.entryCountLimitExceeded(maxEntryCount: maxEntryCount)
+			}
+			entryCount += 1
+
+			let entryUncompressedSize = try Self.checkedArchiveSize(entry.uncompressedSize)
+			let entryCompressedSize = try Self.checkedArchiveSize(entry.compressedSize)
+			try Self.checkedAdd(entryUncompressedSize, to: &uncompressedSize)
+			try Self.checkedAdd(entryCompressedSize, to: &compressedSize)
 
 			if entry.path == "__MACOSX" || entry.path.hasPrefix("__MACOSX/") {
 				continue
@@ -27,7 +36,7 @@ class ZIPPreview: Preview {
 				try fileTree.addNode(
 					path: entry.path,
 					isDirectory: entry.type == .directory,
-					size: Int(entry.uncompressedSize),
+					size: entryUncompressedSize,
 					dateModified: entry.fileAttributes[.modificationDate] as? Date
 				)
 			} catch {
@@ -36,6 +45,21 @@ class ZIPPreview: Preview {
 		}
 
 		return (fileTree, uncompressedSize, compressedSize)
+	}
+
+	static func checkedArchiveSize(_ size: UInt64) throws -> Int {
+		guard size <= UInt64(Int.max) else {
+			throw ZIPPreviewError.metadataSizeLimitExceeded
+		}
+		return Int(size)
+	}
+
+	private static func checkedAdd(_ value: Int, to total: inout Int) throws {
+		let result = total.addingReportingOverflow(value)
+		guard !result.overflow else {
+			throw ZIPPreviewError.metadataSizeLimitExceeded
+		}
+		total = result.partialValue
 	}
 
 	private func compressionRatioText(compressed: Int, uncompressed: Int) -> String {
@@ -48,7 +72,7 @@ class ZIPPreview: Preview {
 
 	func createPreviewVC(file: File) throws -> PreviewVC {
 		let archive = try Archive(url: file.url, accessMode: .read)
-		let (fileTree, uncompressedSize, compressedSize) = makeFileTree(from: archive)
+		let (fileTree, uncompressedSize, compressedSize) = try makeFileTree(from: archive)
 
 		let labelText = """
 		Compressed: \(byteCountFormatter.string(for: file.size) ?? "--")
@@ -57,5 +81,22 @@ class ZIPPreview: Preview {
 		"""
 
 		return OutlinePreviewVC(rootNodes: fileTree.root.childrenList, labelText: labelText)
+	}
+}
+
+enum ZIPPreviewError: LocalizedError {
+	case entryCountLimitExceeded(maxEntryCount: Int)
+	case metadataSizeLimitExceeded
+
+	var errorDescription: String? {
+		switch self {
+			case let .entryCountLimitExceeded(maxEntryCount):
+				NSLocalizedString(
+					"ZIP archive metadata exceeds the \(maxEntryCount) entry preview limit",
+					comment: ""
+				)
+			case .metadataSizeLimitExceeded:
+				NSLocalizedString("ZIP archive metadata is too large to preview safely", comment: "")
+		}
 	}
 }

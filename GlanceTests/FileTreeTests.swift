@@ -414,4 +414,83 @@ class FileTreeTests: XCTestCase {
 			)
 		)
 	}
+
+	func testAddPathAtDepthLimitSucceeds() throws {
+		let limitedFileTree = FileTree(maxPathDepth: 3, maxNodeCount: 10)
+
+		try limitedFileTree.addNode(
+			path: "a/b/c",
+			isDirectory: false,
+			size: 123,
+			dateModified: now
+		)
+
+		let a = assertNode(
+			parent: limitedFileTree.root,
+			name: "a",
+			size: 0,
+			isDirectory: true,
+			dateModified: nil
+		)
+		let b = assertNode(
+			parent: a,
+			name: "b",
+			size: 0,
+			isDirectory: true,
+			dateModified: nil
+		)
+		_ = assertNode(
+			parent: b,
+			name: "c",
+			size: 123,
+			isDirectory: false,
+			dateModified: now
+		)
+	}
+
+	func testAddPathBeyondDepthLimitThrows() {
+		let limitedFileTree = FileTree(maxPathDepth: 2, maxNodeCount: 10)
+
+		XCTAssertThrowsError(
+			try limitedFileTree.addNode(
+				path: "a/b/c",
+				isDirectory: false,
+				size: 123,
+				dateModified: now
+			)
+		) { error in
+			guard let fileTreeError = error as? FileTreeError,
+			      case FileTreeError.pathDepthLimitExceeded = fileTreeError
+			else {
+				XCTFail("Expected pathDepthLimitExceeded, got \(error)")
+				return
+			}
+		}
+	}
+
+	func testAddNodeBeyondNodeCountLimitThrows() throws {
+		let limitedFileTree = FileTree(maxPathDepth: 10, maxNodeCount: 2)
+		try limitedFileTree.addNode(
+			path: "first",
+			isDirectory: false,
+			size: 123,
+			dateModified: now
+		)
+
+		XCTAssertThrowsError(
+			try limitedFileTree.addNode(
+				path: "second",
+				isDirectory: false,
+				size: 456,
+				dateModified: now
+			)
+		) { error in
+			guard let fileTreeError = error as? FileTreeError,
+			      case FileTreeError.nodeCountLimitExceeded = fileTreeError
+			else {
+				XCTFail("Expected nodeCountLimitExceeded, got \(error)")
+				return
+			}
+		}
+	}
 }

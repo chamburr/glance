@@ -2,6 +2,8 @@ import Foundation
 
 enum FileTreeError {
 	case notADirectoryError(pathParts: [String.SubSequence], pathPartIndex: Int)
+	case pathDepthLimitExceeded(path: String, maxDepth: Int)
+	case nodeCountLimitExceeded(maxNodeCount: Int)
 }
 
 extension FileTreeError: LocalizedError {
@@ -10,6 +12,16 @@ extension FileTreeError: LocalizedError {
 			case let .notADirectoryError(pathParts, pathPartIndex):
 				NSLocalizedString(
 					"Cannot create file tree node with path \"\(pathParts.joined())\": \"\(pathParts[pathPartIndex])\" is not a directory",
+					comment: ""
+				)
+			case let .pathDepthLimitExceeded(path, maxDepth):
+				NSLocalizedString(
+					"Cannot create file tree node with path \"\(path)\": maximum path depth of \(maxDepth) exceeded",
+					comment: ""
+				)
+			case let .nodeCountLimitExceeded(maxNodeCount):
+				NSLocalizedString(
+					"Cannot create file tree node: maximum node count of \(maxNodeCount) exceeded",
 					comment: ""
 				)
 		}
@@ -52,7 +64,21 @@ class FileTreeNode: NSObject {
 /// Data structure for representing a tree of files and directories. This class stores the root node
 /// and provides functionality to insert new nodes.
 class FileTree {
+	static let defaultMaxPathDepth = 128
+	static let defaultMaxNodeCount = 50_000
+
 	var root = FileTreeNode(name: "Root", size: 0, isDirectory: true, dateModified: Date())
+	private let maxPathDepth: Int
+	private let maxNodeCount: Int
+	private var nodeCount = 1
+
+	init(
+		maxPathDepth: Int = FileTree.defaultMaxPathDepth,
+		maxNodeCount: Int = FileTree.defaultMaxNodeCount
+	) {
+		self.maxPathDepth = max(1, maxPathDepth)
+		self.maxNodeCount = max(1, maxNodeCount)
+	}
 
 	/// Parses the provided file/directory's path and creates a new `FileTreeNode` at the correct
 	/// position in the tree. If a file/directory's parent directory doesn't exist yet, it will
@@ -62,79 +88,70 @@ class FileTree {
 		guard !pathParts.isEmpty else {
 			return
 		}
+		guard pathParts.count <= maxPathDepth else {
+			throw FileTreeError.pathDepthLimitExceeded(path: path, maxDepth: maxPathDepth)
+		}
 
-		try addNode(
-			parentNode: root,
-			pathParts: pathParts,
-			pathPartIndex: 0,
-			isDirectory: isDirectory,
-			size: size,
-			dateModified: dateModified
-		)
-	}
+		var parentNode = root
+		for (pathPartIndex, pathPart) in pathParts.enumerated() {
+			let isLastPathPart = pathPartIndex == pathParts.count - 1
+			let name = String(pathPart)
+			let currentNode = parentNode.children[name]
 
-	/// Parses the provided file/directory's path and creates a new `FileTreeNode` at the correct
-	/// position in the tree. This is a helper function for the `addNode` function. It performs a
-	/// recursive tree traversal to find the node's location.
-	private func addNode(
-		parentNode: FileTreeNode,
-		pathParts: [String.SubSequence],
-		pathPartIndex: Int,
-		isDirectory: Bool,
-		size: Int,
-		dateModified: Date?
-	) throws {
-		let isLastPathPart = pathPartIndex == pathParts.count - 1
-		let name = String(pathParts[pathPartIndex])
-		var currentNode = parentNode.children[name]
-
-		if isLastPathPart {
-			// Reached end of path: Add to tree
-			if currentNode == nil {
-				// Node doesn't exist yet: Create it
-				parentNode.children[name] = FileTreeNode(
-					name: name,
-					size: size,
-					isDirectory: isDirectory,
-					dateModified: dateModified
-				)
+			if isLastPathPart {
+				if let currentNode {
+					// Node already exists (i.e. directory has been created implicitly in a previous
+					// function call): Update the directory node with the missing `dateModified` info
+					currentNode.dateModified = dateModified
+				} else {
+					_ = try createNode(
+						parentNode: parentNode,
+						name: name,
+						size: size,
+						isDirectory: isDirectory,
+						dateModified: dateModified
+					)
+				}
 			} else {
-				// Node already exists (i.e. directory has been created implicitly in a previous
-				// function call): Update the directory node with the missing `dateModified` info
-				currentNode?.dateModified = dateModified
-			}
-		} else {
-			// Not yet at end of path: Recurse into subdirectory
-			if currentNode == nil {
-				// Directory that doesn't exist yet: Create it
-				currentNode = FileTreeNode(
-					name: name,
-					size: 0,
-					isDirectory: true
-				)
-				parentNode.children[name] = currentNode
-			} else {
-				// Directory exists: Make sure it's not a file
-				if currentNode?.isDirectory == false {
-					throw FileTreeError.notADirectoryError(
-						pathParts: pathParts,
-						pathPartIndex: pathPartIndex
+				if let currentNode {
+					guard currentNode.isDirectory else {
+						throw FileTreeError.notADirectoryError(
+							pathParts: pathParts,
+							pathPartIndex: pathPartIndex
+						)
+					}
+					parentNode = currentNode
+				} else {
+					parentNode = try createNode(
+						parentNode: parentNode,
+						name: name,
+						size: 0,
+						isDirectory: true,
+						dateModified: nil
 					)
 				}
 			}
-			guard let currentNode else {
-				return
-			}
-
-			// Recurse: Execute function again for next path part
-			try addNode(
-				parentNode: currentNode,
-				pathParts: pathParts,
-				pathPartIndex: pathPartIndex + 1,
-				isDirectory: isDirectory,
-				size: size,
-				dateModified: dateModified
-			)
 		}
+	}
+
+	private func createNode(
+		parentNode: FileTreeNode,
+		name: String,
+		size: Int,
+		isDirectory: Bool,
+		dateModified: Date?
+	) throws -> FileTreeNode {
+		guard nodeCount < maxNodeCount else {
+			throw FileTreeError.nodeCountLimitExceeded(maxNodeCount: maxNodeCount)
+		}
+		let node = FileTreeNode(
+			name: name,
+			size: size,
+			isDirectory: isDirectory,
+			dateModified: dateModified
+		)
+		parentNode.children[name] = node
+		nodeCount += 1
+		return node
 	}
 }
