@@ -195,6 +195,7 @@
 				<string>org.kmt.source</string> <!-- .kmt -->
 				<string>org.kotlinlang.source</string> <!-- .kt (Kotlin) -->
 				<string>org.lua.lua-source</string> <!-- .lua -->
+				<string>dyn.ah62d4rv4ge8027pb</string> <!-- .lua -->
 				<string>org.microsoft.inf</string> <!-- .inf -->
 				<string>org.n8gray.awk</string> <!-- .awk -->
 				<string>org.n8gray.bat</string> <!-- .bat, .cmd -->
