@@ -74,9 +74,11 @@
 				<!-- Code / plain text -->
 				<string>com.adobe.jsx</string> <!-- .jsx (used for React instead of ExtendScript) -->
 				<string>com.apple.applescript.script-bundle</string> <!-- .scptd (AppleScript bundle) -->
+				<string>dyn.ah62d4rv4ge81g25usvwa</string> <!-- .scptd -->
 				<string>com.apple.applescript.script</string> <!-- .scpt (AppleScript binary) -->
 				<string>com.apple.applescript.text</string> <!-- .applescript (AppleScript text file) -->
 				<string>com.apple.disk-image-dart</string> <!-- .dart (used for Google's programming language instead of Apple's Disk Archive/Retrieval Tool) -->
+				<string>dyn.ah62d4rv4ge80k2pwsu</string> <!-- .dart -->
 				<string>com.apple.dt.document.scheme</string> <!-- .xcscheme (Xcode schemes) -->
 				<string>com.apple.dt.interfacebuilder.document.storyboard</string> <!-- .storyboard (Xcode Storyboard) -->
 				<string>com.apple.interfacebuilder.document.cocoa</string> <!-- .xib (Xcode XIB) -->
@@ -88,22 +90,32 @@
 				<string>com.apple.xcode.strings-dictionary</string> <!-- .stringsdict (Xcode Stringsdict) -->
 				<string>com.apple.xcode.strings-text</string> <!-- .strings (Xcode Strings Resource) -->
 				<string>com.barebones.bbedit.ini-configuration</string> <!-- .cfg -->
+				<string>dyn.ah62d4rv4ge80g3xh</string> <!-- .cfg -->
 				<string>com.barebones.bbedit.scss-source</string> <!-- .scss -->
 				<string>com.barebones.bbedit.tex-source</string> <!-- .tex -->
 				<string>com.eiffel.source-code</string> <!-- .e (Eiffel) -->
+				<string>dyn.ah62d4rv4ge80n</string> <!-- .e -->
 				<string>com.firecore.fileformat.ass</string> <!-- .ass (Infuse subtitle) -->
 				<string>com.firecore.fileformat.srt</string> <!-- .srt (Infuse SubRip subtitle) -->
 				<string>com.microsoft.csharp-source</string> <!-- .cs -->
 				<string>com.microsoft.f-sharp</string> <!-- .fsx (F Sharp) -->
+				<string>dyn.ah62d4rv4ge80q652</string> <!-- .fsx -->
 				<string>com.netscape.javascript-source</string> <!-- .js, .mjs -->
 				<string>com.runningwithcrayons.alfred.appearance</string> <!-- Alfred theme (.alfredappearance) -->
+				<string>dyn.ah62d4rv4ge80c5dgsmw0k2pusbw0c6xbr3v0n</string> <!-- .alfredappearance -->
 				<string>com.sequelpro.sequelpro.spf</string> <!-- .spf (Sequel Pro query favorites file) -->
+				<string>dyn.ah62d4rv4ge81g6dg</string> <!-- .spf -->
 				<string>com.sequelpro.sequelpro.sptheme</string> <!-- .spTheme (Sequel Pro theme file) -->
+				<string>dyn.ah62d4rv4ge81g6dyrbw043k</string> <!-- .spTheme -->
 				<string>com.sequelpro.sequelpro.sql</string> <!-- .sql (used by Sequel Pro) -->
 				<string>com.seriflabs.xmp</string> <!-- .xmp (used by Affinity) -->
 				<string>com.sun.java-source</string> <!-- .java -->
 				<string>com.vallettaventures.texpadm.bibtex</string> <!-- .bib (Texpad BibTeX) -->
+				<string>dyn.ah62d4rv4ge80e4pc</string> <!-- .bib -->
 				<string>com.vallettaventures.texpadm.tex</string> <!-- .cls, .sty, .tex (Texpad LaTeX) -->
+				<string>dyn.ah62d4rv4ge80g5dx</string> <!-- .cls -->
+				<string>dyn.ah62d4rv4ge81g7d3</string> <!-- .sty -->
+				<string>dyn.ah62d4rv4ge81k3p2</string> <!-- .tex -->
 				<string>dyn.ah62d4rv4ge8007a</string> <!-- .kt (Kotlin) -->
 				<string>dyn.ah62d4rv4ge8024pvszy0k</string> <!-- .liquid -->
 				<string>dyn.ah62d4rv4ge80255drq</string> <!-- .lock (lockfile for Cargo, Poetry, Yarn, ...) -->
@@ -175,53 +187,91 @@
 				<string>dyn.ah62d4rv4ge81u65q</string> <!-- .xsl -->
 				<string>dyn.ah62d4rv4ge81u65qsu</string> <!-- .xslt -->
 				<string>org.arduino.ino-source</string> <!-- .ino (Arduino) -->
+				<string>dyn.ah62d4rv4ge80w5xt</string> <!-- .ino -->
 				<string>org.arduino.source</string>  <!-- .pde (Arduino) -->
+				<string>dyn.ah62d4rv4ge81a3df</string> <!-- .pde -->
 				<string>org.asm.source</string> <!-- .asm (TASM) -->
+				<string>dyn.ah62d4rv4ge80c65r</string> <!-- .asm -->
 				<string>org.codehaus.groovy-source</string> <!-- .groovy -->
+				<string>dyn.ah62d4rv4ge80s6xtr75hw</string> <!-- .groovy -->
 				<string>org.coffee.source</string> <!-- .coffee (CoffeeScript) -->
+				<string>dyn.ah62d4rv4ge80g55gq3w0n</string> <!-- .coffee -->
 				<string>org.coffeescript.coffeescript</string>
 				<string>org.cson.source</string> <!-- .cson (CoffeeScript-Object-Notation) -->
+				<string>dyn.ah62d4rv4ge80g65tr2</string> <!-- .cson -->
 				<string>org.erlang.erlang-source</string> <!-- .erl, .hrl (Erlang) -->
+				<string>dyn.ah62d4rv4ge80n6xq</string> <!-- .erl -->
+				<string>dyn.ah62d4rv4ge80u6xq</string> <!-- .hrl -->
 				<string>org.fish.source</string> <!-- .fish -->
+				<string>dyn.ah62d4rv4ge80q4pxra</string> <!-- .fish -->
 				<string>org.gcc.files</string> <!-- .d -->
+				<string>dyn.ah62d4rv4ge80k</string> <!-- .d -->
 				<string>org.go.source</string> <!-- .go -->
 				<string>org.gradle.source</string> <!-- .gradle -->
 				<string>org.haskell.haskell-source</string> <!-- .hs (Haskell) -->
+				<string>dyn.ah62d4rv4ge80u62</string> <!-- .hs -->
 				<string>org.haskell.literate-haskell-source</string> <!-- .lhs (Haskell) -->
+				<string>dyn.ah62d4rv4ge8024dx</string> <!-- .lhs -->
 				<string>org.inno.source</string> <!-- .iss -->
+				<string>dyn.ah62d4rv4ge80w65x</string> <!-- .iss -->
 				<string>org.iso.sql</string> <!-- .sql -->
 				<string>org.khronos.glsl.fragment-shader</string> <!-- .frag (OpenGL Shading Language) -->
 				<string>org.khronos.glsl.vertex-shader</string> <!-- .vert (OpenGL Shading Language) -->
 				<string>org.kmt.source</string> <!-- .kmt -->
+				<string>dyn.ah62d4rv4ge8005py</string> <!-- .kmt -->
 				<string>org.kotlinlang.source</string> <!-- .kt (Kotlin) -->
 				<string>org.lua.lua-source</string> <!-- .lua -->
 				<string>dyn.ah62d4rv4ge8027pb</string> <!-- .lua -->
 				<string>org.microsoft.inf</string> <!-- .inf -->
+				<string>dyn.ah62d4rv4ge80w5xg</string> <!-- .inf -->
 				<string>org.n8gray.awk</string> <!-- .awk -->
+				<string>dyn.ah62d4rv4ge80c75p</string> <!-- .awk -->
 				<string>org.n8gray.bat</string> <!-- .bat, .cmd -->
+				<string>dyn.ah62d4rv4ge80e2py</string> <!-- .bat -->
+				<string>dyn.ah62d4rv4ge80g5pe</string> <!-- .cmd -->
 				<string>org.n8gray.ini-source</string> <!-- .ini -->
+				<string>dyn.ah62d4rv4ge80w5xm</string> <!-- .ini -->
 				<string>org.n8gray.jsp-source</string> <!-- .jsp -->
+				<string>dyn.ah62d4rv4ge80y65u</string> <!-- .jsp -->
 				<string>org.n8gray.lisp</string> <!-- .clj, .el, .lisp -->
+				<string>dyn.ah62d4rv4ge80g5dn</string> <!-- .clj -->
+				<string>dyn.ah62d4rv4ge80n5a</string> <!-- .el -->
+				<string>dyn.ah62d4rv4ge8024pxsa</string> <!-- .lisp -->
 				<string>org.n8gray.makefile</string> <!-- .mk (Makefile) -->
 				<string>org.n8gray.railstemplate</string> <!-- .erb, .rhtml, .rjs -->
+				<string>dyn.ah62d4rv4ge80n6xc</string> <!-- .erb -->
+				<string>dyn.ah62d4rv4ge81e4dyrz0a</string> <!-- .rhtml -->
+				<string>dyn.ah62d4rv4ge81e4xx</string> <!-- .rjs -->
 				<string>org.n8gray.scheme-source</string> <!-- .scm (Scheme) -->
+				<string>dyn.ah62d4rv4ge81g25r</string> <!-- .scm -->
 				<string>org.n8gray.standard-ml-source</string> <!-- .sml (Standard ML) -->
+				<string>dyn.ah62d4rv4ge81g5pq</string> <!-- .sml -->
 				<string>org.n8gray.structured-query-language-source</string> <!-- .sql -->
 				<string>org.n8gray.verilog</string> <!-- .v (Coq) -->
+				<string>dyn.ah62d4rv4ge81q</string> <!-- .v -->
 				<string>org.n8gray.vhdl</string> <!-- .vhdl -->
+				<string>dyn.ah62d4rv4ge81q4deru</string> <!-- .vhdl -->
 				<string>org.nfo</string> <!-- .nfo -->
 				<string>org.ocaml.ocaml-interface</string> <!-- .mli (OCaml) -->
+				<string>dyn.ah62d4rv4ge8045dm</string> <!-- .mli -->
 				<string>org.ocaml.ocaml-source</string> <!-- .ml, .mll, .mly (OCaml) -->
+				<string>dyn.ah62d4rv4ge8045dq</string> <!-- .mll -->
+				<string>dyn.ah62d4rv4ge8045d3</string> <!-- .mly -->
 				<string>org.omg.ecore</string> <!-- .ecore -->
+				<string>dyn.ah62d4rv4ge80n25tsmwu</string> <!-- .ecore -->
 				<string>org.rdf.source</string> <!-- .rdf -->
+				<string>dyn.ah62d4rv4ge81e3dg</string> <!-- .rdf -->
 				<string>org.rust-lang.source</string> <!-- .rs (Rust) -->
 				<string>org.scala.source</string> <!-- .scala -->
 				<string>org.tug.latex</string> <!-- .latex (used by TeXShop) -->
+				<string>dyn.ah62d4rv4ge8022pyqz6a</string> <!-- .latex -->
 				<string>org.tug.lua</string> <!-- .lua (used by TeXShop) -->
 				<string>org.tug.tex</string> <!-- .tex (used by TeXShop) -->
 				<string>org.vim.vim-script</string> <!-- .vim -->
+				<string>dyn.ah62d4rv4ge81q4pr</string> <!-- .vim -->
 				<string>org.w3.webvtt</string> <!-- .vtt (WebVTT subtitle) -->
 				<string>org.xul.source</string> <!-- .xul -->
+				<string>dyn.ah62d4rv4ge81u7pq</string> <!-- .xul -->
 				<string>public.ada-source</string> <!-- .ada, .adb, .ads (Ada) -->
 				<string>public.assembly-source</string> <!-- .s (Assembly) -->
 				<string>public.bash-script</string> <!-- .bash -->
@@ -259,6 +309,7 @@
 				<string>public.yaml</string> <!-- .yaml, .yml -->
 				<string>public.zsh-script</string> <!-- .zsh -->
 				<string>tk.tcl.tcl-source</string> <!-- .tcl -->
+				<string>dyn.ah62d4rv4ge81k25q</string> <!-- .tcl -->
 			</array>
 			<key>QLSupportsSearchableItems</key>
 			<true/>
