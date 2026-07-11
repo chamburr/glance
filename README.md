@@ -13,7 +13,9 @@ This is a fork of the [original Glance plugin](https://github.com/samuelmeuli/gl
 
 ## Installation
 
-You can install Glance through Homebrew using `brew install --no-quarantine glance-chamburr`.
+You can install Glance through Homebrew using `brew install --cask chamburr/tap/glance`.
+
+If you previously installed Glance from the official tap, uninstall it first with `brew uninstall --cask glance-chamburr`.
 
 Alternatively, you can install Glance directly. The installation is slightly complex as the package is not notarized. The steps are as follows:
 
