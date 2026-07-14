@@ -120,6 +120,7 @@
 		7EE0465C246EB5DE006172D9 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE0465B246EB5DE006172D9 /* AppIcon.swift */; };
 		7EE10F84244F679B007214D8 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE10F82244F6774007214D8 /* Log.swift */; };
 		7EE10F85244F696F007214D8 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE10F82244F6774007214D8 /* Log.swift */; };
+		8FFE4252F0E1494C9A1A6003 /* markdown-mermaid.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 066A70F7C2734C3AA484CF2F /* markdown-mermaid.min.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		066A70F7C2734C3AA484CF2F /* markdown-mermaid.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "markdown-mermaid.min.js"; sourceTree = "<group>"; };
 		102D56C426206A36000B5C0E /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		103654F32F72623D006F2538 /* SevenZipPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenZipPreview.swift; sourceTree = "<group>"; };
 		10779C0D26218B2B008A903C /* GlanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -550,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				7EB3643D244B03CC00D7F96F /* markdown-main.css */,
+				066A70F7C2734C3AA484CF2F /* markdown-mermaid.min.js */,
 			);
 			path = markdown;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				7EB36444244B03CC00D7F96F /* KaTeX_AMS-Regular.ttf in Resources */,
 				7EB36464244B03CC00D7F96F /* KaTeX_AMS-Regular.woff in Resources */,
 				7EB36482244B03CC00D7F96F /* markdown-main.css in Resources */,
+				8FFE4252F0E1494C9A1A6003 /* markdown-mermaid.min.js in Resources */,
 				7EB36462244B03CC00D7F96F /* KaTeX_Size4-Regular.woff in Resources */,
 				7EB3644A244B03CC00D7F96F /* KaTeX_Caligraphic-Bold.woff2 in Resources */,
 				7EB3644D244B03CC00D7F96F /* KaTeX_Caligraphic-Regular.woff in Resources */,

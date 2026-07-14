@@ -23,6 +23,7 @@ var markdownFrontMatterRegex = regexp.MustCompile(`^---\n([\s\S]*?)\n---\n`)
 var markdownParser = goldmark.New(
 	goldmark.WithExtensions(
 		extension.GFM,
+		Mermaid,
 		highlighting.NewHighlighting(
 			highlighting.WithFormatOptions(
 				htmlFormatter.WithClasses(true),
