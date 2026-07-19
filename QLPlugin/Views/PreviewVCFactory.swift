@@ -18,6 +18,8 @@ class PreviewVCFactory {
 				return TSVPreview.self
 			case "7z":
 				return SevenZipPreview.self
+			case "drawio":
+				return DrawIOPreview.self
 			case "ear", "jar", "war", "zip":
 				return ZIPPreview.self
 			default:
