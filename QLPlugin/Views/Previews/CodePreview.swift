@@ -34,6 +34,7 @@ let fileExtensionLexers = [
 	"entitlements": "xml",
 	"hbs": "handlebars",
 	"iml": "xml",
+	"jsonl": "json",
 	"mjs": "js",
 	"plist": "xml",
 	"props": "xml",

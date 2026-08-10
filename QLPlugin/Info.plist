@@ -284,6 +284,7 @@
 				<string>public.data</string> <!-- e.g. .gitignore, .editorconfig, README, ... -->
 				<string>public.fortran-90-source</string> <!-- .f90 (Fortran) -->
 				<string>public.fortran-source</string> <!-- .f, .for (Fortran) -->
+				<string>dyn.ah62d4rv4ge80y65tr30a</string> <!-- .jsonl -->
 				<string>public.json</string> <!-- .json -->
 				<string>public.ksh-script</string> <!-- .ksh (KornShell) -->
 				<string>public.make-source</string> <!-- .mak (Makefile) -->
