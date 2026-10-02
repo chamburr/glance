@@ -163,4 +163,4 @@ identifier_name:
     - "y1"
     - "y2"
 opening_brace:
-  allow_multiline_func: true
+  ignore_multiline_function_signatures: true
