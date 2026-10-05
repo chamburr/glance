@@ -100,6 +100,7 @@
 				<string>com.microsoft.csharp-source</string> <!-- .cs -->
 				<string>com.microsoft.f-sharp</string> <!-- .fsx (F Sharp) -->
 				<string>dyn.ah62d4rv4ge80q652</string> <!-- .fsx -->
+				<string>com.microsoft.ini</string> <!-- .ini (used by Xcode) -->
 				<string>com.netscape.javascript-source</string> <!-- .js, .mjs -->
 				<string>com.runningwithcrayons.alfred.appearance</string> <!-- Alfred theme (.alfredappearance) -->
 				<string>dyn.ah62d4rv4ge80c5dgsmw0k2pusbw0c6xbr3v0n</string> <!-- .alfredappearance -->
@@ -307,6 +308,7 @@
 				<string>public.tcsh-script</string> <!-- .tcsh -->
 				<string>public.tex</string> <!-- .tex -->
 				<string>public.text</string>
+				<string>public.toml</string> <!-- .toml (used by Xcode) -->
 				<string>public.yaml</string> <!-- .yaml, .yml -->
 				<string>public.zsh-script</string> <!-- .zsh -->
 				<string>tk.tcl.tcl-source</string> <!-- .tcl -->
