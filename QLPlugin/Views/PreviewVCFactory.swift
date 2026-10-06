@@ -3,7 +3,10 @@ import Foundation
 /// Returns a `PreviewVC` subclass that can be used to generate a preview of the provided file.
 /// May return `nil` if the file is not supported.
 class PreviewVCFactory {
-	static func getPreviewInitializer(fileURL: URL) -> Preview.Type? {
+	static func getPreviewInitializer(fileURL: URL, isDirectory: Bool = false) -> Preview.Type? {
+		if isDirectory {
+			return DirectoryPreview.self
+		}
 		switch fileURL.pathExtension.lowercased() {
 			case "gz":
 				// `gzip` is only supported for tarballs

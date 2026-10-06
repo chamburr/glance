@@ -105,7 +105,10 @@ class MainVC: NSViewController, QLPreviewingController {
 	/// Generates a preview of the selected file and adds the corresponding child view controller.
 	private func previewFile(file: File) throws {
 		// Initialize `PreviewVC` for the file type
-		if let previewInitializerType = PreviewVCFactory.getPreviewInitializer(fileURL: file.url) {
+		if let previewInitializerType = PreviewVCFactory.getPreviewInitializer(
+			fileURL: file.url,
+			isDirectory: file.isDirectory
+		) {
 			// Generate file preview
 			let previewInitializer = previewInitializerType.init()
 			let previewVC = try previewInitializer.createPreviewVC(file: file)

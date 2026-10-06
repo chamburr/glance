@@ -3,6 +3,7 @@ import Cocoa
 class OutlinePreviewVC: NSViewController, PreviewVC {
 	@objc dynamic var rootNodes: [FileTreeNode]
 	private let labelText: String?
+	private let expandAll: Bool
 
 	@objc dynamic var customSortDescriptors = [
 		NSSortDescriptor(
@@ -16,18 +17,30 @@ class OutlinePreviewVC: NSViewController, PreviewVC {
 	@IBOutlet private var outlineView: NSOutlineView!
 	@IBOutlet private var label: NSTextField!
 
-	required convenience init(rootNodes: [FileTreeNode], labelText: String?) {
-		self.init(nibName: nil, bundle: nil, rootNodes: rootNodes, labelText: labelText)
+	required convenience init(
+		rootNodes: [FileTreeNode],
+		labelText: String?,
+		expandAll: Bool = false
+	) {
+		self.init(
+			nibName: nil,
+			bundle: nil,
+			rootNodes: rootNodes,
+			labelText: labelText,
+			expandAll: expandAll
+		)
 	}
 
 	init(
 		nibName nibNameOrNil: NSNib.Name?,
 		bundle nibBundleOrNil: Bundle?,
 		rootNodes: [FileTreeNode],
-		labelText: String?
+		labelText: String?,
+		expandAll: Bool = false
 	) {
 		self.rootNodes = rootNodes
 		self.labelText = labelText
+		self.expandAll = expandAll
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
 		// Register required value transformers
@@ -44,7 +57,11 @@ class OutlinePreviewVC: NSViewController, PreviewVC {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpView()
-		expandSingleRootItem()
+		if expandAll {
+			expandAllItems()
+		} else {
+			expandSingleRootItem()
+		}
 	}
 
 	private func setUpView() {
@@ -64,6 +81,11 @@ class OutlinePreviewVC: NSViewController, PreviewVC {
 			outlineView.expandItem(root.children?.first!)
 		}
 	}
+
+	/// Expands all items in the outline view.
+	private func expandAllItems() {
+		outlineView.expandItem(nil, expandChildren: true)
+	}
 }
 
 /// `ValueTransformer` which formats the provided date.
@@ -78,9 +100,13 @@ class DateTransformer: ValueTransformer {
 		dateFormatter.doesRelativeDateFormatting = true
 	}
 
-	override class func transformedValueClass() -> AnyClass { NSString.self }
+	override class func transformedValueClass() -> AnyClass {
+		NSString.self
+	}
 
-	override class func allowsReverseTransformation() -> Bool { false }
+	override class func allowsReverseTransformation() -> Bool {
+		false
+	}
 
 	override func transformedValue(_ value: Any?) -> Any? {
 		guard let date = value as? Date else {
@@ -103,9 +129,13 @@ class IconTransformer: ValueTransformer {
 		contentsOfFile: "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/GenericDocumentIcon.icns"
 	)
 
-	override class func transformedValueClass() -> AnyClass { NSImage.self }
+	override class func transformedValueClass() -> AnyClass {
+		NSImage.self
+	}
 
-	override class func allowsReverseTransformation() -> Bool { false }
+	override class func allowsReverseTransformation() -> Bool {
+		false
+	}
 
 	override func transformedValue(_ value: Any?) -> Any? {
 		guard let isDirectoryNumber = value as? NSNumber else {
@@ -122,9 +152,13 @@ class SizeTransformer: ValueTransformer {
 	let byteCountFormatter = ByteCountFormatter()
 	let fallbackValue = "--"
 
-	override class func transformedValueClass() -> AnyClass { NSString.self }
+	override class func transformedValueClass() -> AnyClass {
+		NSString.self
+	}
 
-	override class func allowsReverseTransformation() -> Bool { false }
+	override class func allowsReverseTransformation() -> Bool {
+		false
+	}
 
 	override func transformedValue(_ value: Any?) -> Any? {
 		guard let size = value as? NSNumber else {
