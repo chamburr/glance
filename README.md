@@ -48,6 +48,8 @@ Alternatively, you can install Glance directly. The installation is slightly com
 
   <p><img src="./AppStore/Assets/Screenshots/ScreenshotTSV.png" alt="" width="600"></p>
 
+- **3D model** (rendered using SceneKit, can be rotated and zoomed): `.3mf`
+
 ## FAQ
 
 **There are existing Quick Look apps for some of the supported file types. Why create another one?**

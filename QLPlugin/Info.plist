@@ -36,6 +36,9 @@
 					- public.xml (.xml)
 				-->
 
+				<!-- 3D model -->
+				<string>dyn.ah62d4rv4ge8xg5pg</string> <!-- .3mf -->
+
 				<!-- Archive -->
 				<string>org.7-zip.7-zip-archive</string> <!-- .7z -->
 				<string>com.sun.java-archive</string> <!-- .jar (Java) -->

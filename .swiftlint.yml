@@ -156,6 +156,7 @@ identifier_name:
   excluded:
     - "x"
     - "y"
+    - "z"
     - "a"
     - "b"
     - "x1"

@@ -27,7 +27,9 @@ extension FileError: LocalizedError {
 
 /// Utility class for reading the content and metadata of the corresponding file.
 class File {
-	let archiveExtensions = ["7z", "tar", "tar.gz", "tgz", "zip"]
+	/// Extensions of container formats, whose content is much larger than the data that needs to be
+	/// read to generate a preview
+	let archiveExtensions = ["3mf", "7z", "tar", "tar.gz", "tgz", "zip"]
 	let fileManager = FileManager.default
 
 	var attributes: [FileAttributeKey: Any]
@@ -35,7 +37,7 @@ class File {
 	var path: String
 	var url: URL
 
-	var isArchive: Bool { archiveExtensions.contains(url.pathExtension) }
+	var isArchive: Bool { archiveExtensions.contains(url.pathExtension.lowercased()) }
 	var size: Int { attributes[.size] as? Int ?? 0 }
 
 	/// Looks for a file at the provided URL and saves its metadata as object properties.

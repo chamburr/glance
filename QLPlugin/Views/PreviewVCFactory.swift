@@ -5,6 +5,8 @@ import Foundation
 class PreviewVCFactory {
 	static func getPreviewInitializer(fileURL: URL) -> Preview.Type? {
 		switch fileURL.pathExtension.lowercased() {
+			case "3mf":
+				return ThreeMFPreview.self
 			case "gz":
 				// `gzip` is only supported for tarballs
 				return fileURL.path.hasSuffix(".tar.gz") ? TARPreview.self : nil

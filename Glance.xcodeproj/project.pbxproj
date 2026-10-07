@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10A3F0012F80000000000006 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A3F0002F80000000000006 /* SCNVector3.swift */; };
+		10A3F0012F80000000000005 /* ModelCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A3F0002F80000000000005 /* ModelCamera.swift */; };
+		10A3F0012F80000000000001 /* ThreeMFModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A3F0002F80000000000001 /* ThreeMFModel.swift */; };
+		10A3F0012F80000000000002 /* ThreeMFParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A3F0002F80000000000002 /* ThreeMFParser.swift */; };
+		10A3F0012F80000000000003 /* ModelPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A3F0002F80000000000003 /* ModelPreviewVC.swift */; };
+		10A3F0012F80000000000004 /* ThreeMFPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A3F0002F80000000000004 /* ThreeMFPreview.swift */; };
 		102D56C526206A36000B5C0E /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D56C426206A36000B5C0E /* MainVC.swift */; };
 		103654F42F726241006F2538 /* SevenZipPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103654F32F72623D006F2538 /* SevenZipPreview.swift */; };
 		10779BC42621502C008A903C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 10779BC32621502C008A903C /* ZIPFoundation */; };
@@ -164,6 +170,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		10A3F0002F80000000000006 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
+		10A3F0002F80000000000005 /* ModelCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCamera.swift; sourceTree = "<group>"; };
+		10A3F0002F80000000000001 /* ThreeMFModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeMFModel.swift; sourceTree = "<group>"; };
+		10A3F0002F80000000000002 /* ThreeMFParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeMFParser.swift; sourceTree = "<group>"; };
+		10A3F0002F80000000000003 /* ModelPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPreviewVC.swift; sourceTree = "<group>"; };
+		10A3F0002F80000000000004 /* ThreeMFPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeMFPreview.swift; sourceTree = "<group>"; };
 		102D56C426206A36000B5C0E /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		103654F32F72623D006F2538 /* SevenZipPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenZipPreview.swift; sourceTree = "<group>"; };
 		10779C0D26218B2B008A903C /* GlanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,6 +339,7 @@
 				7EAC01EB240D220B009505D0 /* File.swift */,
 				7E45F898244DA45500BFB869 /* FileTree.swift */,
 				7E1B16912455D93E00E2B84D /* HTMLRenderer.swift */,
+				10A3F0022F80000000000001 /* ThreeMF */,
 				7E9F0D7924168870007F1008 /* WebAsset */,
 			);
 			path = Utils;
@@ -357,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				103654F32F72623D006F2538 /* SevenZipPreview.swift */,
+				10A3F0002F80000000000004 /* ThreeMFPreview.swift */,
 				7E1DC529240E6FDE00D0A061 /* CodePreview.swift */,
 				7EB7491824228549007265A4 /* JupyterPreview.swift */,
 				7E1DC520240E6D8000D0A061 /* MarkdownPreview.swift */,
@@ -413,6 +427,8 @@
 		7E616BB324499A380043F7AB /* PreviewVCs */ = {
 			isa = PBXGroup;
 			children = (
+				10A3F0002F80000000000005 /* ModelCamera.swift */,
+				10A3F0002F80000000000003 /* ModelPreviewVC.swift */,
 				7E022BEC245253B3000EFCD3 /* OutlinePreviewVC.xib */,
 				7E022BEB245253B3000EFCD3 /* OutlinePreviewVC.swift */,
 				7E08A50E2454372200B7FF53 /* TablePreviewVC.xib */,
@@ -446,6 +462,15 @@
 				102D56C426206A36000B5C0E /* MainVC.swift */,
 			);
 			path = QLPlugin;
+			sourceTree = "<group>";
+		};
+		10A3F0022F80000000000001 /* ThreeMF */ = {
+			isa = PBXGroup;
+			children = (
+				10A3F0002F80000000000001 /* ThreeMFModel.swift */,
+				10A3F0002F80000000000002 /* ThreeMFParser.swift */,
+			);
+			path = ThreeMF;
 			sourceTree = "<group>";
 		};
 		7E9F0D7924168870007F1008 /* WebAsset */ = {
@@ -557,6 +582,7 @@
 		7EB36486244B65D900D7F96F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				10A3F0002F80000000000006 /* SCNVector3.swift */,
 				7EB36487244B65D900D7F96F /* String.swift */,
 			);
 			path = Extensions;
@@ -850,6 +876,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EB36488244B65D900D7F96F /* String.swift in Sources */,
+				10A3F0012F80000000000006 /* SCNVector3.swift in Sources */,
 				7EAC01EC240D220B009505D0 /* File.swift in Sources */,
 				7E458AED2439176B0091BD0F /* Date.swift in Sources */,
 				7EB7491924228549007265A4 /* JupyterPreview.swift in Sources */,
@@ -871,6 +898,11 @@
 				7E9F0D7E24168870007F1008 /* Script.swift in Sources */,
 				7EB3648A244B665700D7F96F /* ZIPPreview.swift in Sources */,
 				103654F42F726241006F2538 /* SevenZipPreview.swift in Sources */,
+				10A3F0012F80000000000001 /* ThreeMFModel.swift in Sources */,
+				10A3F0012F80000000000002 /* ThreeMFParser.swift in Sources */,
+				10A3F0012F80000000000003 /* ModelPreviewVC.swift in Sources */,
+				10A3F0012F80000000000005 /* ModelCamera.swift in Sources */,
+				10A3F0012F80000000000004 /* ThreeMFPreview.swift in Sources */,
 				7E9F0D7D24168870007F1008 /* Stylesheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
