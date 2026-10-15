@@ -34,5 +34,47 @@
 	<true/>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Developer previews</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.text</string>
+				<string>public.source-code</string>
+				<string>public.folder</string>
+				<string>org.sqlite.sqlite3</string>
+			</array>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.sqlite.sqlite3</string>
+			<key>UTTypeDescription</key>
+			<string>SQLite database</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.database</string>
+			</array>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>sqlite</string>
+					<string>sqlite3</string>
+					<string>db</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>application/vnd.sqlite3</string>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

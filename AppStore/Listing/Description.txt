@@ -6,10 +6,17 @@ Features:
 • Beautiful file previews for various file types
 • Previews visible in Quick Look, Finder and Spotlight
 • Full compatibility with Dark Mode
+• Find, copy, font size, wrapping and appearance controls
+• Markdown diagrams, math and a table of contents, rendered locally
+• A standalone preview window for formats Finder reserves for itself
 
 Supported file types:
 • Source code (.cpp, .js, .json, .py, .swift, .yml and many more)
 • Markdown (.md, .markdown, .mdown, .mkdn, .mkd, .Rmd, .qmd)
 • Archive (.tar, .tar.gz, .zip)
 • Jupyter Notebook (.ipynb)
-• Tab-separated values (.tab, .tsv)
+• CSV and tab-separated values (.csv, .tab, .tsv)
+• Expandable folder trees
+• Read-only SQLite databases (.sqlite, .sqlite3, .db)
+
+Finder may keep its built-in CSV or TypeScript preview. Open those files in Glance’s standalone window instead. Local Markdown images may require choosing their project folder for read-only access.

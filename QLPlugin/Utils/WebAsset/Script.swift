@@ -14,7 +14,7 @@ class Script: WebAsset {
 
 	func getHTML() -> String {
 		if let url = url {
-			return "<script src=\"\(url.path)\"></script>"
+			return "<script src=\"\("glance-resource://bundle/" + url.lastPathComponent)\"></script>"
 		} else {
 			return "<script>\(content ?? "")</script>"
 		}

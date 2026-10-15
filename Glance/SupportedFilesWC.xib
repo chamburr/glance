@@ -103,7 +103,7 @@
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
-                                        <fragment content="Tab-separated values">
+                                        <fragment content="Tables, folders and databases">
                                             <attributes>
                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
@@ -120,7 +120,7 @@ Cg
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
-                                        <fragment content=".tab, .tsv">
+                                        <fragment content=".csv, .tab, .tsv&#10;Folders; .sqlite, .sqlite3, .db">
                                             <attributes>
                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="13" name="HelveticaNeue"/>

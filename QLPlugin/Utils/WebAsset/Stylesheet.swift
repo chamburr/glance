@@ -14,7 +14,7 @@ class Stylesheet: WebAsset {
 
 	func getHTML() -> String {
 		if let url = url {
-			return "<link rel=\"stylesheet\" type=\"text/css\" href=\"\(url.path)\" />"
+			return "<link rel=\"stylesheet\" type=\"text/css\" href=\"\("glance-resource://bundle/" + url.lastPathComponent)\" />"
 		} else {
 			return "<style>\(content ?? "")</style>"
 		}

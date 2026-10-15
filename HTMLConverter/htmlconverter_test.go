@@ -40,7 +40,7 @@ func TestConvertMarkdownToHTML(t *testing.T) {
 	source := `# Heading
 
 Text`
-	expected := "<h1>Heading</h1><p>Text</p>"
+	expected := `<h1 id="heading">Heading</h1><p>Text</p>`
 	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
 	assert.Equal(t, expected, minifyHTML(actual))
 }
@@ -56,7 +56,7 @@ key2: Another value
 Text`
 	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
 	assert.True(t, strings.Contains(actual, `<pre class="chroma">`))
-	assert.True(t, strings.Contains(minifyHTML(actual), `<h1>Heading</h1><p>Text</p>`))
+	assert.True(t, strings.Contains(minifyHTML(actual), `<h1 id="heading">Heading</h1><p>Text</p>`))
 }
 
 func TestConvertMarkdownToHTMLWithSyntaxHighlighting(t *testing.T) {
@@ -77,4 +77,12 @@ func TestConvertNotebookToHTMLInvalid(t *testing.T) {
 	source := "This is not a valid JSON file."
 	actual := convertToGoString(convertNotebookToHTML(convertToCString(source)))
 	assert.True(t, strings.HasPrefix(actual, "error: "))
+}
+
+func TestMarkdownMermaidAndHeadingIDs(t *testing.T) {
+	source := "# Overview\n\n```mermaid\nflowchart LR\n A-->B\n```\n"
+	actual := convertToGoString(convertMarkdownToHTML(convertToCString(source)))
+	assert.Contains(t, actual, `id="overview"`)
+	assert.Contains(t, actual, `class="language-mermaid"`)
+	assert.Contains(t, actual, `A--&gt;B`)
 }

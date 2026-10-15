@@ -28,12 +28,25 @@
 		<dict>
 			<key>QLSupportedContentTypes</key>
 			<array>
+				<string>dyn.ah62d4rv4ge81g6pqrf4gn</string>
+				<string>dyn.ah62d4rv4ge81g6pqrf4gnq2</string>
+				<string>dyn.ah62d4rv4ge80k2u</string>
+				<string>public.typescript</string>
+				<string>com.microsoft.typescript</string>
+				<string>public.tsx</string>
+				<string>org.yaml.yaml</string>
+				<string>io.toml</string>
+				<string>public.xml</string>
+				<string>com.apple.property-list</string>
+				<string>com.apple.xml-property-list</string>
+				<string>com.apple.binary-property-list</string>
+				<string>public.comma-separated-values-text</string>
+				<string>public.folder</string>
+				<string>org.sqlite.sqlite3</string>
 				<!--
-					File types that Glance cannot provide previews for:
+					Finder-owned types handled through the standalone window:
 					- Files that are already supported by macOS (e.g. .csv)
-					- com.apple.property-list (.plist)
 					- public.mpeg-2-transport-stream (.ts)
-					- public.xml (.xml)
 				-->
 
 				<!-- Archive -->

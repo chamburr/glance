@@ -11,6 +11,10 @@
 
 This is a fork of the [original Glance plugin](https://github.com/samuelmeuli/glance). Unfortunately, the owner seems to have discarded the project a while ago, and the app is largely broken on newer macOS systems. The aim of this fork is to revive the project and maintain it for future updates. For now, we have added support for macOS Big Sur and fixed several internal bugs.
 
+## Developer previews
+
+Glance includes Mermaid/math and Contents for Markdown; Find, Copy and display controls; formatted JSON/XML and binary plists; CSV tables; expandable folder trees; read-only SQLite previews; and a native CLI. See [developer previews](docs/developer-previews.md) for build instructions, validation and sandbox/file-routing limits.
+
 ## Installation
 
 You can install Glance through Homebrew using `brew install --cask chamburr/tap/glance`.
@@ -44,9 +48,13 @@ Alternatively, you can install Glance directly. The installation is slightly com
 
   <p><img src="./AppStore/Assets/Screenshots/ScreenshotJupyterNotebook.png" alt="" width="600"></p>
 
-- **Tab-separated values** (parsed using [SwiftCSV](https://github.com/swiftcsv/SwiftCSV)): `.tab`, `.tsv`
+- **CSV and TSV tables** (parsed using [SwiftCSV](https://github.com/swiftcsv/SwiftCSV)): `.csv`, `.tab`, `.tsv` (CSV uses the standalone window when Finder keeps its native provider)
 
   <p><img src="./AppStore/Assets/Screenshots/ScreenshotTSV.png" alt="" width="600"></p>
+
+- **Folders**: bounded, expandable directory trees
+
+- **SQLite databases**: read-only tables in `.sqlite`, `.sqlite3`, `.db`
 
 ## FAQ
 
@@ -63,13 +71,13 @@ The app uses the [new Quick Look API](https://developer.apple.com/documentation/
 
 **Why are images in my Markdown files not loading?**
 
-Glance blocks remote assets. Furthermore, the app only has access to the file that's being previewed. Local image files referenced from Markdown are therefore not loaded.
+Glance blocks remote assets. Furthermore, the app only has access to the file that's being previewed. Local images within the document directory are embedded when the sandbox permits reading them; Finder may still withhold sibling-file access.
 
 **Why isn't [file type] supported?**
 
 Feel free to [open an issue](https://github.com/chamburr/glance/issues/new) or [contribute](#contributing)! When opening an issue, please describe what kind of preview you'd expect for your file.
 
-Please note that macOS doesn't allow the handling of some file types (e.g. `.plist`, `.ts` and `.xml`).
+macOS file associations determine which provider handles a type. Glance now registers property-list, XML and TypeScript identifiers, but deliberately does not claim MPEG-2 `.ts` video files.
 
 **You claim to support [file type], but previews aren't showing up.**
 
@@ -80,6 +88,8 @@ It's possible that your file's extension or [UTI](https://en.wikipedia.org/wiki/
 1. Check whether the file extension is matched to the correct class in [`PreviewVCFactory.swift`](./QLPlugin/Views/PreviewVCFactory.swift).
 2. Find your file's UTI by running `mdls -name kMDItemContentType /path/to/your/file`. Check whether the UTI is listed under `QLSupportedContentTypes` in [`Info.plist`](./QLPlugin/Info.plist).
 3. If an association is missing, please feel free to add it and submit a PR.
+
+The developer preview build also adds live refresh with scroll preservation, unified diff previews, sortable/paginated CSV and TSV tables, Markdown callouts and Mermaid zoom. SQLite navigation remains bounded to preview rows. See [developer previews](docs/developer-previews.md) for behavior and limits.
 
 ## Contributing
 

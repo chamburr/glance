@@ -40,6 +40,12 @@ class File {
 
 	/// Looks for a file at the provided URL and saves its metadata as object properties.
 	init(url: URL) throws {
+		guard url.isFileURL else {
+			throw FileError.fileReadError(
+				path: url.path,
+				message: "Only local files can be previewed"
+			)
+		}
 		self.url = url
 		path = url.path
 

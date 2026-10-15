@@ -1,3 +1,6 @@
 * text=auto eol=lf
 *.rtf linguist-vendored
 GlanceTests/TestFiles/**/* linguist-vendored
+
+# Preserve the verified vendor bundle, including whitespace inside template literals.
+QLPlugin/Resources/markdown/markdown-mermaid.min.js linguist-vendored -text -whitespace
