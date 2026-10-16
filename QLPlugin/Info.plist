@@ -36,6 +36,9 @@
 					- public.xml (.xml)
 				-->
 
+				<!-- draw.io -->
+				<string>dyn.ah62d4rv4ge80k6xbs7y08</string> <!-- .drawio -->
+
 				<!-- Archive -->
 				<string>org.7-zip.7-zip-archive</string> <!-- .7z -->
 				<string>com.sun.java-archive</string> <!-- .jar (Java) -->
