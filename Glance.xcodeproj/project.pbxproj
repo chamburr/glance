@@ -120,6 +120,7 @@
 		7EE0465C246EB5DE006172D9 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE0465B246EB5DE006172D9 /* AppIcon.swift */; };
 		7EE10F84244F679B007214D8 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE10F82244F6774007214D8 /* Log.swift */; };
 		7EE10F85244F696F007214D8 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE10F82244F6774007214D8 /* Log.swift */; };
+		890CF2EB70752C4D63FF13F2 /* markdown-callouts.js in Resources */ = {isa = PBXBuildFile; fileRef = 32DC13C19ACAF5A164A9AEE6 /* markdown-callouts.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,6 +282,7 @@
 		7ED140652450C671007A7C70 /* SupportedFilesWC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportedFilesWC.swift; sourceTree = "<group>"; };
 		7EE0465B246EB5DE006172D9 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		7EE10F82244F6774007214D8 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		32DC13C19ACAF5A164A9AEE6 /* markdown-callouts.js */ = {isa = PBXFileReference; lastKnownFileType = text; path = "QLPlugin/Resources/markdown/markdown-callouts.js"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -550,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				7EB3643D244B03CC00D7F96F /* markdown-main.css */,
+				32DC13C19ACAF5A164A9AEE6 /* markdown-callouts.js */,
 			);
 			path = markdown;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				7EB36444244B03CC00D7F96F /* KaTeX_AMS-Regular.ttf in Resources */,
 				7EB36464244B03CC00D7F96F /* KaTeX_AMS-Regular.woff in Resources */,
 				7EB36482244B03CC00D7F96F /* markdown-main.css in Resources */,
+				890CF2EB70752C4D63FF13F2 /* markdown-callouts.js in Resources */,
 				7EB36462244B03CC00D7F96F /* KaTeX_Size4-Regular.woff in Resources */,
 				7EB3644A244B03CC00D7F96F /* KaTeX_Caligraphic-Bold.woff2 in Resources */,
 				7EB3644D244B03CC00D7F96F /* KaTeX_Caligraphic-Regular.woff in Resources */,
