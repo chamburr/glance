@@ -8,7 +8,10 @@ class TSVPreview: Preview {
 		// Read and parse TSV file
 		var csv: CSV
 		do {
-			csv = try CSV(url: file.url, delimiter: "\t")
+			csv = try CSV(
+				url: file.url,
+				delimiter: file.url.pathExtension.lowercased() == "csv" ? "," : "\t"
+			)
 		} catch {
 			os_log(
 				"Could not parse TSV file: %{public}s",
@@ -19,6 +22,15 @@ class TSVPreview: Preview {
 			throw error
 		}
 
-		return TablePreviewVC(headers: csv.header, cells: csv.namedRows)
+		let rows = try EnumeratedView(
+			header: csv.header,
+			text: try file.read(),
+			delimiter: file.url.pathExtension
+				.lowercased() == "csv" ? "," : "\t",
+			// Include the header and one extra data row to detect a truncated preview.
+			limitTo: TablePreviewVC.rowLimit + 2,
+			loadColumns: false
+		)
+		return TablePreviewVC(headers: csv.header, cells: rows.rows)
 	}
 }

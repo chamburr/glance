@@ -14,7 +14,7 @@ class PreviewVCFactory {
 				return JupyterPreview.self
 			case "tar", "tgz":
 				return TARPreview.self
-			case "tab", "tsv":
+			case "tab", "tsv", "csv":
 				return TSVPreview.self
 			case "7z":
 				return SevenZipPreview.self
