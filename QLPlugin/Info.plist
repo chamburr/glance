@@ -28,6 +28,14 @@
 		<dict>
 			<key>QLSupportedContentTypes</key>
 			<array>
+				<string>dyn.ah62d4rv4ge81g6pqrf4gn</string>
+				<string>dyn.ah62d4rv4ge81g6pqrf4gnq2</string>
+				<string>dyn.ah62d4rv4ge80k2u</string>
+				<string>public.typescript</string>
+				<string>com.microsoft.typescript</string>
+				<string>public.tsx</string>
+				<string>org.yaml.yaml</string>
+				<string>io.toml</string>
 				<!--
 					File types that Glance cannot provide previews for:
 					- Files that are already supported by macOS (e.g. .csv)
