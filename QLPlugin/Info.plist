@@ -308,6 +308,7 @@
 				<string>public.tcsh-script</string> <!-- .tcsh -->
 				<string>public.tex</string> <!-- .tex -->
 				<string>public.text</string>
+				<string>public.patch-file</string> <!-- .diff, .patch -->
 				<string>public.toml</string> <!-- .toml (used by Xcode) -->
 				<string>public.yaml</string> <!-- .yaml, .yml -->
 				<string>public.zsh-script</string> <!-- .zsh -->
