@@ -1,3 +1,4 @@
+// swiftformat:disable wrapMultilineStatementBraces
 import Cocoa
 import os.log
 import Quartz
@@ -61,7 +62,9 @@ class MainVC: NSViewController, QLPreviewingController {
 			}
 
 			// Skip preview if the file is too large
-			if !file.isDirectory, !file.isArchive, file.size > self.maxFileSize {
+			if !file.isDirectory, !file.isArchive,
+			   !["db", "sqlite", "sqlite3"].contains(file.url.pathExtension.lowercased()),
+			   file.size > self.maxFileSize {
 				// Log error and fall back to default preview (by calling the completion handler
 				// with the error)
 				let error = PreviewError.fileSizeError(path: file.path)

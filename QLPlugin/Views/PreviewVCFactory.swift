@@ -5,6 +5,8 @@ import Foundation
 class PreviewVCFactory {
 	static func getPreviewInitializer(fileURL: URL) -> Preview.Type? {
 		switch fileURL.pathExtension.lowercased() {
+			case "sqlite", "sqlite3", "db":
+				return DatabasePreview.self
 			case "gz":
 				// `gzip` is only supported for tarballs
 				return fileURL.path.hasSuffix(".tar.gz") ? TARPreview.self : nil

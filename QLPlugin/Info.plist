@@ -28,6 +28,7 @@
 		<dict>
 			<key>QLSupportedContentTypes</key>
 			<array>
+				<string>org.sqlite.sqlite3</string>
 				<!--
 					File types that Glance cannot provide previews for:
 					- Files that are already supported by macOS (e.g. .csv)
