@@ -62,9 +62,17 @@ class MarkdownPreview: Preview {
 	}
 
 	func createPreviewVC(file: File) throws -> PreviewVC {
-		WebPreviewVC(
+		var stylesheets = getStylesheets()
+		if let katex = Bundle.main.url(forResource: "jupyter-katex.min", withExtension: "css") {
+			stylesheets.append(Stylesheet(url: katex))
+		}
+		return WebPreviewVC(
 			html: try getHTML(file: file),
-			stylesheets: getStylesheets()
+			stylesheets: stylesheets,
+			scripts: ["jupyter-katex.min", "jupyter-katex-auto-render.min", "markdown-math"]
+				.compactMap { name in
+					Bundle.main.url(forResource: name, withExtension: "js").map { Script(url: $0) }
+				}
 		)
 	}
 }
